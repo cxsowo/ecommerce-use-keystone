@@ -10,13 +10,13 @@ var keystone = require('keystone');
 // and documentation.
 
 keystone.init({
-	'name': 'ddd',
+	'name': '基于keystone的电商',
 	'brand': 'MyEcommerce',
 
 	'less': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
-	'views': 'templates/views',
+	'views': 'templates2/views',
 	'view engine': 'jade',
 
 	'emails': 'templates/emails',
@@ -45,29 +45,29 @@ keystone.set('routes', require('./routes'));
 
 // Setup common locals for your emails. The following are required by Keystone's
 // default email templates, you may remove them if you're using your own.
-keystone.set('email locals', {
-	logo_src: '/images/logo-email.gif',
-	logo_width: 194,
-	logo_height: 76,
-	theme: {
-		email_bg: '#f9f9f9',
-		link_color: '#2697de',
-		buttons: {
-			color: '#fff',
-			background_color: '#2697de',
-			border_color: '#1a7cb7',
-		},
-	},
-});
+// keystone.set('email locals', {
+// 	logo_src: '/images/logo-email.gif',
+// 	logo_width: 194,
+// 	logo_height: 76,
+// 	theme: {
+// 		email_bg: '#f9f9f9',
+// 		link_color: '#2697de',
+// 		buttons: {
+// 			color: '#fff',
+// 			background_color: '#2697de',
+// 			border_color: '#1a7cb7',
+// 		},
+// 	},
+// });
 
 // Load your project's email test routes
-keystone.set('email tests', require('./routes/emails'));
+//keystone.set('email tests', require('./routes/emails'));
 
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
 	enquiries: 'enquiries',
-	ys: 'ys',
+	user: 'User',
 });
 
 // Start Keystone to connect to your database and initialise the web server

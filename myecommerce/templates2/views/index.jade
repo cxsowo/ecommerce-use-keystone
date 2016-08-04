@@ -3,9 +3,9 @@ html
 	head
 		meta(charset="utf-8")
 		title #{title}
-		include ./link
+		include ./layouts/link
 	body
 		#page
-			include ./header
+			include ./layouts/header
 			block content
-			include ./footer
+			include ./layouts/footer
