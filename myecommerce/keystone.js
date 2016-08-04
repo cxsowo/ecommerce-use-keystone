@@ -10,7 +10,7 @@ var keystone = require('keystone');
 // and documentation.
 
 keystone.init({
-	'name': 'MyEcommerce',
+	'name': 'ddd',
 	'brand': 'MyEcommerce',
 
 	'less': 'public',
