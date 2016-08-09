@@ -14,13 +14,13 @@ block content
 										img(src='#{one.picPath}', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='#{one.name}')
 										.info
 											.tp-caption.LargeTitle.sfl.tp-resizeme(data-x='0', data-y='180', data-endspeed='500', data-speed='500', data-start='1300', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;')
-												span 良心好物
+												span #{one.main_words}
 											.tp-caption.sfb.tp-resizeme(data-x='0', data-y='400', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
-												a.buy-btn(href='#') 现在就买！
+												a.buy-btn(href='/') 浏览商品
 											.tp-caption.Title.sft.tp-resizeme(data-x='0', data-y='270', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Power2.easeInOut', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
-												| 反正就是推荐
+												| #{one.words_one}
 												br
-												| 可以点现在就买看看哦
+												| #{one.words_two}
 							else
 								li(data-transition='random', data-slotamount='7', data-masterspeed='1000', data-thumb='images/slide-img1.jpg')
 									img(src='images/slide-img2.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='slider-image1')
@@ -28,7 +28,7 @@ block content
 										.tp-caption.LargeTitle.sfl.tp-resizeme(data-x='0', data-y='180', data-endspeed='500', data-speed='500', data-start='1300', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;')
 											span Awesome Design
 										.tp-caption.sfb.tp-resizeme(data-x='0', data-y='400', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
-											a.buy-btn(href='#') Shop Now
+											a.buy-btn(href='/') Shop Now
 										.tp-caption.Title.sft.tp-resizeme(data-x='0', data-y='270', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Power2.easeInOut', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
 											| Pellentesque habitant morbi tristique
 											br
@@ -39,7 +39,7 @@ block content
 										.tp-caption.LargeTitle.sfl.tp-resizeme(data-x='0', data-y='180', data-endspeed='500', data-speed='500', data-start='1300', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;')
 											span Nexus Hot Collection
 										.tp-caption.sfb.tp-resizeme(data-x='0', data-y='400', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
-											a.buy-btn(href='#') Shop Now
+											a.buy-btn(href='/') Shop Now
 										.tp-caption.Title.sft.tp-resizeme(data-x='0', data-y='270', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Power2.easeInOut', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
 											| Pellentesque habitant morbi tristique
 											br
@@ -47,27 +47,27 @@ block content
 		// Category slider Start
 		.CollectionGrid-container
 			.CollectionGrid.container
-				a.CollectionGrid-tile.hover-overlay-light(href='#')
+				a.CollectionGrid-tile.hover-overlay-light(href='/')
 					.CollectionGrid-tileImage.align-center
 						img(src='products-images/product.jpg', alt='bags')
 					.CollectionGrid-tileName.js-dotdotdot
 						| Handbags
-				a.CollectionGrid-tile.hover-overlay-light(href='#')
+				a.CollectionGrid-tile.hover-overlay-light(href='/')
 					.CollectionGrid-tileImage.align-center
 						img(src='products-images/product.jpg', alt='bags')
 					.CollectionGrid-tileName.js-dotdotdot
 						| Lighting
-				a.CollectionGrid-tile.hover-overlay-light(href='#')
+				a.CollectionGrid-tile.hover-overlay-light(href='/')
 					.CollectionGrid-tileImage.align-center
 						img(src='products-images/product.jpg', alt='bags')
 					.CollectionGrid-tileName.js-dotdotdot
 						| Kids
-				a.CollectionGrid-tile.hover-overlay-light(href='#')
+				a.CollectionGrid-tile.hover-overlay-light(href='/')
 					.CollectionGrid-tileImage.align-center
 						img(src='products-images/product.jpg', alt='bags')
 					.CollectionGrid-tileName.js-dotdotdot
 						| Watches
-				a.CollectionGrid-tile.hover-overlay-light(href='#')
+				a.CollectionGrid-tile.hover-overlay-light(href='/')
 					.CollectionGrid-tileImage.align-center
 						img(src='products-images/product.jpg', alt='bags')
 					.CollectionGrid-tileName.js-dotdotdot
@@ -80,7 +80,7 @@ block content
 					.slider-items.slider-width-col4.products-grid
 						.item
 							.item-inner
-								a(href='#')
+								a(href='/')
 									img(src='images/img1.png', alt='slide img1')
 								.homeslider-description
 									.wrap-desc
@@ -93,10 +93,10 @@ block content
 											br
 											| 2016
 										div
-											a.learnmore(href='#') Learn more
+											a.learnmore(href='/') Learn more
 						.item
 							.item-inner
-								a(href='#')
+								a(href='/')
 									img(src='images/img2.png', alt='slide img1')
 								.homeslider-description
 									.wrap-desc
@@ -109,246 +109,56 @@ block content
 											br
 											| 2016
 										div
-											a.learnmore(href='#') Learn more
+											a.learnmore(href='/') Learn more
 		// top products end
 		// best Pro Slider
 		section.wow.bounceInUp.animated
 			.best-pro.slider-items-products.container
 				.new_title
-					h2 这些卖的很好的！
+					h2 快速查看
 				#best-seller.product-flexslider.hidden-buttons
 					.slider-items.slider-width-col4.products-grid
-						.item
-							.item-inner
-								.item-img
-									.item-img-info
-										a.product-image(href='product-detail.html', title='Retis lapen casen')
-											img(src='products-images/p1.jpg', alt='Retis lapen casen')
-										.item-box-hover
-											.box-inner
-												.product-detail-bnt
-													a.button.detail-bnt
-														span Quick View
-												.actions
-													span.add-to-links
-														a.link-wishlist(href='#', title='Add to Wishlist')
-															span Add to Wishlist
-														a.link-compare.add_to_compare(href='#', title='Add to Compare')
-															span Add to Compare
-												.add_cart
-													button.button.btn-cart(type='button')
-														span Add to Cart
-								.item-info
-									.info-inner
-										.item-title
-											a(href='product-detail.html', title='Retis lapen casen') Retis lapen casen
-										.item-content
-											.rating
-												.ratings
-													.rating-box
-														.rating(style='width:80%')
-													p.rating-links
-														a(href='#') 1 Review(s)
-														span.separator |
-														a(href='#') Add Review
-											.item-price
-												.price-box
-													span.regular-price
-														span.price $125
-						// Item
-						.item
-							.item-inner
-								.item-img
-									.item-img-info
-										a.product-image(href='product-detail.html', title='Retis lapen casen')
-											img(src='products-images/p2.jpg', alt='Retis lapen casen')
-										.item-box-hover
-											.box-inner
-												.product-detail-bnt
-													a.button.detail-bnt
-														span Quick View
-												.actions
-													span.add-to-links
-														a.link-wishlist(href='#', title='Add to Wishlist')
-															span Add to Wishlist
-														a.link-compare.add_to_compare(href='#', title='Add to Compare')
-															span Add to Compare
-												.add_cart
-													button.button.btn-cart(type='button')
-														span Add to Cart
-								.item-info
-									.info-inner
-										.item-title
-											a(href='product-detail.html', title='Retis lapen casen') Retis lapen casen
-										.item-content
-											.rating
-												.ratings
-													.rating-box
-														.rating(style='width:80%')
-													p.rating-links
-														a(href='#') 1 Review(s)
-														span.separator |
-														a(href='#') Add Review
-											.item-price
-												.price-box
-													span.regular-price
-														span.price $125
-						// End Item
-						// Item
-						.item
-							.item-inner
-								.item-img
-									.item-img-info
-										a.product-image(href='product-detail.html', title='Retis lapen casen')
-											img(src='products-images/p3.jpg', alt='Retis lapen casen')
-										.sale-label.sale-top-left Sale
-										.item-box-hover
-											.box-inner
-												.product-detail-bnt
-													a.button.detail-bnt
-														span Quick View
-												.actions
-													span.add-to-links
-														a.link-wishlist(href='#', title='Add to Wishlist')
-															span Add to Wishlist
-														a.link-compare.add_to_compare(href='#', title='Add to Compare')
-															span Add to Compare
-												.add_cart
-													button.button.btn-cart(type='button')
-														span Add to Cart
-								.item-info
-									.info-inner
-										.item-title
-											a(href='product-detail.html', title='Retis lapen casen') Retis lapen casen
-										.item-content
-											.rating
-												.ratings
-													.rating-box
-														.rating(style='width:80%')
-													p.rating-links
-														a(href='#') 1 Review(s)
-														span.separator |
-														a(href='#') Add Review
-											.item-price
-												.price-box
-													span.regular-price
-														span.price $125
-						// End Item
-						.item
-							.item-inner
-								.item-img
-									.item-img-info
-										a.product-image(href='product-detail.html', title='Retis lapen casen')
-											img(src='products-images/p4.jpg', alt='Retis lapen casen')
-										.item-box-hover
-											.box-inner
-												.product-detail-bnt
-													a.button.detail-bnt
-														span Quick View
-												.actions
-													span.add-to-links
-														a.link-wishlist(href='#', title='Add to Wishlist')
-															span Add to Wishlist
-														a.link-compare.add_to_compare(href='#', title='Add to Compare')
-															span Add to Compare
-												.add_cart
-													button.button.btn-cart(type='button')
-														span Add to Cart
-								.item-info
-									.info-inner
-										.item-title
-											a(href='product-detail.html', title='Retis lapen casen') Retis lapen casen
-										.item-content
-											.rating
-												.ratings
-													.rating-box
-														.rating(style='width:80%')
-													p.rating-links
-														a(href='#') 1 Review(s)
-														span.separator |
-														a(href='#') Add Review
-											.item-price
-												.price-box
-													span.regular-price
-														span.price $125
-						// Item
-						.item
-							.item-inner
-								.item-img
-									.item-img-info
-										a.product-image(href='product-detail.html', title='Retis lapen casen')
-											img(src='products-images/p5.jpg', alt='Retis lapen casen')
-										.item-box-hover
-											.box-inner
-												.product-detail-bnt
-													a.button.detail-bnt
-														span Quick View
-												.actions
-													span.add-to-links
-														a.link-wishlist(href='#', title='Add to Wishlist')
-															span Add to Wishlist
-														a.link-compare.add_to_compare(href='#', title='Add to Compare')
-															span Add to Compare
-												.add_cart
-													button.button.btn-cart(type='button')
-														span Add to Cart
-								.item-info
-									.info-inner
-										.item-title
-											a(href='product-detail.html', title='Retis lapen casen') Retis lapen casen
-										.item-content
-											.rating
-												.ratings
-													.rating-box
-														.rating(style='width:80%')
-													p.rating-links
-														a(href='#') 1 Review(s)
-														span.separator |
-														a(href='#') Add Review
-											.item-price
-												.price-box
-													span.regular-price
-														span.price $125
-						// End Item
-						// Item
-						.item
-							.item-inner
-								.item-img
-									.item-img-info
-										a.product-image(href='product-detail.html', title='Retis lapen casen')
-											img(src='products-images/p6.jpg', alt='Retis lapen casen')
-										.item-box-hover
-											.box-inner
-												.product-detail-bnt
-													a.button.detail-bnt
-														span Quick View
-												.actions
-													span.add-to-links
-														a.link-wishlist(href='#', title='Add to Wishlist')
-															span Add to Wishlist
-														a.link-compare.add_to_compare(href='#', title='Add to Compare')
-															span Add to Compare
-												.add_cart
-													button.button.btn-cart(type='button')
-														span Add to Cart
-								.item-info
-									.info-inner
-										.item-title
-											a(href='product-detail.html', title='Retis lapen casen') Retis lapen casen
-										.item-content
-											.rating
-												.ratings
-													.rating-box
-														.rating(style='width:80%')
-													p.rating-links
-														a(href='#') 1 Review(s)
-														span.separator |
-														a(href='#') Add Review
-											.item-price
-												.price-box
-													span.regular-price
-														span.price $125
-						// End Item
+						if quick_view_commodities
+							each one in quick_view_commodities
+								.item
+									.item-inner
+										.item-img
+											.item-img-info
+												a.product-image(href='/product-detail/'+'#{one.id}', title='#{one.name}')
+													img(src='#{one.imgPath}', alt='#{one.name}')
+												.item-box-hover
+													.box-inner
+														.product-detail-bnt
+															a.button.detail-bnt
+																span 快速查看
+														.actions
+															span.add-to-links
+																a.link-wishlist(href='/', title='收藏')
+																	span 收藏
+																a.link-compare.add_to_compare(href='/', title='对比')
+																	span 对比
+														.add_cart
+															button.button.btn-cart(type='button')
+																span 添加到购物车
+										.item-info
+											.info-inner
+												.item-title
+													a(href='/product-detail/'+'#{one.id}', title='#{one.name}') #{one.name}
+												.item-content
+													.rating
+														.ratings
+															.rating-box
+																.rating(style='width:80%')
+															p.rating-links
+																a(href='/') 1 Review(s)
+																span.separator |
+																a(href='/') Add Review
+													.item-price
+														.price-box
+															span.regular-price
+																span.price #{one.price}
+						else
+							span 商店里没有商品
 		// best Pro Slider
 		// Logo Brand Block
 		.brand-logo.wow.bounceInUp.animated
@@ -407,16 +217,6 @@ block content
 						.box-timer
 							.countbox_1.timer-grid
 block js
-	//#fade
-	// JavaScript
-	script(type='text/javascript', src='js/jquery.min.js')
-	script(type='text/javascript', src='js/bootstrap.min.js')
-	script(type='text/javascript', src='js/revslider.js')
-	script(type='text/javascript', src='js/common.js')
-	script(type='text/javascript', src='js/countdown.js')
-	script(type='text/javascript', src='js/jquery.bxslider.min.js')
-	script(type='text/javascript', src='js/owl.carousel.min.js')
-	script(type='text/javascript', src='js/jquery.mobile-menu.min.js')
 	script(type='text/javascript').
 		var dthen1 = new Date("12/25/17 11:59:00 PM");
 		start = "05/03/15 03:02:11 AM";
@@ -440,60 +240,3 @@ block js
 		gsecs1 = Math.floor(ddiff.valueOf() / 1000);
 		var iid1 = "countbox_2";
 		CountBack_slider(gsecs1, "countbox_2", 1);
-	script(type='text/javascript').
-		jQuery(document).ready(function(){
-		jQuery('#thm-rev-slider').show().revolution({
-		dottedOverlay: 'none',
-		delay: 5000,
-		startwidth: 0,
-		startheight:570,
-		hideThumbs: 200,
-		thumbWidth: 200,
-		thumbHeight: 50,
-		thumbAmount: 2,
-		navigationType: 'thumb',
-		navigationArrows: 'solo',
-		navigationStyle: 'round',
-		touchenabled: 'on',
-		onHoverStop: 'on',
-		swipe_velocity: 0.7,
-		swipe_min_touches: 1,
-		swipe_max_touches: 1,
-		drag_block_vertical: false,
-		spinner: 'spinner0',
-		keyboardNavigation: 'off',
-		navigationHAlign: 'center',
-		navigationVAlign: 'bottom',
-		navigationHOffset: 0,
-		navigationVOffset: 20,
-		soloArrowLeftHalign: 'left',
-		soloArrowLeftValign: 'center',
-		soloArrowLeftHOffset: 20,
-		soloArrowLeftVOffset: 0,
-		soloArrowRightHalign: 'right',
-		soloArrowRightValign: 'center',
-		soloArrowRightHOffset: 20,
-		soloArrowRightVOffset: 0,
-		shadow: 0,
-		fullWidth: 'on',
-		fullScreen: 'on',
-		stopLoop: 'off',
-		stopAfterLoops: -1,
-		stopAtSlide: -1,
-		shuffle: 'off',
-		autoHeight: 'on',
-		forceFullWidth: 'off',
-		fullScreenAlignForce: 'off',
-		minFullScreenHeight: 0,
-		hideNavDelayOnMobile: 1500,
-		hideThumbsOnMobile: 'off',
-		hideBulletsOnMobile: 'off',
-		hideArrowsOnMobile: 'off',
-		hideThumbsUnderResolution: 0,
-		hideSliderAtLimit: 0,
-		hideCaptionAtLimit: 0,
-		hideAllCaptionAtLilmit: 0,
-		startWithSlide: 0,
-		fullScreenOffsetContainer: ''
-		});
-		});

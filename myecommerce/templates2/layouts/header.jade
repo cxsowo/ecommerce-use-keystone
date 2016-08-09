@@ -3,7 +3,7 @@ header
 		.header-container.container
 			.row
 				.logo
-					a(href='#', title='主页')
+					a(href='/', title='主页')
 						div
 							img(src='/images/logo2.png', alt='')
 				.fl-nav-menu
@@ -15,70 +15,17 @@ header
 						.nav-inner
 							// BEGIN NAV
 							ul#nav.hidden-xs
-								li.mega-menu
-									a.level-top(href='/electronics')
-										span 电子
-									.level0-wrapper.dropdown-6col
-										.container
-											.level0-wrapper2
-												.col-1
-													.nav-block.nav-block-center
-														ul.level0
-															li.level1.nav-6-1.parent.item
-																ul.level1
-																	if sec_categories_electronics
-																		each one in sec_categories_electronics
-																			li.level2.nav-6-1-1
-																				a(href= '#{one.path}')
-																					span #{one.name}
-								li.mega-menu
-									a.level-top(href='/books')
-										span 图书
-									.level0-wrapper.dropdown-6col
-										.container
-											.level0-wrapper2
-												.nav-block.nav-block-center
-													ul.level0
-														li.level1.nav-6-1.parent.item
-															ul.level1
-																li.level2.nav-6-1-1
-																	if sec_categories_books
-																		each one in sec_categories_books
-																			li.level2.nav-6-1-1
-																				a(href= '#{one.path}')
-																					span #{one.name}
-								li.mega-menu
-									a.level-top(href='/food')
-										span 食品
-									.level0-wrapper.dropdown-6col
-										.container
-											.level0-wrapper2
-												.nav-block.nav-block-center
-													ul.level0
-														li.level1.nav-6-1.parent.item
-															ul.level1
-																li.level2.nav-6-1-1
-																	if sec_categories_food
-																		each one in sec_categories_food
-																			li.level2.nav-6-1-1
-																				a(href= '#{one.path}')
-																					span #{one.name}
-								li.mega-menu
-									a.level-top(href='/food')
-										span 杂货
-									.level0-wrapper.dropdown-6col
-										.container
-											.level0-wrapper2
-												.nav-block.nav-block-center
-													ul.level0
-														li.level1.nav-6-1.parent.item
-															ul.level1
-																li.level2.nav-6-1-1
-																	if sec_categories_others
-																		each one in sec_categories_others
-																			li.level2.nav-6-1-1
-																				a(href= '#{one.path}')
-																					span #{one.name}
+								if first_categories
+									each one in first_categories
+										li.level0.parent.drop-menu
+											a.level-top(href='/'+'#{one.id}')
+												span #{one.name}
+											ul.level1
+												if one.sec_categories
+													each oneSec in one.sec_categories
+														li.level2.nav-6-1-1
+															a(href= '/'+'#{oneSec.id}')
+																span #{oneSec.name}
 				// row
 			.fl-header-right
 				.fl-links
@@ -88,18 +35,18 @@ header
 							ul.links
 								li
 									a(href='/personal_index', title='个人主页') 个人主页
-								if user
-									li.last
-										a(href='/logout', title='退出登录')
-											span 退出登录
-								else
-									li.last
-										a(href='/login', title='登录')
-											span 登录
+									if user
+										li.last
+											a(href='/signout', title='退出登录')
+												span 退出登录
+									else
+										li.last
+											a(href='/signin', title='登录')
+												span 登录
 				.fl-cart-contain
 					.mini-cart
 						.basket
-							a(href='/shopping-cart')
+							a(href='/shoppingcart')
 						.fl-mini-cart-content
 							.block-subtitle
 								.top-subtotal
@@ -108,48 +55,44 @@ header
 								// pull-right
 							// block-subtitle
 							ul#cart-sidebar.mini-products-list
-								li.item.first
-									.item-inner
-										a.product-image(title='timi & leslie Sophia Diaper Bag, Lemon Yellow/Shadow White', href='#l')
-											img(alt='timi & leslie Sophia Diaper Bag, Lemon Yellow/Shadow White', src='products-images/p4.jpg')
-										.product-details
-											.access
-												a.btn-remove1(title='Remove This Item', href='#') Remove
-												a.btn-edit(title='Edit item', href='#')
-													i.icon-pencil
-													span.hidden Edit item
-											// access
-											strong 1
-											| x
-											span.price $179.99
-											p.product-name
-												a(href='product-detail.html') Retis lapen casen
-								li.item.last
-									.item-inner
-										a.product-image(title='JP Lizzy Satchel Designer Diaper Bag - Slate Citron', href='#')
-											img(alt='JP Lizzy Satchel Designer Diaper Bag - Slate Citron', src='products-images/p3.jpg')
-										.product-details
-											.access
-												a.btn-remove1(title='Remove This Item', href='#') Remove
-												a.btn-edit(title='Edit item', href='#')
-													i.icon-pencil
-													span.hidden Edit item
-											// access
-											strong 1
-											| x
-											span.price $80
-											p.product-name
-												a(href='product-detail.html') Retis lapen casen
-							.actions
-								button.btn-checkout(title='结算', type='button', onclick='window.location=/checkout')
-									span 结算
-								button.view-cart(title='Checkout', type='button', onclick='window.location=/checkout')
-									span 进入购物车
+							if !user
+								ul#cart-sidebar.mini-products-list
+									if commodities_in_cart
+										each one in commodities_in_cart
+											li.item
+												.item-inner
+													a.product-image(title='#{one.name}', href='/product-detail/'+'#{one.id}')
+														img(alt='#{one.imgPath}')
+													.product-details
+														.access
+															a.btn-remove1(title='删除', href='#') 删除
+															a.btn-edit(title='编辑', href='#')
+																i.icon-pencil
+																span.hidden 编辑
+														// access
+														strong #{one.number}
+														| x
+														span.price #{one.price}
+														p.product-name
+															a(href='/product-detail/'+'#{one.id}') #{one.name}
+									else
+										li.item
+											span 空荡荡的购物车O.O
+								.actions
+									button.view-cart(title='查看购物车', type='button', onclick='')
+										a(href='/shoppingcart') 进入购物车
+							else
+								ul#cart-sidebar.mini-products-list
+									li.item.first
+										.item-inner
+											a.product-image(title='登陆', href='/signin')
+									span 请先
+									a(href='/signin') 登陆
 							// actions
 						// fl-mini-cart-content
 				// mini-cart
 				.collapse.navbar-collapse
-					form.navbar-form(role='search')
+					form.navbar-form(role='search',action='/search',method='get')
 						.input-group
 							input#desktopSearchInput.GlobalNavSearch.js-globalSearchInput(placeholder='搜索', data-reactid='.1.0.0.0')
 							label.GlobalNavSearch-searchIcon(for='desktopSearchInput', data-reactid='.1.0.0.1')

@@ -1,0 +1,59 @@
+extends ../layouts/default
+
+block content
+	+flash-messages(messages)
+	.page-heading
+		.container
+			.row
+				.col-xs-12
+					.page-title
+						h2 注册或登录
+	.main-container.col1-layout.wow.bounceInUp.animated.animated(style='visibility: visible;')
+		.main
+			.account-login.container
+				// page-title
+				form#login-form(action='/signin', method='post')
+					input(name='form_key', type='hidden', value='EPYwQxF6xoWcjLUr')
+					fieldset.col2-set
+						.col-1.new-users
+							strong 新用户
+							.content
+								p
+									| 注册一下就可以畅游这个网站啦！
+								.buttons-set
+									button.button.create-account(type='button', title='注册', onclick='')
+										span
+											a(href='/register') 我要注册
+						.col-2.registered-users
+							strong 登陆
+							.content
+								p 如果已经注册了，就登陆吧~
+								ul.form-list
+									li
+										label(for='email')
+											| 邮箱或用户名
+											em.required *
+										.input-box
+											input#email.input-text.required-entry.validate-email(type='text', name='signin[username]', value='', title='邮箱或用户名')
+									li
+										label(for='pass')
+											| 密码
+											em.required *
+										.input-box
+											input#pass.input-text.required-entry.validate-password(type='password', name='signin[password]', title='密码')
+								.remember-me-popup
+									.remember-me-popup-head(style='display:none')
+										h3#text2 What's this?
+										a.remember-me-popup-close(href='/', onclick='showDiv()', title='Close') Close
+									.remember-me-popup-body(style='display:none')
+										p#text1
+											| Checking "Remember Me" will let you access your shopping cart on this computer when you are logged out
+										.remember-me-popup-close-button.a-right
+											a.remember-me-popup-close.button(href='/', title='Close', onclick='\
+											showDiv()')
+												span 关闭
+								//- p.required * 为必填的
+								.buttons-set
+									button#send2.button.login(type='submit', title='Login', name='send')
+										span 登陆
+									a.forgot-word(href='/') 忘记密码了?

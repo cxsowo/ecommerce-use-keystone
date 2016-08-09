@@ -7,7 +7,6 @@ exports = module.exports = function (req, res) {
 
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
-	locals.section = 'home';
 	var commodities_in_cart = [{
 			id:"123",
 			name:"奇怪的商品123",

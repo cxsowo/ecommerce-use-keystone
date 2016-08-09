@@ -1,13 +1,11 @@
 var keystone = require('keystone');
 
-exports = module.exports = function (req, res) {
+//exports = module.exports = User;
+exports = module.exports = function(req, res) {
 
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 
-	// locals.section is used to set the currently selected
-	// item in the header navigation.
-	locals.section = 'home';
 	var commodities_in_cart = [{
 			id:"123",
 			name:"奇怪的商品123",
@@ -39,6 +37,5 @@ exports = module.exports = function (req, res) {
 		sec_categories:[{id:"1231",name:"电脑"},{id:"1232",name:"电视"},{id:"1233",name:"鼠标"}]
 	}
 	];
-	// Render the view
-	view.render('index',{ title:"买买买", first_categories:categories, shopping_cart_price:1233.33,commodities_in_cart:commodities_in_cart});
-};
+	view.render('shoppingcart',{ title:"购物车", categories:categories, commodities_in_cart:commodities_in_cart});
+}

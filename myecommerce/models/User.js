@@ -20,6 +20,26 @@ User.schema.virtual('canAccessKeystone').get(function () {
 	return this.isAdmin;
 });
 
+User.schema.methods.isMatch = function (name,password,callback) {
+	if (typeof callback !== 'function') {
+		callback = function () {};
+	}
+	var enquiry = this;
+	keystone.list('User').model.find().where('isAdmin', true).exec(function (err, admins) {
+		if (err) return callback(err);
+		new keystone.Email({
+			templateName: 'enquiry-notification',
+		}).send({
+			to: admins,
+			from: {
+				name: 'MyEcommerce',
+				email: 'contact@myecommerce.com',
+			},
+			subject: 'New Enquiry for MyEcommerce',
+			enquiry: enquiry,
+		}, callback);
+	});
+};
 
 /**
  * Registration

@@ -40,7 +40,7 @@ Enquiry.schema.methods.sendNotificationEmail = function (callback) {
 		callback = function () {};
 	}
 	var enquiry = this;
-	keystone.list('Y').model.find().where('isAdmin', true).exec(function (err, admins) {
+	keystone.list('User').model.find().where('isAdmin', true).exec(function (err, admins) {
 		if (err) return callback(err);
 		new keystone.Email({
 			templateName: 'enquiry-notification',
