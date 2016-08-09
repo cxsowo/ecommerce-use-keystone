@@ -1,0 +1,139 @@
+extends ../layouts/default
+
+block content
+	.page-heading
+		.container
+			.row
+				.col-xs-12
+					.page-title
+						h2 购物车
+	.main-container.col1-layout.wow.bounceInUp.animated
+		.main.container
+			.cart.wow.bounceInUp.animated
+				.table-responsive.shopping-cart-tbl.container
+					form(action='/checkout', method='post')
+						input(name='form_key', type='hidden', value='EPYwQxF6xoWcjLUr')
+						fieldset
+							table#shopping-cart-table.data-table.cart-table.table-striped
+								colgroup
+									col(width='1')
+									col
+									col(width='1')
+									col(width='1')
+									col(width='1')
+									col(width='1')
+									col(width='1')
+								thead
+									tr.first.last
+										th(rowspan='1')  
+										th(rowspan='1')
+											span.nobr 产品名称
+										th(rowspan='1')
+										th.a-center(colspan='1')
+											span.nobr 单价
+										th.a-center(rowspan='1') 数量
+										th.a-center(colspan='1') 总价
+										th.a-center(rowspan='1')  
+								tfoot
+									tr.first.last
+										td.a-right.last(colspan='50')
+											button.button.btn-continue(type='button', title='继续购物', onclick='')
+												span
+													span 返回继续购物
+											button.button.btn-update(name='update_cart_action', value='update_qty', title='Update Cart')
+												span
+													span 刷新购物车
+											button#empty_cart_button.button.btn-empty(name='update_cart_action', value='empty_cart', title='Clear Cart')
+												span
+													span 清空购物车
+								tbody
+									if commodities_in_cart
+										each one in commodities_in_cart
+											tr.odd(class = 'cart-item-#{one.id}')
+												td.image.hidden-table
+													a.product-image(href='/product-detail/'+'#{one.id}', title="#{one.name}")
+														img(src='#{one.imgPath}', width='75', alt="#{one.name}")
+												td
+													h2.product-name
+														a(href='/product-detail/'+'#{one.id}') #{one.name}
+												td.a-center.hidden-table
+													a.edit-bnt(href='#', title='Edit item parameters')
+												td.a-right.hidden-table
+													span.cart-price
+														span.price #{one.price}
+												td.a-center.movewishlist
+													input.input-text.qty(name='cart[26340][qty]', value='#{one.number}', size='4', title='Qty', maxlength='12')
+												td.a-right.movewishlist
+													span.cart-price
+														span.price #{one.price * one.number}
+												td.a-center.last
+													a.button.remove-item(href='#', title='删除',onclick="delete_item_in_cart(#{one.id})")
+														span
+															span 删除
+
+				// BEGIN CART COLLATERALS
+				.cart-collaterals.container
+					// BEGIN COL2 SEL COL 1
+					// BEGIN TOTALS COL 2
+					.col-sm-8
+						.discount
+							h3 地址
+							if address
+								span #{address}
+							form#address_form(action='', method='post')
+								label(for='coupon_code') Enter your coupon code if you have one.
+								input#remove-coupone(type='hidden', name='remove', value='0')
+								input#coupon_code.input-text.fullwidth(type='text', name='coupon_code', value='')
+								button.button.coupon(type='button', title='Apply Coupon', onclick='discountForm.submit(false)', value='Apply Coupon')
+									span Apply Coupon
+						// discount
+					// col-sm-4
+					.col-sm-4
+						.totals
+							h3 Shopping Cart Total
+							.inner
+								table#shopping-cart-totals-table.table.shopping-cart-table-total
+									colgroup
+										col
+										col(width='1')
+									tfoot
+										tr
+											td.a-left(style='', colspan='1')
+												strong Grand Total
+											td.a-right(style='')
+												strong
+													span.price $129.00
+									tbody
+										tr
+											td.a-left(style='', colspan='1')
+												| Subtotal
+											td.a-right(style='')
+												span.price $129.00
+								ul.checkout
+									li
+										button.button.btn-proceed-checkout(type='button', title='Proceed to Checkout', onclick='')
+											span Proceed to Checkout
+									br
+									li
+										a(href='multiple-addresses.html', title='Checkout with Multiple Addresses') Checkout with Multiple Addresses
+									br
+							// inner
+block js
+	script(type='text/javascript').
+		function delete_item_in_cart(id){
+			var tr = $('.cart-item-'+ id);
+			var minitr = $('.minicart-item-'+id)
+			$.ajax({
+				type : 'DELETE',
+				url : '/shopping-cart?id=' + id
+			})
+			.done(function(results) {
+				if(results.success === 1)
+					if(tr) {
+						tr.remove()
+					}
+					if(minitr) {
+						,minitr.remove()
+					}
+			})
+		}

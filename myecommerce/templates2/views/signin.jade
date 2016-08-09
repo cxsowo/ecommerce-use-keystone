@@ -23,7 +23,7 @@ block content
 								.buttons-set
 									button.button.create-account(type='button', title='注册', onclick='')
 										span
-											a(href='/register') 我要注册
+											a(href='/signup') 我要注册
 						.col-2.registered-users
 							strong 登陆
 							.content
@@ -54,6 +54,9 @@ block content
 												span 关闭
 								//- p.required * 为必填的
 								.buttons-set
-									button#send2.button.login(type='submit', title='Login', name='send')
+									button#send2.button.login(type='submit', title='signin', name='send')
 										span 登陆
 									a.forgot-word(href='/') 忘记密码了?
+block js
+	script(type='text/javascript').
+			$('#form').validation();

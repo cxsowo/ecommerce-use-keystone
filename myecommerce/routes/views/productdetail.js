@@ -7,6 +7,7 @@ exports = module.exports = function (req, res) {
 
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
+	console.log("in product-detail");
 	var commodities_in_cart = [{
 			id:"123",
 			name:"奇怪的商品123",
@@ -36,8 +37,16 @@ exports = module.exports = function (req, res) {
 		id:"125",
 		name:"服装",
 		sec_categories:[{id:"1231",name:"电脑"},{id:"1232",name:"电视"},{id:"1233",name:"鼠标"}]
+	}];
+	var product ={
+		name:"测试名字的商品呵呵哈哈哈",
+		id:123,
+		first_category:{
+			name:"一级分类电子",
+			id:"12321"
+		}
 	}
-	];
 	// Render the view
-	view.render('index',{ title:"买买买", first_categories:categories, shopping_cart_price:1233.33,commodities_in_cart:commodities_in_cart});
+	view.render('product-detail',{ title:"买买买", first_categories:categories, shopping_cart_price:1233.33,commodities_in_cart:commodities_in_cart
+	,product:product});
 };

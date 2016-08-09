@@ -1,0 +1,367 @@
+extends ../layouts/default
+
+block content
+	.page-heading
+		.breadcrumbs
+			.container
+				.row
+					div
+						ul
+							li.home
+								a(href='/', title='') 主页
+								span ›
+							if product &&　product.first_category
+								li.category1599
+									a(href='/'+'#{product.first_category.id}', title='') #{product.first_category.name}
+									span ›
+							if product &&　product.sec_category
+								li.category1600
+									a(href='/'+'#{product.sec_category.id}', title='') #{product.sec_category.name}
+									span ›
+							li.category1601
+								strong #{product.name}
+					// col-xs-12
+					.page-title
+						h2 Women
+					// row
+			// container
+	// BEGIN Main Container
+	.main-container.col1-layout.wow.bounceInUp.animated
+		.main
+			.col-main
+				// Endif Next Previous Product
+				.product-view.wow.bounceInUp.animated(itemscope='', itemtype='http://schema.org/Product', itemid='#product_base')
+					#messages_product_view
+					// product-next-prev
+					.product-essential.container
+						.row
+							.product-next-prev
+								a.product-next(title='Next', href='#')
+								a.product-prev(title='Previous', href='#')
+							form#product_addtocart_form(action='', method='post')
+								// End For version 1, 2, 6
+								// For version 3
+								.product-img-box.col-sm-6.col-xs-12
+									.new-label.new-top-left  New
+									p.availability.in-stock
+										link(itemprop='availability', href='http://schema.org/InStock')
+										span In stock
+									.product-image
+										.large-image
+											a#zoom1.cloud-zoom(href='products-images/p4.jpg', rel='useWrapper: false, adjustY:0, adjustX:20')
+												img(src='products-images/p4.jpg')
+										.flexslider.flexslider-thumb
+											ul.previews-list.slides
+												if product.imgs
+													each one in product.imgs
+														li
+															a.cloud-zoom-gallery(href='#{one.imgPath}', rel="useZoom: 'zoom1', smallImage: 'products-images/p15.jpg' ")
+																img(src='products-images/p15.jpg', alt='Thumbnail 1')
+
+									// end: more-images
+								// End For version 1,2,6
+								// For version 3
+								.product-shop.col-sm-6.col-xs-12
+									.product-name
+										h1(itemprop='name') #{product.name}
+									// product-name
+									span(itemprop='aggregateRating', itemscope='', itemtype='http://schema.org/AggregateRating')
+										.rating
+											.ratings
+												.rating-box
+													.rating(style='width:50%')
+									.price-block
+										.price-box
+											span#product-price-123.regular-price
+												span.price #{product.price}
+									// price-block
+									.short-description
+										h2 Quick Overview
+										p
+											| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate.
+									.add-to-box
+										.add-to-cart
+											.pull-left
+												.custom.pull-left
+													button.increase.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;", type='button')
+														i.icon-plus
+													input#qty.input-text.qty(type='text', name='qty', maxlength='12', value='1', title='Quantity:')
+													button.reduced.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty > 0 ) result.value--;return false;", type='button')
+														i.icon-minus
+												// custom pull-left
+											// pull-left
+											button.button.btn-cart(type='button', title='Add to Cart', onclick='productAddToCartForm.submit(this)')
+												span Add to Cart
+										// add-to-cart
+										.email-addto-box
+											p.email-friend
+												a(href='#', title='Email to a Friend')
+													span Email to a Friend
+											ul.add-to-links
+												li
+													a.link-wishlist(href='wishlist.html', onclick='', title='Add To Wishlist')
+														span Add To Wishlist
+												li
+													span.separator |
+													a.link-compare(href='Compare.html', title='Add To Compare')
+														span Add To Compare
+											// add-to-links
+										// email-addto-box
+									// add-to-box
+									// thm-mart Social Share
+									.social
+										ul.link
+											li.fb
+												a(href='http://www.facebook.com/', rel='nofollow', target='_blank', style='text-decoration:none;')
+											li.linkedin
+												a(href='http://www.linkedin.com/', rel='nofollow', target='_blank', style='text-decoration:none;')
+											li.tw
+												a(href='http://twitter.com/', rel='nofollow', target='_blank', style='text-decoration:none;')
+											li.pintrest
+												a(href='http://pinterest.com/', rel='nofollow', target='_blank', style='text-decoration:none;')
+											li.googleplus
+												a(href='https://plus.google.com/', rel='nofollow', target='_blank', style='text-decoration:none;')
+									// thm-mart Social Share Close
+								// product-shop
+								// Detail page static block for version 3
+					// product-essential
+					.product-collateral.container
+						ul#product-detail-tab.nav.nav-tabs.product-tabs
+							li.active
+								a(href='#product_tabs_description', data-toggle='tab')  Product Description
+							li
+								a(href='#product_tabs_tags', data-toggle='tab') Tags
+							li
+								a(href='#reviews_tabs', data-toggle='tab') Reviews
+							li
+								a(href='#product_tabs_custom', data-toggle='tab') Custom Tab
+							li
+								a(href='#product_tabs_custom1', data-toggle='tab') Custom Tab1
+						#productTabContent.tab-content
+							#product_tabs_description.tab-pane.fade.in.active
+								.std
+									p
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.
+									p
+										| Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.
+							#product_tabs_tags.tab-pane.fade
+								.box-collateral.box-tags
+									.tags
+										form#addTagForm(action='#', method='get')
+											.form-add-tags
+												label(for='productTagName') Add Tags:
+												.input-box
+													input#productTagName.input-text(name='productTagName', type='text')
+													button.button.btn-add(type='button', title='Add Tags', onclick='submitTagForm()')
+														span Add Tags
+												// input-box
+									// tags
+									p.note Use spaces to separate tags. Use single quotes (') for phrases.
+							#reviews_tabs.tab-pane.fade
+								#customer-reviews.box-collateral.box-reviews
+									.box-reviews1
+										.form-add
+											form#review-form(method='post', action='')
+												h3 Write Your Own Review
+												fieldset
+													h4
+														| How do you rate this product?
+														em.required *
+													span#input-message-box
+													table#product-review-table.data-table
+														colgroup
+															col
+															col(width='1')
+															col(width='1')
+															col(width='1')
+															col(width='1')
+															col(width='1')
+														thead
+															tr.first.last
+																th  
+																th
+																	span.nobr 1 *
+																th
+																	span.nobr 2 *
+																th
+																	span.nobr 3 *
+																th
+																	span.nobr 4 *
+																th
+																	span.nobr 5 *
+														tbody
+															tr.first.odd
+																th Price
+																td.value
+																	input#Price_1.radio(type='radio', value='11', name='ratings[3]')
+																td.value
+																	input#Price_2.radio(type='radio', value='12', name='ratings[3]')
+																td.value
+																	input#Price_3.radio(type='radio', value='13', name='ratings[3]')
+																td.value
+																	input#Price_4.radio(type='radio', value='14', name='ratings[3]')
+																td.value.last
+																	input#Price_5.radio(type='radio', value='15', name='ratings[3]')
+															tr.even
+																th Value
+																td.value
+																	input#Value_1.radio(type='radio', value='6', name='ratings[2]')
+																td.value
+																	input#Value_2.radio(type='radio', value='7', name='ratings[2]')
+																td.value
+																	input#Value_3.radio(type='radio', value='8', name='ratings[2]')
+																td.value
+																	input#Value_4.radio(type='radio', value='9', name='ratings[2]')
+																td.value.last
+																	input#Value_5.radio(type='radio', value='10', name='ratings[2]')
+															tr.last.odd
+																th Quality
+																td.value
+																	input#Quality_1.radio(type='radio', value='1', name='ratings[1]')
+																td.value
+																	input#Quality_2.radio(type='radio', value='2', name='ratings[1]')
+																td.value
+																	input#Quality_3.radio(type='radio', value='3', name='ratings[1]')
+																td.value
+																	input#Quality_4.radio(type='radio', value='4', name='ratings[1]')
+																td.value.last
+																	input#Quality_5.radio(type='radio', value='5', name='ratings[1]')
+													input.validate-rating(type='hidden', value='', name='validate_rating')
+													.review1
+														ul.form-list
+															li
+																label.required(for='nickname_field')
+																	| Nickname
+																	em *
+																.input-box
+																	input#nickname_field.input-text(type='text', name='nickname')
+															li
+																label.required(for='summary_field')
+																	| Summary
+																	em *
+																.input-box
+																	input#summary_field.input-text(type='text', name='title')
+													.review2
+														ul
+															li
+																label.required.label-wide(for='review_field')
+																	| Review
+																	em *
+																.input-box
+																	textarea#review_field(rows='3', cols='5', name='detail')
+														.buttons-set
+															button.button.submit(title='Submit Review', type='submit')
+																span Submit Review
+									.box-reviews2
+										h3 Customer Reviews
+										.box.visible
+											ul
+												li
+													table.ratings-table
+														colgroup
+															col(width='1')
+															col
+														tbody
+															tr
+																th Value
+																td
+																	.rating-box
+																		.rating(style='width:100%;')
+															tr
+																th Quality
+																td
+																	.rating-box
+																		.rating(style='width:100%;')
+															tr
+																th Price
+																td
+																	.rating-box
+																		.rating(style='width:100%;')
+													.review
+														h6
+															a(href='#') Excellent
+														small
+															| Review by
+															span Leslie Prichard
+															| on 1/3/2014
+														.review-txt
+															| I have purchased shirts from Minimalism a few times and am never disappointed. The quality is excellent and the shipping is amazing. It seems like it's at your front door the minute you get off your pc. I have received my purchases within two days - amazing.
+												li.even
+													table.ratings-table
+														colgroup
+															col(width='1')
+															col
+														tbody
+															tr
+																th Value
+																td
+																	.rating-box
+																		.rating(style='width:100%;')
+															tr
+																th Quality
+																td
+																	.rating-box
+																		.rating(style='width:100%;')
+															tr
+																th Price
+																td
+																	.rating-box
+																		.rating(style='width:80%;')
+													.review
+														h6
+															a(href='#/catalog/product/view/id/60/') Amazing
+														small
+															| Review by
+															span Sandra Parker
+															| on 1/3/2014
+														.review-txt  Minimalism is the online !
+												li
+													table.ratings-table
+														colgroup
+															col(width='1')
+															col
+														tbody
+															tr
+																th Value
+																td
+																	.rating-box
+																		.rating(style='width:100%;')
+															tr
+																th Quality
+																td
+																	.rating-box
+																		.rating(style='width:100%;')
+															tr
+																th Price
+																td
+																	.rating-box
+																		.rating(style='width:80%;')
+													.review
+														h6
+															a(href='#/catalog/product/view/id/59/') Nicely
+														small
+															| Review by
+															span Anthony  Lewis
+															| on 1/3/2014
+														.review-txt
+															| Unbeatable service and selection. This store has the best business model I have seen on the net. They are true to their word, and go the extra mile for their customers. I felt like a purchasing partner more than a customer. You have a lifetime client in me.
+										.actions
+											a#revies-button.button.view-all(href='#')
+												span
+													span View all
+									.clear
+							#product_tabs_custom.tab-pane.fade
+								.product-tabs-content-inner.clearfix
+									p
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi.
+									p
+										| Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.
+							#product_tabs_custom1.tab-pane.fade
+								.product-tabs-content-inner.clearfix
+									p
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.
+										// End Item
+						// end related product
+					// end related product
+				// box-additional
+				// product-view

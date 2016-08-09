@@ -40,13 +40,16 @@ header
 											a(href='/signout', title='退出登录')
 												span 退出登录
 									else
-										li.last
+										li
 											a(href='/signin', title='登录')
 												span 登录
+										li.last
+											a(href='/signup', title='注册')
+												span 注册
 				.fl-cart-contain
 					.mini-cart
 						.basket
-							a(href='/shoppingcart')
+							a(href='/shopping-cart')
 						.fl-mini-cart-content
 							.block-subtitle
 								.top-subtotal
@@ -80,7 +83,7 @@ header
 											span 空荡荡的购物车O.O
 								.actions
 									button.view-cart(title='查看购物车', type='button', onclick='')
-										a(href='/shoppingcart') 进入购物车
+										a(href='/shopping-cart') 进入购物车
 							else
 								ul#cart-sidebar.mini-products-list
 									li.item.first

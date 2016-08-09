@@ -1,0 +1,52 @@
+extends ../layouts/default
+
+block content
+	+flash-messages(messages)
+	.page-heading
+		.container
+			.row
+				.col-xs-12
+					.page-title
+						h2 注册
+	.main-container.col1-layout.wow.bounceInUp.animated.animated(style='visibility: visible;')
+		.main
+			.account-login.container
+				// page-title
+				form#login-form(action='/signup', method='post')
+					input(name='form_key', type='hidden', value='EPYwQxF6xoWcjLUr')
+					fieldset.col2-set
+						.col-1.new-users
+							strong 注册
+							.content
+								p 带
+									em.required *
+									| 的是必填的
+								ul.form-list
+									li
+										label(for='name')
+											| 用户名
+											em.required *
+										.input-box
+											input#name.input-text.required-entry(type='text', name='signup[username]', value='', title='用户名', size=20)
+									li
+										label(for='email')
+											| 邮箱
+											em.required *
+										.input-box
+											input#email.input-text.required-entry.validate-email(type='text', name='signup[email]', value='', title='邮箱')
+									li
+										label(for='pass')
+											| 密码
+											em.required *
+										.input-box
+											input#pass.input-text.required-entry.validate-password(type='password', name='signup[password]', title='密码', size=20)
+								//- p.required * 为必填的
+								.buttons-set
+									button.button.login(type='submit', title='signup', name='send')
+										span 注册
+									a.forgot-word(href='/signin') 已经注册过了?
+						.col-2
+							strong 说明
+block js
+	script(type='text/javascript').
+		$('#form').validation();
