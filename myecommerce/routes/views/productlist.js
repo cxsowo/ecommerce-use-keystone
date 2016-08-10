@@ -71,7 +71,7 @@ exports = module.exports = function (req, res) {
 		products:products
 	}
 	// Render the view
-	view.render('productlist',{
+	view.render('product-list',{
 		title:"买买买",
 		first_categories:categories,
 		shopping_cart_price:1233.33,
@@ -150,7 +150,7 @@ exports.allproduct = function (req, res) {
 		products:products
 	}
 	// Render the view
-	view.render('productlist',{
+	view.render('product-list',{
 		title:"买买买",
 		first_categories:categories,
 		shopping_cart_price:1233.33,

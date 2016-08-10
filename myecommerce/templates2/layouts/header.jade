@@ -18,13 +18,13 @@ header
 								if first_categories
 									each one in first_categories
 										li.level0.parent.drop-menu
-											a.level-top(href='/'+'#{one.id}')
+											a.level-top(href='/product-list/'+'#{one.id}')
 												span #{one.name}
 											ul.level1
 												if one.sec_categories
 													each oneSec in one.sec_categories
 														li.level2.nav-6-1-1
-															a(href= '/'+'#{oneSec.id}')
+															a(href= '/product-list/'+'#{oneSec.id}')
 																span #{oneSec.name}
 				// row
 			.fl-header-right
@@ -62,7 +62,7 @@ header
 								ul#cart-sidebar.mini-products-list
 									if commodities_in_cart
 										each one in commodities_in_cart
-											li.item
+											li.item(class = '.minicart-item-#{one.id}')
 												.item-inner
 													a.product-image(title='#{one.name}', href='/product-detail/'+'#{one.id}')
 														img(alt='#{one.imgPath}')

@@ -27,19 +27,19 @@ block content
 											| 用户名
 											em.required *
 										.input-box
-											input#name.input-text.required-entry(type='text', name='signup[username]', value='', title='用户名', size=20)
+											input#username.input-text.required-entry(type='text', name='user[name]', value='', title='用户名', size=20)
 									li
 										label(for='email')
 											| 邮箱
 											em.required *
 										.input-box
-											input#email.input-text.required-entry.validate-email(type='text', name='signup[email]', value='', title='邮箱')
+											input#email.input-text.required-entry.validate-email(type='text', name='user[email]', value='', title='邮箱')
 									li
 										label(for='pass')
 											| 密码
 											em.required *
 										.input-box
-											input#pass.input-text.required-entry.validate-password(type='password', name='signup[password]', title='密码', size=20)
+											input#pass.input-text.required-entry.validate-password(type='password', name='user[password]', title='密码', size=20)
 								//- p.required * 为必填的
 								.buttons-set
 									button.button.login(type='submit', title='signup', name='send')

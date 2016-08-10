@@ -1,55 +1,61 @@
 var keystone = require('keystone');
+var bcrypt = require('bcrypt');
+var User = keystone.list('User');
 
-//exports = module.exports = User;
-exports = module.exports = function(req, res) {
+exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res);
-	var locals = res.locals;
+	var _user = req.body.user;
 
-	// locals.section is used to set the currently selected
-	// item in the header navigation.
-	// locals.section = 'home';
-	// var _user = req.body.user
-	// var name = _user.name
-	// var password = _user.password
+	User.model.find()
+		.where('name' , _user.name)
+		.exec(function(err,user){
+			if(err)
+				console.error(err);
+			if(user.length === 1){
+				bcrypt.compare(_user.password, user[0].password, function(err, isMatch){
+					if(err){
+						console.error(err);
+					}
+					if(isMatch){
+						console.log("登录成功："+_user.name);
+						res.redirect('/');
+					}
+					else{
+						console.log("登录失败："+_user.name);
+						res.redirect('/signin');
+					}
+				});
+			}
+		});
+		// .where('name' , _user.name)
+		// .exec(function(err,user){
+		// 	if(err)
+		// 		console.error(err);
+		// 	if(user.length === 0){
+		// 		console.log("该用户不存在"+_user.name);
+		// 		res.redirect('/signin');
+		// 	}
+		// 	else{
+		// 		User.model.comparePassword(_user.password,function(err,isMatch){
+		// 			if(err)
+		// 				console.error(err);
+		// 			if(isMatch){
+		// 				console.log("登录成功："+_user.name);
+		// 				res.redirect('/');
+		// 			}
+		// 			else{
+		// 				console.log("登录失败："+_user.name);
+		// 				res.redirect('/signin');
+		// 			}
 
-	// User.findOne({
-	// 	name : name
-	// }, function(err, user) {
-	// 	if(err)  console.log(err)
+		// 		});
+		// 	}
+		// });
+};
 
-	// 	if(!user)
-	// 		return res.redirect('/signup')
-	// 	user.comparePassword(password, function(err, isMatch) {
-	// 		if(err) console.log(err)
-
-	// 		if(isMatch) {
-	// 			//save user  on serve
-	// 			req.session.user = user
-	// 			return res.redirect('/')
-	// 		}
-	// 		else
-	// 			return res.redirect('../signin')
-	// 	})
-	// })
-	// view.on('post', { action: 'signin' }, function (next) {
-
-	// 	var newUser = new User.model();
-	// 	var updater = newEnquiry.getUpdateHandler(req);
-
-	// 	updater.process(req.body, {
-	// 		flashErrors: true,
-	// 		fields: 'name, email, phone, enquiryType, message',
-	// 		errorMessage: 'There was a problem submitting your enquiry:',
-	// 	}, function (err) {
-	// 		if (err) {
-	// 			locals.validationErrors = err.errors;
-	// 		} else {
-	// 			locals.enquirySubmitted = true;
-	// 		}
-	// 		next();
-	// 	});
-	// });
-
-	view.render('signin',{ title:"登陆页面" });
+exports.showSignin = function(req, res) {
+	res.render('signin', {
+		title: '登录'
+	})
 }

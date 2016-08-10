@@ -25,6 +25,7 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
+	'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/myecommerce-db',
 });
 
 // Load your project's Models
@@ -65,9 +66,17 @@ keystone.set('routes', require('./routes'));
 
 
 // Configure the navigation bar in Keystone's Admin UI
+keystone.set('email tests', require('./routes/emails'));
+
+keystone.set('cloudinary config', { cloud_name: 'shi-no', api_key: '782672353871716', api_secret: 'Pbe0M55TgExXsjevlUu0TdvB3SI' })
+// Configure the navigation bar in Keystone's Admin UI
+
 keystone.set('nav', {
 	enquiries: 'enquiries',
-	user: 'User',
+	users: 'users',
+	products: 'products',
+	orders: 'orders',
+	categories: 'categories'
 });
 
 // Start Keystone to connect to your database and initialise the web server

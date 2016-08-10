@@ -30,17 +30,17 @@ block content
 								p 如果已经注册了，就登陆吧~
 								ul.form-list
 									li
-										label(for='email')
-											| 邮箱或用户名
+										label(for='name')
+											| 用户名
 											em.required *
 										.input-box
-											input#email.input-text.required-entry.validate-email(type='text', name='user[username]', value='', title='邮箱或用户名')
+											input#username.input-text.required-entry.validate-email(type='text', name='user[name]', value='', title='用户名')
 									li
 										label(for='pass')
 											| 密码
 											em.required *
 										.input-box
-											input#pass.input-text.required-entry.validate-password(type='password', name='user[password]', title='密码')
+											input#pass.input-text.required-entry.validate-password(type='password', name='usere[password]', title='密码')
 								.remember-me-popup
 									.remember-me-popup-head(style='display:none')
 										h3#text2 What's this?

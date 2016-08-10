@@ -1,9 +1,7 @@
 var keystone = require('keystone')
 var Types = keystone.Field.Types
 
-var Order = new keystone.List('Order',{
-	track : true
-})
+var Order = new keystone.List('Order')
 
 Order.add({
 	customer: {type: Types.Relationship, ref: 'User', many: false, index: true, initial: true},
@@ -12,7 +10,7 @@ Order.add({
 	status: {type: Types.Boolean, require: true}
 })
 
-Order.trace = true
+Order.track = true
 Order.defaultSort = '-createAt'
 Order.defaultColumns = 'name, price, description, productionDate, createdAt, updatedAt'
 
