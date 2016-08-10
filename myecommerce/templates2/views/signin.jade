@@ -34,13 +34,13 @@ block content
 											| 邮箱或用户名
 											em.required *
 										.input-box
-											input#email.input-text.required-entry.validate-email(type='text', name='signin[username]', value='', title='邮箱或用户名')
+											input#email.input-text.required-entry.validate-email(type='text', name='user[username]', value='', title='邮箱或用户名')
 									li
 										label(for='pass')
 											| 密码
 											em.required *
 										.input-box
-											input#pass.input-text.required-entry.validate-password(type='password', name='signin[password]', title='密码')
+											input#pass.input-text.required-entry.validate-password(type='password', name='user[password]', title='密码')
 								.remember-me-popup
 									.remember-me-popup-head(style='display:none')
 										h3#text2 What's this?

@@ -1,0 +1,123 @@
+extends ../layouts/default
+
+block content
+	.page-heading
+		.breadcrumbs
+			.container
+				.row
+					div
+						ul
+							li.home
+								a(href='/', title='回主页') 主页
+								span ›
+							if productlist.first_category
+								li.category1599
+									a(href='/product-list/#{productlist.first_category.id}', title='') #{productlist.first_category.name}
+									span ›
+							if productlist.sec_category
+								li.category1600
+									a(href='/product-list/#{productlist.sec_category.id}', title='') #{productlist.sec_category.name}
+									span ›
+							li.category1601
+								strong 商品列表
+					// col-xs-12
+					.page-title
+						h2 商品列表
+		section.main-container.col2-left-layout.bounceInUp.animated
+				// For version 1, 2, 3, 8
+				// For version 1, 2, 3
+				.container
+					.row
+						.col-main.product-grid
+							.pro-coloumn
+								article.col-main
+									.toolbar
+										.pager
+											#sort-by
+												label.left Sort By: 
+												ul
+													li
+														a(href='#')
+															| Position
+															span.right-arrow
+														ul
+															li
+																a(href='#') Name
+															li
+																a(href='#') Price
+															li
+																a(href='#') Position
+											.pages
+												ul.pagination
+													li
+														a(href='#') «
+													li.active
+														a(href='#') 1
+													li
+														a(href='#') 2
+													li
+														a(href='#') 3
+													li
+														a(href='#') 4
+													li
+														a(href='#') 5
+													li
+														a(href='#') »
+									.category-products
+										ul.products-grid
+											if productlist.products
+												each one in productlist.products
+													li.item.col-lg-3.col-md-3.col-sm-3.col-xs-6
+														.item-inner
+															.item-img
+																.item-img-info
+																	a.product-image(href='/product-detail/#{one.id}', title='#{one.name}')
+																		img(src='#{one.imgPath}', alt='#{one.name}')
+																	.item-box-hover
+																		.box-inner
+																			.product-detail-bnt
+																				a.button.detail-bnt(href='/product-detail/#{one.id}')
+																					span 查看
+																			.actions
+																				span.add-to-links
+																					a.link-wishlist(href='#', title='收藏')
+																						span 收藏
+																					a.link-compare.add_to_compare(href='#', title='对比')
+																						span 加入对比
+																			.add_cart
+																				button.button.btn-cart(type='button')
+																					span 加入购物车
+															.item-info
+																.info-inner
+																	.item-title
+																		a(href='/product-detail/#{one.id}', title='#{one.name}') #{one.name}
+																	.item-content
+																		.rating
+																			.ratings
+																				.rating-box
+																					.rating(style='width:80%')
+																				p.rating-links
+																					a(href='#') 1 Review(s)
+																					span.separator |
+																					a(href='#') Add Review
+																		.item-price
+																			.price-box
+																				span.regular-price
+																					span.price #{one.price}
+											else
+												span 没有商品。。
+
+									.toolbar
+										.pager
+											.pages
+												ul.pagination
+													li
+														a(href='#') «
+													li.active
+														a(href='#') 1
+													#pagelist
+													li
+														a(href='#') »
+
+block js
+	

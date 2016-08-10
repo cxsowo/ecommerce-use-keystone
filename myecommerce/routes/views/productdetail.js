@@ -5,6 +5,7 @@ exports = module.exports = function (req, res) {
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 
+	console.log("query id:" + req.query.category_id);
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
 	console.log("in product-detail");

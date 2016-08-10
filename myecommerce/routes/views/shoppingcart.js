@@ -35,8 +35,8 @@ exports = module.exports = function(req, res) {
 		id:"125",
 		name:"服装",
 		sec_categories:[{id:"1231",name:"电脑"},{id:"1232",name:"电视"},{id:"1233",name:"鼠标"}]
-	}
-	];
+	}];
+
 	view.render('shopping-cart',{ title:"购物车", categories:categories, commodities_in_cart:commodities_in_cart});
 }
 exports.delete = function(req, res) {
@@ -73,8 +73,8 @@ exports.delete = function(req, res) {
 		id:"125",
 		name:"服装",
 		sec_categories:[{id:"1231",name:"电脑"},{id:"1232",name:"电视"},{id:"1233",name:"鼠标"}]
-	}
-	];
+	}];
+
 	return {success:1};
 }
 
