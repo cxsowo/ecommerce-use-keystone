@@ -1,15 +1,17 @@
 var keystone = require('keystone');
 var User = keystone.list('User');
+var signin = require('./signin');
 
 exports = module.exports = function (req, res) {
-
-	var view = new keystone.View(req, res);
 
 	var _user = req.body.user;
 	var newUser = new User.model({
 		name : _user.name,
 		email : _user.email,
-		password : _user.password
+		password : _user.password,
+		phone : _user.phone || '',
+		address : _user.address || '',
+		isAdmin : false
 	});
 
 	newUser.save(function(err,isSuccess) {
@@ -18,8 +20,7 @@ exports = module.exports = function (req, res) {
 	    	console.error(err);
 	    if(isSuccess){
 	    	console.log("注册成功："+_user.name);
-			req.session.user = newUser;
-			res.redirect('/');
+	    	signin(req,res);
 	    }
 	    else{
 			console.log("注册失败："+_user.name);

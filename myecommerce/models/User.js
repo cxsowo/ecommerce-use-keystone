@@ -10,8 +10,8 @@ var User = new keystone.List('User',{
 });
 
 User.add({
-	name: { type: Types.Text, required: true, index: true,unique: true },
-	email: { type: Types.Email, initial: true, required: true, index: true },
+	name: { type: Types.Text, initial: true, required: true, index: true },
+	email: { type: Types.Email, initial: true, required: true, index: true,unique: true},
 	password: { type: Types.Password, initial: true, required: true },
 	address: {type: Types.Text, initial: true},
 	phone: {type: Types.Number, initial: true}
@@ -23,46 +23,6 @@ User.add({
 User.schema.virtual('canAccessKeystone').get(function () {
 	return this.isAdmin;
 });
-
-User.schema.methods.signIn = function(user,cb){
-	this.findOne({
-		name:user.name
-	},function(err, founduser) {
-		if(err) cb(err,false);
-
-		if(!founduser){
-			console.log("该用户不存在："+founduser.name);
-			cb(null,false);
-		}
-		bcrypt.compare(user.password, founduser.password, function(isMatch){
-			if(err){
-				cb(err,false);
-			}
-			if(isMatch)
-				cb(null, true);
-			else
-				cb(null,false);
-		})
-	});
-}
-
-User.schema.methods.signUp = function(user,cb){
-	this.findOne({
-		name:user.name
-	},function(err, founduser) {
-		if(err) cb(err,false);
-
-		if(founduser){
-			console.log("该用户已存在："+founduser.name);
-			cb(null,false);
-		}
-		newuser = new User(user)
-		newuser.save(function(err, u) {
-			if(err)  cb(err,false);
-			cb(null,true);
-		})
-	});
-}
 
 /**
  * Registration

@@ -26,6 +26,7 @@ keystone.init({
 	'auth': true,
 	'user model': 'User',
 	'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/myecommerce-db',
+	'session store': 'mongo'
 });
 
 // Load your project's Models

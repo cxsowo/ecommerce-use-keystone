@@ -40,12 +40,16 @@ exports = module.exports = function (app) {
 	app.get('/product-detail/:id', routes.views.productdetail);
 	app.get('/product-list/:id', routes.views.productlist);
 	app.get('/product-list/', routes.views.productlist.allproduct);
-	app.get('/signin', routes.views.signin.showSignin);
-	app.get('/signup', routes.views.signup.showSignup);
+	app.get('/signin', middleware.requireNoUser, routes.views.signin.showSignin);
+	app.get('/signup', middleware.requireNoUser, routes.views.signup.showSignup);
 	//app.get('/signout', middleware.requireUser, routes.views.user.signout);
-	app.post('/signin', routes.views.signin);
-	app.post('/signup', routes.views.signup);
+	app.get('/signout', middleware.requireUser, routes.views.signout);
 	app.get('/shopping-cart', routes.views.shoppingcart);
+
+
+	app.post('/signin', middleware.requireNoUser, routes.views.signin);
+	app.post('/signup', middleware.requireNoUser, routes.views.signup);
+
 	app.delete('/shopping-cart?delete_id=:id', routes.views.shoppingcart.delete);
 	//app.get('/categories/:id', routes.views.categories);
 

@@ -1,57 +1,44 @@
 var keystone = require('keystone');
-var bcrypt = require('bcrypt');
 var User = keystone.list('User');
 
 exports = module.exports = function (req, res) {
 
-	var view = new keystone.View(req, res);
 	var _user = req.body.user;
 
-	User.model.find()
-		.where('name' , _user.name)
-		.exec(function(err,user){
-			if(err)
-				console.error(err);
-			if(user.length === 1){
-				bcrypt.compare(_user.password, user[0].password, function(err, isMatch){
-					if(err){
-						console.error(err);
-					}
-					if(isMatch){
-						console.log("登录成功："+_user.name);
-						res.redirect('/');
-					}
-					else{
-						console.log("登录失败："+_user.name);
-						res.redirect('/signin');
-					}
-				});
-			}
+	console.dir(_user);
+	keystone.session.signin(_user, req, res,
+		function onSuccess(user){
+			console.log("登录成功："+user.name);
+			res.redirect('/');
+		},
+		function onFail(err){
+			console.error("signin fail:"+err);
+			res.redirect('/signin');
 		});
-		// .where('name' , _user.name)
-		// .exec(function(err,user){
-		// 	if(err)
-		// 		console.error(err);
-		// 	if(user.length === 0){
-		// 		console.log("该用户不存在"+_user.name);
-		// 		res.redirect('/signin');
-		// 	}
-		// 	else{
-		// 		User.model.comparePassword(_user.password,function(err,isMatch){
-		// 			if(err)
-		// 				console.error(err);
-		// 			if(isMatch){
-		// 				console.log("登录成功："+_user.name);
-		// 				res.redirect('/');
-		// 			}
-		// 			else{
-		// 				console.log("登录失败："+_user.name);
-		// 				res.redirect('/signin');
-		// 			}
-
-		// 		});
-		// 	}
-		// });
+	// User.model.find()
+	// 	.where('name' , _user.name)
+	// 	.exec(function(err,users){
+	// 		if(err)
+	// 			console.error(err);
+	// 		if(users.length === 1){
+	// 			var user = users[0];
+	// 			user._.password.compare(_user.password,function(err,result){
+	// 				if(err){
+	// 					console.error(err);
+	// 				}
+	// 				if(result){
+	// 					saveSession(user,req,res,function(){
+	// 						console.log("登录成功："+user.name);
+	// 						res.redirect('/');
+	// 					});
+	// 				}
+	// 				else{
+	// 					console.log("登录失败："+_user.name);
+	// 					res.redirect('/signin');
+	// 				}
+	// 			});
+	// 		}
+	// 	});
 };
 
 exports.showSignin = function(req, res) {

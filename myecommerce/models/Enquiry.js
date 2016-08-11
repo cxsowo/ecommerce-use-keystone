@@ -47,19 +47,19 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 
 		if (err) return callback(err);
 
-    new keystone.Email({
-        
-        templateName: 'enquiry-notification'
-      }).send({
-        to: admins,
-        from: {
-          name: 'My Site',
-          email: 'contact@my-site.com'
-        },
-        subject: 'New Enquiry for My Site',
-        enquiry: enquiry
-      }, callback);
-    });
+	new keystone.Email({
+
+		templateName: 'enquiry-notification'
+	  }).send({
+		to: admins,
+		from: {
+		  name: 'My Site',
+		  email: 'contact@my-site.com'
+		},
+		subject: 'New Enquiry for My Site',
+		enquiry: enquiry
+	  }, callback);
+	});
 
 };
 

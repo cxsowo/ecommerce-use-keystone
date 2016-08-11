@@ -53,3 +53,15 @@ exports.requireUser = function (req, res, next) {
 		next();
 	}
 };
+
+/**
+	Prevents people from accessing protected pages when they're not signed in
+ */
+exports.requireNoUser = function (req, res, next) {
+	if (req.user) {
+		req.flash('warning', '已经登录！');
+		res.redirect('/');
+	} else {
+		next();
+	}
+};

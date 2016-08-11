@@ -10,7 +10,7 @@ Product.add({
 	productionDate: {type: Types.Datetime, default: Date.now(),	 requrie: true},
 	vedio: {type: Types.Url, require: true},
 	pv: {type: Number, default: 0, noedit:true},
-	category: {type: Types.Relationship, ref:'Category', require: true},
+	category: {type: Types.Relationship, ref:'Category', require: true,initial: true},
 	image: {type: Types.CloudinaryImages,  folder: true}
 })
 Product.track = true

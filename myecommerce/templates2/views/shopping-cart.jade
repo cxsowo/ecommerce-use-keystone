@@ -80,12 +80,13 @@ block content
 							h3 地址
 							if address
 								span #{address}
-							form#address_form(action='', method='post')
-								label(for='coupon_code') Enter your coupon code if you have one.
-								input#remove-coupone(type='hidden', name='remove', value='0')
-								input#coupon_code.input-text.fullwidth(type='text', name='coupon_code', value='')
-								button.button.coupon(type='button', title='Apply Coupon', onclick='discountForm.submit(false)', value='Apply Coupon')
-									span Apply Coupon
+							else
+								form#address_form(action='/save-address', method='post')
+									label(for='coupon_code') Enter your coupon code if you have one.
+									input#remove-coupone(type='hidden', name='remove', value='0')
+									input#coupon_code.input-text.fullwidth(type='text', name='coupon_code', value='')
+									button.button.coupon(type='button', title='Apply Coupon', onclick='discountForm.submit(false)', value='Apply Coupon')
+										span Apply Coupon
 						// discount
 					// col-sm-4
 					.col-sm-4
