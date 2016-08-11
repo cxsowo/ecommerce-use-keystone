@@ -18,13 +18,13 @@ header
 								if first_categories
 									each one in first_categories
 										li.level0.parent.drop-menu
-											a.level-top(href='/product-list/'+'#{one.id}')
+											a.level-top(href='/product-list/#{one._id}')
 												span #{one.name}
 											ul.level1
 												if one.sec_categories
 													each oneSec in one.sec_categories
 														li.level2.nav-6-1-1
-															a(href= '/product-list/'+'#{oneSec.id}')
+															a(href= '/product-list/#{oneSec._id}')
 																span #{oneSec.name}
 				// row
 			.fl-header-right
@@ -39,6 +39,10 @@ header
 										li.last
 											a(href='/signout', title='退出登录')
 												span 退出登录
+										if user.canAccessKeystone
+											li.last
+												a(href='/keystone', title='退出登录')
+													span 管理页面
 									else
 										li
 											a(href='/signin', title='登录')
@@ -62,9 +66,9 @@ header
 								ul#cart-sidebar.mini-products-list
 									if commodities_in_cart
 										each one in commodities_in_cart
-											li.item(class = '.minicart-item-#{one.id}')
+											li.item(class = '.minicart-item-#{one._id}')
 												.item-inner
-													a.product-image(title='#{one.name}', href='/product-detail/'+'#{one.id}')
+													a.product-image(title='#{one.name}', href='/product-detail/'+'#{one._id}')
 														img(alt='#{one.imgPath}')
 													.product-details
 														.access
@@ -77,7 +81,7 @@ header
 														| x
 														span.price #{one.price}
 														p.product-name
-															a(href='/product-detail/'+'#{one.id}') #{one.name}
+															a(href='/product-detail/'+'#{one._id}') #{one.name}
 									else
 										li.item
 											span 空荡荡的购物车O.O

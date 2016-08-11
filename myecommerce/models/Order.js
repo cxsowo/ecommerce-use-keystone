@@ -4,13 +4,10 @@ var Types = keystone.Field.Types
 var Order = new keystone.List('Order')
 
 Order.add({
-	customer: {type: Types.Relationship, ref: 'User', many: false, index: true, initial: true},
-	products: {
-		product : {type: Types.Relationship, ref: 'Product', many: true, index: true},
-		num : {type: Types.Number,required: true,initial:true}
-	},
+	customer: {type: Types.Relationship, ref: 'User', many: false, required: true,index: true, initial: true},
+	products: {type: Types.Relationship, ref: 'ProductItem', many: true},
 	price: {type: Types.Money, require: true},
-	status: {type: Types.Boolean, require: true}
+	finish: {type: Types.Boolean, require: true, default:false, initial:true}
 })
 
 Order.track = true

@@ -1,5 +1,5 @@
 exports.create = {
 	Category: [
-		{ 'name': 'Root', noedit: true},
+		{ 'name': 'root', noedit: true},
 	],
 };

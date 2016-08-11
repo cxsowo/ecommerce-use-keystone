@@ -1,14 +1,11 @@
 var keystone = require('keystone')
 var Types = keystone.Field.Types
 
-var Cart = new keystone.List('Cart')
+var Cart = new keystone.List('Cart');
 
 Cart.add({
 	user: {type: Types.Relationship, ref: 'User', required: true, many: false, initial: true},
-	products: {
-		product : {type: Types.Relationship, ref: 'Product', many: true, index: true},
-		num : {type: Types.Number,required: true,initial:true}
-	}
+	products: {type: Types.Relationship, ref: 'ProductItem', many: true},
 })
 Cart.track = true
 Cart.defaultSort = '-createAt'

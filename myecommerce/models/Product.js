@@ -4,14 +4,14 @@ var Types = keystone.Field.Types
 var Product = new keystone.List('Product')
 
 Product.add({
-	name : {type: Types.Text, require: true, initial: true},
-	price : {type: Types.Money, requrie: true, initial: true},
-	description: {type: Types.Textarea},
+	name: {type: Types.Text, require: true, initial: true},
+	price: {type: Types.Money, requrie: true, initial: true},
+	description: {type: Types.Markdown},
 	productionDate: {type: Types.Datetime, default: Date.now(),	 requrie: true},
 	vedio: {type: Types.Url, require: true},
 	pv: {type: Number, default: 0, noedit:true},
 	category: {type: Types.Relationship, ref:'Category', require: true,initial: true},
-	image: {type: Types.CloudinaryImages,  folder: true}
+	images: {type: Types.CloudinaryImages,  folder: true}
 })
 Product.track = true
 
