@@ -5,7 +5,7 @@ var Cart = new keystone.List('Cart');
 
 Cart.add({
 	user: {type: Types.Relationship, ref: 'User', required: true, many: false, initial: true},
-	products: {type: Types.Relationship, ref: 'ProductItem', many: true},
+	products: {type: Types.Relationship, ref: 'CartItem', many: true, unique: true},
 })
 Cart.track = true
 Cart.defaultSort = '-createAt'

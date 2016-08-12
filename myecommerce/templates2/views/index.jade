@@ -8,19 +8,20 @@ block content
 				#thm_slider_wrapper.thm_slider_wrapper.fullwidthbanner-container
 					#thm-rev-slider.rev_slider.fullwidthabanner
 						ul
-							if slide_commodities
-								for one in slide_commodities
-									li(data-transition='random', data-slotamount='7', data-masterspeed='1000', data-thumb='#{one.picPath}')
-										img(src='#{one.picPath}', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='#{one.name}')
-										.info
-											.tp-caption.LargeTitle.sfl.tp-resizeme(data-x='0', data-y='180', data-endspeed='500', data-speed='500', data-start='1300', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;')
-												span #{one.main_words}
-											.tp-caption.sfb.tp-resizeme(data-x='0', data-y='400', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
-												a.buy-btn(href='/') 浏览商品
-											.tp-caption.Title.sft.tp-resizeme(data-x='0', data-y='270', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Power2.easeInOut', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
-												| #{one.words_one}
-												br
-												| #{one.words_two}
+							if expands && expands.length > 0
+								for one in expands
+									li(data-transition='random', data-slotamount='7', data-masterspeed='1000', data-thumb='')
+										if one.image
+											img(src='#{one.image.url}', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='')
+										else
+											img(src='images/slide-img2.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='#{one.name}')
+										if one.statement
+											.info
+												.tp-caption.LargeTitle.sfl.tp-resizeme(data-x='0', data-y='180', data-endspeed='500', data-speed='500', data-start='1300', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;')
+													span #{one.statement}
+												if one.miniStatement
+													.tp-caption.Title.sft.tp-resizeme(data-x='0', data-y='270', data-endspeed='500', data-speed='500', data-start='1500', data-easing='Power2.easeInOut', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;')
+														| #{one.miniStatement}
 							else
 								li(data-transition='random', data-slotamount='7', data-masterspeed='1000', data-thumb='images/slide-img1.jpg')
 									img(src='images/slide-img2.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='slider-image1')
@@ -44,35 +45,7 @@ block content
 											| Pellentesque habitant morbi tristique
 											br
 											| senectus et netus et malesuada
-		// Category slider Start
-		.CollectionGrid-container
-			.CollectionGrid.container
-				a.CollectionGrid-tile.hover-overlay-light(href='/')
-					.CollectionGrid-tileImage.align-center
-						img(src='products-images/product.jpg', alt='bags')
-					.CollectionGrid-tileName.js-dotdotdot
-						| Handbags
-				a.CollectionGrid-tile.hover-overlay-light(href='/')
-					.CollectionGrid-tileImage.align-center
-						img(src='products-images/product.jpg', alt='bags')
-					.CollectionGrid-tileName.js-dotdotdot
-						| Lighting
-				a.CollectionGrid-tile.hover-overlay-light(href='/')
-					.CollectionGrid-tileImage.align-center
-						img(src='products-images/product.jpg', alt='bags')
-					.CollectionGrid-tileName.js-dotdotdot
-						| Kids
-				a.CollectionGrid-tile.hover-overlay-light(href='/')
-					.CollectionGrid-tileImage.align-center
-						img(src='products-images/product.jpg', alt='bags')
-					.CollectionGrid-tileName.js-dotdotdot
-						| Watches
-				a.CollectionGrid-tile.hover-overlay-light(href='/')
-					.CollectionGrid-tileImage.align-center
-						img(src='products-images/product.jpg', alt='bags')
-					.CollectionGrid-tileName.js-dotdotdot
-						| kitchen
-		// Category silder End
+		
 		// top products
 		section.wow.bounceInUp.animated
 			.top-banner.slider-items-products.container
@@ -115,31 +88,21 @@ block content
 		section.wow.bounceInUp.animated
 			.best-pro.slider-items-products.container
 				.new_title
-					h2 快速查看
-				#best-seller.product-flexslider.hidden-buttons
+					h2 畅销产品
+				#hot-seller.product-flexslider.hidden-buttons
 					.slider-items.slider-width-col4.products-grid
-						if quick_view_commodities
-							each one in quick_view_commodities
+						if hot_products
+							each one in hot_products
 								.item
 									.item-inner
 										.item-img
 											.item-img-info
-												a.product-image(href='/product-detail/'+'#{one.id}', title='#{one.name}')
-													img(src='#{one.imgPath}', alt='#{one.name}')
-												.item-box-hover
-													.box-inner
-														.product-detail-bnt
-															a.button.detail-bnt
-																span 快速查看
-														.actions
-															span.add-to-links
-																a.link-wishlist(href='/', title='收藏')
-																	span 收藏
-																a.link-compare.add_to_compare(href='/', title='对比')
-																	span 对比
-														.add_cart
-															button.button.btn-cart(type='button')
-																span 添加到购物车
+												if one.images && one.images.length >0
+													a.product-image(href='/product-detail/#{one._id}', title='#{one.name}')
+														img(src='#{one.images[0].url}', alt='#{one.name}')
+												else
+													a.product-image(href='/product-detail/#{one._id}', title='#{one.name}')
+														img(src='images/member1.png', alt='#{one.name}')
 										.item-info
 											.info-inner
 												.item-title

@@ -5,9 +5,9 @@ var Order = new keystone.List('Order')
 
 Order.add({
 	customer: {type: Types.Relationship, ref: 'User', many: false, required: true,index: true, initial: true},
-	products: {type: Types.Relationship, ref: 'ProductItem', many: true},
-	price: {type: Types.Money, require: true},
-	finish: {type: Types.Boolean, require: true, default:false, initial:true}
+	products: {type: Types.Relationship, ref: 'CartItem', many: true, unique: true},
+	price: {type: Types.Money, required: true, default: 0},
+	finish: {type: Types.Boolean, default:false, initial:true}
 })
 
 Order.track = true

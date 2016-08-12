@@ -15,17 +15,18 @@ header
 						.nav-inner
 							// BEGIN NAV
 							ul#nav.hidden-xs
-								if first_categories
-									each one in first_categories
-										li.level0.parent.drop-menu
-											a.level-top(href='/product-list/#{one._id}')
-												span #{one.name}
-											ul.level1
-												if one.sec_categories
-													each oneSec in one.sec_categories
-														li.level2.nav-6-1-1
-															a(href= '/product-list/#{oneSec._id}')
-																span #{oneSec.name}
+								if categories
+									each one in categories
+										if !one.parent
+											li.level0.parent.drop-menu
+												a.level-top(href='/product-list/#{one._id}')
+													span #{one.name}
+												ul.level1
+													each oneSec in categories
+														if oneSec.parent && oneSec.parent.equals(one._id)
+															li.level2.nav-6-1-1
+																a(href= '/product-list/#{oneSec._id}')
+																	span #{oneSec.name}
 				// row
 			.fl-header-right
 				.fl-links
@@ -64,7 +65,7 @@ header
 							ul#cart-sidebar.mini-products-list
 							if user
 								ul#cart-sidebar.mini-products-list
-									if commodities_in_cart
+									if cart_datas &&　cart_datas.products
 										each one in commodities_in_cart
 											li.item(class = '.minicart-item-#{one._id}')
 												.item-inner

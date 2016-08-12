@@ -21,7 +21,7 @@ html
 		script(type='text/javascript', src='js/jquery.mobile-menu.min.js')
 		script(type='text/javascript').
 			$(document).ready(function(){
-				$('#thm-rev-slider').show().revolution({
+				$('#thm-rev-slider').show().revolution({//购物车显示
 					dottedOverlay: 'none',
 					delay: 5000,
 					startwidth: 0,
@@ -75,5 +75,20 @@ html
 					startWithSlide: 0,
 					fullScreenOffsetContainer: ''
 				});
+
+				var i,j,fir_num;//处理分类
+				for(i = 0,fir_num = 0; i < categories.length; i++){
+					if(!categories[i].parent){//一级分类
+						console.log("in:"+i);
+						fir_num++;
+						categories[i].sec_categories = [];
+					}
+					else{//二级分类
+						for(j = 0; j < fir_num; j++)
+							if(categories[j]._id.equals(categories[i].parent))
+								categories[j].sec_categories.push(categories[i]);
+					}
+				}
+				first_categories = result.slice(0,fir_num);
 			});
 		block js

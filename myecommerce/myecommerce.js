@@ -25,9 +25,11 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/myecommerce-db',
+	'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/myecommerce-test',
 	'session store': 'mongo'
 });
+
+keystone.set('cloudinary config', { cloud_name: 'shi-no', api_key: '782672353871716', api_secret: 'Pbe0M55TgExXsjevlUu0TdvB3SI' });
 
 // Load your project's Models
 keystone.import('models');
@@ -68,16 +70,21 @@ keystone.set('routes', require('./routes'));
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('email tests', require('./routes/emails'));
-
-keystone.set('cloudinary config', { cloud_name: 'shi-no', api_key: '782672353871716', api_secret: 'Pbe0M55TgExXsjevlUu0TdvB3SI' })
+keystone.set('cloudinary config', { cloud_name: 'shi-no', api_key: '782672353871716', api_secret: 'Pbe0M55TgExXsjevlUu0TdvB3SI' });
 // Configure the navigation bar in Keystone's Admin UI
+// 可选，会用'keystone_'作为所有内置标签的前缀
+keystone.set('cloudinary prefix', 'myecommerce');
+// 可选，会用[{prefix}]/{list.path}/{field.path}/ 作为每个图片的public_id的前缀
+keystone.set('cloudinary folders', true);
 
 keystone.set('nav', {
 	enquiries: 'enquiries',
 	users: 'users',
 	products: 'products',
 	orders: 'orders',
-	categories: 'categories'
+	categories: 'categories',
+	cart : 'carts',
+	expand : 'expands'
 });
 
 // Start Keystone to connect to your database and initialise the web server
