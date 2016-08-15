@@ -48,6 +48,6 @@ exports = module.exports = function (req, res) {
 		}
 	}
 	// Render the view
-	view.render('product-detail',{ title:"买买买", first_categories:categories, shopping_cart_price:1233.33,commodities_in_cart:commodities_in_cart
+	view.render('productdetail',{ title:"买买买", first_categories:categories, shopping_cart_price:1233.33,commodities_in_cart:commodities_in_cart
 	,product:product});
 };

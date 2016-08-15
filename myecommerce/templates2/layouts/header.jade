@@ -15,17 +15,20 @@ header
 						.nav-inner
 							// BEGIN NAV
 							ul#nav.hidden-xs
+								li.level0.parent.drop-menu
+									a.level-top(href='/productlist/')
+										span 所有
 								if categories
 									each one in categories
 										if !one.parent
 											li.level0.parent.drop-menu
-												a.level-top(href='/product-list/#{one._id}')
+												a.level-top(href='/productlist/#{one._id}')
 													span #{one.name}
 												ul.level1
 													each oneSec in categories
 														if oneSec.parent && oneSec.parent.equals(one._id)
 															li.level2.nav-6-1-1
-																a(href= '/product-list/#{oneSec._id}')
+																a(href= '/productlist/#{oneSec._id}')
 																	span #{oneSec.name}
 				// row
 			.fl-header-right
@@ -35,7 +38,7 @@ header
 						.fl-nav-links
 							ul.links
 								li
-									a(href='/personal_index', title='个人主页') 个人主页
+									a(href='/personalindex', title='个人主页') 个人主页
 									if user
 										li.last
 											a(href='/signout', title='退出登录')
@@ -54,7 +57,7 @@ header
 				.fl-cart-contain
 					.mini-cart
 						.basket
-							a(href='/shopping-cart')
+							a(href='/shoppingcart')
 						.fl-mini-cart-content
 							.block-subtitle
 								.top-subtotal
@@ -69,7 +72,7 @@ header
 										each one in commodities_in_cart
 											li.item(class = '.minicart-item-#{one._id}')
 												.item-inner
-													a.product-image(title='#{one.name}', href='/product-detail/'+'#{one._id}')
+													a.product-image(title='#{one.name}', href='/productdetail/'+'#{one._id}')
 														img(alt='#{one.imgPath}')
 													.product-details
 														.access
@@ -82,13 +85,13 @@ header
 														| x
 														span.price #{one.price}
 														p.product-name
-															a(href='/product-detail/'+'#{one._id}') #{one.name}
+															a(href='/productdetail/'+'#{one._id}') #{one.name}
 									else
 										li.item
 											span 空荡荡的购物车O.O
 								.actions
 									button.view-cart(title='查看购物车', type='button', onclick='')
-										a(href='/shopping-cart') 进入购物车
+										a(href='/shoppingcart') 进入购物车
 							else
 								ul#cart-sidebar.mini-products-list
 									li.item.first

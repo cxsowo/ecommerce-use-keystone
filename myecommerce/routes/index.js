@@ -37,20 +37,21 @@ exports = module.exports = function (app) {
 	app.get('/', routes.views.index);
 	app.all('/contact', routes.views.contact);
 
-	app.get('/product-detail/:id', routes.views.productdetail);
-	app.get('/product-list/:id', routes.views.productlist);
-	app.get('/product-list/', routes.views.productlist.allproduct);
+	app.get('/productdetail/:id', routes.views.productdetail);
+	app.get('/productlist/:id', routes.views.productlist.findByCategory);
+	app.get('/productlist', routes.views.productlist.allproduct);
 	app.get('/signin', middleware.requireNoUser, routes.views.signin.showSignin);
 	app.get('/signup', middleware.requireNoUser, routes.views.signup.showSignup);
 	//app.get('/signout', middleware.requireUser, routes.views.user.signout);
 	app.get('/signout', middleware.requireUser, routes.views.signout);
-	app.get('/shopping-cart', routes.views.shoppingcart);
+	app.get('/shoppingcart', routes.views.shoppingcart);
 
 
 	app.post('/signin', middleware.requireNoUser, routes.views.signin);
 	app.post('/signup', middleware.requireNoUser, routes.views.signup);
+	app.post('/addtocart', middleware.requireUser, routes.views.shoppingcart.addToCart);
 
-	app.delete('/shopping-cart?delete_id=:id', routes.views.shoppingcart.delete);
+	app.delete('/shoppingcart?delete_id=:id', routes.views.shoppingcart.delete);
 	//app.get('/categories/:id', routes.views.categories);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:

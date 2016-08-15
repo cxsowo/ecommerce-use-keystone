@@ -45,51 +45,16 @@ block content
 											| Pellentesque habitant morbi tristique
 											br
 											| senectus et netus et malesuada
-		
-		// top products
-		section.wow.bounceInUp.animated
-			.top-banner.slider-items-products.container
-				#top-deals.product-flexslider.hidden-buttons
-					.slider-items.slider-width-col4.products-grid
-						.item
-							.item-inner
-								a(href='/')
-									img(src='images/img1.png', alt='slide img1')
-								.homeslider-description
-									.wrap-desc
-										h2
-											| Women's
-											br
-											| Collection
-										p
-											| New collection
-											br
-											| 2016
-										div
-											a.learnmore(href='/') Learn more
-						.item
-							.item-inner
-								a(href='/')
-									img(src='images/img2.png', alt='slide img1')
-								.homeslider-description
-									.wrap-desc
-										h2
-											| Men's
-											br
-											| Collection
-										p
-											| New collection
-											br
-											| 2016
-										div
-											a.learnmore(href='/') Learn more
+
+
+
 		// top products end
 		// best Pro Slider
 		section.wow.bounceInUp.animated
 			.best-pro.slider-items-products.container
 				.new_title
 					h2 畅销产品
-				#hot-seller.product-flexslider.hidden-buttons
+				#best-seller.product-flexslider.hidden-buttons
 					.slider-items.slider-width-col4.products-grid
 						if hot_products
 							each one in hot_products
@@ -98,15 +63,29 @@ block content
 										.item-img
 											.item-img-info
 												if one.images && one.images.length >0
-													a.product-image(href='/product-detail/#{one._id}', title='#{one.name}')
+													a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
 														img(src='#{one.images[0].url}', alt='#{one.name}')
 												else
-													a.product-image(href='/product-detail/#{one._id}', title='#{one.name}')
+													a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
 														img(src='images/member1.png', alt='#{one.name}')
+												.item-box-hover
+													.box-inner
+														.product-detail-bnt
+															a.button.detail-bnt
+																span Quick View
+														.actions
+															span.add-to-links
+																a.link-wishlist(href='#', title='Add to Wishlist')
+																	span Add to Wishlist
+																a.link-compare.add_to_compare(href='#', title='Add to Compare')
+																	span Add to Compare
+														.add_cart
+															button.button.btn-cart(type='button')
+																span Add to Cart
 										.item-info
 											.info-inner
 												.item-title
-													a(href='/product-detail/'+'#{one.id}', title='#{one.name}') #{one.name}
+													a(href='/productdetail/'+'#{one.id}', title='#{one.name}') #{one.name}
 												.item-content
 													.rating
 														.ratings
@@ -122,84 +101,28 @@ block content
 																span.price #{one.price}
 						else
 							span 商店里没有商品
-		// best Pro Slider
-		// Logo Brand Block
-		.brand-logo.wow.bounceInUp.animated
-			.container
-				.row
-					.col-lg-6.col-md-6.col-sm-6.col-xs-12.testimonials-section
-						div
-							ul.bxslider
-								li
-									.avatar
-										img(src='images/member1.png', alt='Image')
-									.testimonials
-										em "
-										|	Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.
-										em "
-									.clients_author
-										| John Doe
-										span Abc Company
-								li
-									.avatar
-										img(src='images/member2.png', alt='Image')
-									.testimonials
-										em "
-										|	Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.
-										em "
-									.clients_author
-										| Saraha Smith
-										span Datsun & Co
-								li
-									.avatar
-										img(src='images/member3.png', alt='Image')
-									.testimonials
-										em "
-										| Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.
-										em "
-									.clients_author
-										| Stephen Doe
-										span Xperia Designs
-					.col-lg-6.col-md-6.col-sm-6.col-xs-12.offer-slider
-						.left-coloum-hot
-							.deal_img
-								img(src='images/hot_img.png', alt='')
-							.deal_info
-								h2
-									a(href='#') Wall Pendent Lamp
-								.starSeparator
-								p Nexus lighting store is updated regularly with offers.
-								.rating
-									.ratings
-										.rating-box
-											.rating(style='width:80%')
-										p.rating-links
-											a(href='#') 1 Review(s)
-											span.separator |
-											a(href='#') Add Review
-						.box-timer
-							.countbox_1.timer-grid
+
 block js
-	script(type='text/javascript').
-		var dthen1 = new Date("12/25/17 11:59:00 PM");
-		start = "05/03/15 03:02:11 AM";
-		start_date = Date.parse(start);
-		var dnow1 = new Date(start_date);
-		if (CountStepper > 0)
-		ddiff = new Date((dnow1) - (dthen1));
-		else
-		ddiff = new Date((dthen1) - (dnow1));
-		gsecs1 = Math.floor(ddiff.valueOf() / 1000);
-		var iid1 = "countbox_1";
-		CountBack_slider(gsecs1, "countbox_1", 1);
-		var dthen1 = new Date("12/12/17 11:59:00 PM");
-		start = "01/20/16 03:02:11 AM";
-		start_date = Date.parse(start);
-		var dnow1 = new Date(start_date);
-		if (CountStepper > 0)
-		ddiff = new Date((dnow1) - (dthen1));
-		else
-		ddiff = new Date((dthen1) - (dnow1));
-		gsecs1 = Math.floor(ddiff.valueOf() / 1000);
-		var iid1 = "countbox_2";
-		CountBack_slider(gsecs1, "countbox_2", 1);
+	//- script(type='text/javascript').
+	//- 	var dthen1 = new Date("12/25/17 11:59:00 PM");
+	//- 	start = "05/03/15 03:02:11 AM";
+	//- 	start_date = Date.parse(start);
+	//- 	var dnow1 = new Date(start_date);
+	//- 	if (CountStepper > 0)
+	//- 	ddiff = new Date((dnow1) - (dthen1));
+	//- 	else
+	//- 	ddiff = new Date((dthen1) - (dnow1));
+	//- 	gsecs1 = Math.floor(ddiff.valueOf() / 1000);
+	//- 	var iid1 = "countbox_1";
+	//- 	CountBack_slider(gsecs1, "countbox_1", 1);
+	//- 	var dthen1 = new Date("12/12/17 11:59:00 PM");
+	//- 	start = "01/20/16 03:02:11 AM";
+	//- 	start_date = Date.parse(start);
+	//- 	var dnow1 = new Date(start_date);
+	//- 	if (CountStepper > 0)
+	//- 	ddiff = new Date((dnow1) - (dthen1));
+	//- 	else
+	//- 	ddiff = new Date((dthen1) - (dnow1));
+	//- 	gsecs1 = Math.floor(ddiff.valueOf() / 1000);
+	//- 	var iid1 = "countbox_2";
+	//- 	CountBack_slider(gsecs1, "countbox_2", 1);

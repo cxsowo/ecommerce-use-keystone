@@ -71,12 +71,12 @@ block content
 														.item-inner
 															.item-img
 																.item-img-info
-																	a.product-image(href='/product-detail/#{one.id}', title='#{one.name}')
-																		img(src='#{one.imgPath}', alt='#{one.name}')
+																	a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
+																		img(src='#{one.images[0]}', alt='#{one.name}')
 																	.item-box-hover
 																		.box-inner
 																			.product-detail-bnt
-																				a.button.detail-bnt(href='/product-detail/#{one.id}')
+																				a.button.detail-bnt(href='/productdetail/#{one._id}')
 																					span 查看
 																			.actions
 																				span.add-to-links
@@ -85,12 +85,12 @@ block content
 																					a.link-compare.add_to_compare(href='#', title='对比')
 																						span 加入对比
 																			.add_cart
-																				button.button.btn-cart(type='button')
+																				button.button.btn-cart(type='button',onclick='addToCart(#{one._id})')
 																					span 加入购物车
 															.item-info
 																.info-inner
 																	.item-title
-																		a(href='/product-detail/#{one.id}', title='#{one.name}') #{one.name}
+																		a(href='/productdetail/#{one._id}', title='#{one.name}') #{one.name}
 																	.item-content
 																		.rating
 																			.ratings
@@ -112,11 +112,35 @@ block content
 											.pages
 												ul.pagination
 													li
-														a(href='#') «
+														if 
+															a(href='/productlist?#{query}&p=#{i}') «
 													li.active
 														a(href='#') 1
+													- for (var i = 2; i < totalPage; i++) {
+														- if(currentPage === (i+1)) {
+															li.active
+																a(href='#') #{currentPage}
+														- }
+														- else{
+															li
+																a(href='/productlist?#{query}&p=#{i}') #{i + 1}
+														- }
+													- }
 													li
 														a(href='#') »
 
 block js
 	script(type='text/javascript').
+		function addToCart(id){
+			$.ajax({
+				url : '/addtocart',
+				type : 'post',
+				data : {_id:id},
+				success:function(data, status){
+					alert("success:data,status:::"+data+","+status);
+				},
+				error:function(data, status){
+
+				}
+			});
+		}

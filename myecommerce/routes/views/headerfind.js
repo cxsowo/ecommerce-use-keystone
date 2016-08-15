@@ -1,7 +1,7 @@
 var keystone = require('keystone'),
 	Category = keystone.list('Category'),
 	Cart = keystone.list('Cart'),
-	Product = keystone.list('Product');
+	Product = keystone.list('Product'),
 	CartItem = keystone.list('CartItem');
 
 // exports = module.exports = function(){
@@ -12,11 +12,11 @@ exports.findCategories = function(){
 	return Category.model.find();
 }
 
-exports.findCart = function(user){
-	if(!user)
+exports.findCart = function(_user){
+	if(!_user)
 		throw new Error("in findCart(),need a user!");
 	return Cart.model.find({
-			user : req.user._id
+			user : _user._id
 		})
 		.populate('CartItem')
 		.populate('Product');
