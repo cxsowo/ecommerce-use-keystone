@@ -10,22 +10,19 @@ block content
 							li.home
 								a(href='/', title='回主页') 主页
 								span ›
-							if productlist.first_category
+							if first_category
 								li.category1599
-									a(href='/product-list/#{productlist.first_category.id}', title='') #{productlist.first_category.name}
+									a(href='/productlist/#{first_category._id}', title='') #{first_category.name}
 									span ›
-							if productlist.sec_category
+							if sec_category
 								li.category1600
-									a(href='/product-list/#{productlist.sec_category.id}', title='') #{productlist.sec_category.name}
+									a(href='/productlist/#{sec_category._id}', title='') #{sec_category.name}
 									span ›
 							li.category1601
 								strong 商品列表
-					// col-xs-12
 					.page-title
 						h2 商品列表
 		section.main-container.col2-left-layout.bounceInUp.animated
-				// For version 1, 2, 3, 8
-				// For version 1, 2, 3
 				.container
 					.row
 						.col-main.product-grid
@@ -34,7 +31,7 @@ block content
 									.toolbar
 										.pager
 											#sort-by
-												label.left Sort By: 
+												label.left Sort By:
 												ul
 													li
 														a(href='#')
@@ -50,40 +47,44 @@ block content
 											.pages
 												ul.pagination
 													li
-														a(href='#') «
-													li.active
-														a(href='#') 1
+														if product_result.previous
+															a(href='/productlist?p=#{product_result.previous}') «
+														else
+															a(href='#' onclick='alert("这已经是第一页了！");') «
+														- console.log(product_result.totalPages)
+														- for (var i = 0; i < product_result.totalPages; i++) {
+															- if(product_result.currentPage === (i+1)) {
+																li.active
+																	a(href='#') #{i+1}
+															- }
+															- else{
+																li
+																	a(href='/productlist?p=#{i+1}') #{i+1}
+															- }
+														- }
 													li
-														a(href='#') 2
-													li
-														a(href='#') 3
-													li
-														a(href='#') 4
-													li
-														a(href='#') 5
-													li
-														a(href='#') »
+														if product_result.next
+															a(href='/productlist?p=#{product_result.next}') »
+														else
+															a(href='#' onclick='alert("这已经是最后一页了！");') »
 									.category-products
 										ul.products-grid
-											if productlist.products
-												each one in productlist.products
+											if product_result.results
+												each one in product_result.results
 													li.item.col-lg-3.col-md-3.col-sm-3.col-xs-6
 														.item-inner
 															.item-img
 																.item-img-info
 																	a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
-																		img(src='#{one.images[0]}', alt='#{one.name}')
+																		if one.images && one.images.length > 0
+																			img(src='#{one.images[0].url}', alt='#{one.name}')
+																		else
+																			img(src='/products-images/p11.jpg', alt='#{one.name}')
 																	.item-box-hover
 																		.box-inner
 																			.product-detail-bnt
 																				a.button.detail-bnt(href='/productdetail/#{one._id}')
 																					span 查看
-																			.actions
-																				span.add-to-links
-																					a.link-wishlist(href='#', title='收藏')
-																						span 收藏
-																					a.link-compare.add_to_compare(href='#', title='对比')
-																						span 加入对比
 																			.add_cart
 																				button.button.btn-cart(type='button',onclick='addToCart(#{one._id})')
 																					span 加入购物车
@@ -97,7 +98,7 @@ block content
 																				.rating-box
 																					.rating(style='width:80%')
 																				p.rating-links
-																					a(href='#') 1 Review(s)
+																					a(href='/productdetail/#{one._id}') 1 Review(s)
 																					span.separator |
 																					a(href='#') Add Review
 																		.item-price
@@ -112,35 +113,23 @@ block content
 											.pages
 												ul.pagination
 													li
-														if 
-															a(href='/productlist?#{query}&p=#{i}') «
-													li.active
-														a(href='#') 1
-													- for (var i = 2; i < totalPage; i++) {
-														- if(currentPage === (i+1)) {
-															li.active
-																a(href='#') #{currentPage}
+														if product_result.previous
+															a(href='/productlist?p=#{product_result.previous}') «
+														else
+															a(href='#' onclick='alert("这已经是第一页了！");') «
+														- for (var i = 0; i < product_result.totalPages; i++) {
+															- if(product_result.currentPage === (i+1)) {
+																li.active
+																	a(href='#') #{i+1}
+															- }
+															- else{
+																li
+																	a(href='/productlist?p=#{i+1}') #{i+1}
+															- }
 														- }
-														- else{
-															li
-																a(href='/productlist?#{query}&p=#{i}') #{i + 1}
-														- }
-													- }
 													li
-														a(href='#') »
+														if product_result.next
+															a(href='/productlist?p=#{product_result.next}') »
+														else
+															a(href='#' onclick='alert("这已经是最后一页了！");') »
 
-block js
-	script(type='text/javascript').
-		function addToCart(id){
-			$.ajax({
-				url : '/addtocart',
-				type : 'post',
-				data : {_id:id},
-				success:function(data, status){
-					alert("success:data,status:::"+data+","+status);
-				},
-				error:function(data, status){
-
-				}
-			});
-		}

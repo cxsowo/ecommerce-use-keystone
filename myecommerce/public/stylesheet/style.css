@@ -3360,9 +3360,11 @@ ul.pdt-list li.item a img.image-hover {
 .products-grid .item .item-inner .item-img .item-img-info a.product-image {
 	display: block;
 	width: 100%;
+	height: 280px;
 }
 .products-grid .item .item-inner .item-img .item-img-info a.product-image img {
 	width: 100%;
+	height: 100%;
 }
 .products-grid .item .item-inner .item-img:hover img {
 
@@ -4590,7 +4592,7 @@ text-transform: uppercase
 
 .cate-banner-img {position:absolute; z-index:100; margin-top:-9px; margin-left:-9px}
 
-#best-seller .owl-item .item {margin-left:14px; margin-right:14px; margin-bottom:10px}
+#best-seller .owl-item .item {width: 100%; margin-left:14px; margin-right:14px; margin-bottom:10px}
 
 .best-pro {
   position: relative;
@@ -4649,6 +4651,7 @@ text-transform: uppercase
 #best-seller .owl-item .item .item-inner .item-img {
 	position: relative;
 	border: none;
+	width: 100%;
 	height: 280px;
 }
 #best-seller .owl-item .item .item-inner .item-img .ico-product {
@@ -5665,7 +5668,7 @@ transition: all 0.2s ease-in-out;}
 
 /* PRODUCTS SLIDER */
 .owl-item .item {
-	margin: 0 15px;
+
 }
 .slider-items-products {
 	position: relative;

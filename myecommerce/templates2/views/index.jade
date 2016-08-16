@@ -14,7 +14,7 @@ block content
 										if one.image
 											img(src='#{one.image.url}', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='')
 										else
-											img(src='images/slide-img2.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='#{one.name}')
+											img(src='/images/slide-img2.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='#{one.name}')
 										if one.statement
 											.info
 												.tp-caption.LargeTitle.sfl.tp-resizeme(data-x='0', data-y='180', data-endspeed='500', data-speed='500', data-start='1300', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;')
@@ -24,7 +24,7 @@ block content
 														| #{one.miniStatement}
 							else
 								li(data-transition='random', data-slotamount='7', data-masterspeed='1000', data-thumb='images/slide-img1.jpg')
-									img(src='images/slide-img2.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='slider-image1')
+									img(src='/images/slide-img2.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='slider-image1')
 									.info
 										.tp-caption.LargeTitle.sfl.tp-resizeme(data-x='0', data-y='180', data-endspeed='500', data-speed='500', data-start='1300', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;')
 											span Awesome Design
@@ -35,7 +35,7 @@ block content
 											br
 											| senectus et netus et malesuada
 								li(data-transition='random', data-slotamount='7', data-masterspeed='1000', data-thumb='images/slide-img2.jpg')
-									img(src='images/slide-img1.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='slider-image2')
+									img(src='/images/slide-img1.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='slider-image2')
 									.info
 										.tp-caption.LargeTitle.sfl.tp-resizeme(data-x='0', data-y='180', data-endspeed='500', data-speed='500', data-start='1300', data-easing='Linear.easeNone', data-splitin='none', data-splitout='none', data-elementdelay='0.1', data-endelementdelay='0.1', style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;')
 											span Nexus Hot Collection
@@ -73,12 +73,12 @@ block content
 														.product-detail-bnt
 															a.button.detail-bnt
 																span Quick View
-														.actions
-															span.add-to-links
-																a.link-wishlist(href='#', title='Add to Wishlist')
-																	span Add to Wishlist
-																a.link-compare.add_to_compare(href='#', title='Add to Compare')
-																	span Add to Compare
+														//- .actions
+														//- 	span.add-to-links
+														//- 		a.link-wishlist(href='#', title='Add to Wishlist')
+														//- 			span Add to Wishlist
+														//- 		a.link-compare.add_to_compare(href='#', title='Add to Compare')
+														//- 			span Add to Compare
 														.add_cart
 															button.button.btn-cart(type='button')
 																span Add to Cart

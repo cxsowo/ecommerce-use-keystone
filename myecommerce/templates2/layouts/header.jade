@@ -13,7 +13,6 @@ header
 								i.icon-align-justify
 								span.mm-label 菜单
 						.nav-inner
-							// BEGIN NAV
 							ul#nav.hidden-xs
 								li.level0.parent.drop-menu
 									a.level-top(href='/productlist/')
@@ -30,7 +29,6 @@ header
 															li.level2.nav-6-1-1
 																a(href= '/productlist/#{oneSec._id}')
 																	span #{oneSec.name}
-				// row
 			.fl-header-right
 				.fl-links
 					.no-js
@@ -62,49 +60,42 @@ header
 							.block-subtitle
 								.top-subtotal
 									span.price #{shopping_cart_price}
-								// top-subtotal
-								// pull-right
-							// block-subtitle
 							ul#cart-sidebar.mini-products-list
-							if user
-								ul#cart-sidebar.mini-products-list
-									if cart_datas &&　cart_datas.products
-										each one in commodities_in_cart
-											li.item(class = '.minicart-item-#{one._id}')
-												.item-inner
-													a.product-image(title='#{one.name}', href='/productdetail/'+'#{one._id}')
-														img(alt='#{one.imgPath}')
-													.product-details
-														.access
-															a.btn-remove1(title='删除', href='#') 删除
-															a.btn-edit(title='编辑', href='#')
-																i.icon-pencil
-																span.hidden 编辑
-														// access
-														strong #{one.number}
-														| x
-														span.price #{one.price}
-														p.product-name
-															a(href='/productdetail/'+'#{one._id}') #{one.name}
-									else
-										li.item
-											span 空荡荡的购物车O.O
-								.actions
-									button.view-cart(title='查看购物车', type='button', onclick='')
-										a(href='/shoppingcart') 进入购物车
-							else
-								ul#cart-sidebar.mini-products-list
-									li.item.first
-										.item-inner
-											a.product-image(title='登陆', href='/signin')
-									span 请先
-									a(href='/signin') 登陆
-							// actions
-						// fl-mini-cart-content
-				// mini-cart
+							//- if user
+							//- 	ul#cart-sidebar.mini-products-list
+							//- 		if cart_datas &&　cart_datas.products
+							//- 			each one in commodities_in_cart
+							//- 				li.item(class = '.minicart-item-#{one._id}')
+							//- 					.item-inner
+							//- 						a.product-image(title='#{one.name}', href='/productdetail/'+'#{one._id}')
+							//- 							img(alt='#{one.imgPath}')
+							//- 						.product-details
+							//- 							.access
+							//- 								a.btn-remove1(title='删除', href='#') 删除
+							//- 								a.btn-edit(title='编辑', href='#')
+							//- 									i.icon-pencil
+							//- 									span.hidden 编辑
+							//- 							// access
+							//- 							strong #{one.number}
+							//- 							| x
+							//- 							span.price #{one.price}
+							//- 							p.product-name
+							//- 								a(href='/productdetail/'+'#{one._id}') #{one.name}
+							//- 		else
+							//- 			li.item
+							//- 				span 空荡荡的购物车O.O
+							//- 	.actions
+							//- 		button.view-cart(title='查看购物车', type='button', onclick='')
+							//- 			a(href='/shoppingcart') 进入购物车
+							//- else
+							//- 	ul#cart-sidebar.mini-products-list
+							//- 		li.item.first
+							//- 			.item-inner
+							//- 				a.product-image(title='登陆', href='/signin')
+							//- 		span 请先
+							//- 		a(href='/signin') 登陆
 				.collapse.navbar-collapse
 					form.navbar-form(role='search',action='/search',method='get')
 						.input-group
 							input#desktopSearchInput.GlobalNavSearch.js-globalSearchInput(placeholder='搜索', data-reactid='.1.0.0.0')
 							label.GlobalNavSearch-searchIcon(for='desktopSearchInput', data-reactid='.1.0.0.1')
-				// links

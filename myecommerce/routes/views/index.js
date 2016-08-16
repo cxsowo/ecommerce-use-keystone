@@ -3,8 +3,7 @@ var keystone = require('keystone'),
 	Cart = keystone.list('Cart'),
 	Category = keystone.list('Category'),
 	Product = keystone.list('Product'),
-	Expand = keystone.list('Expand'),
-	CartItem = keystone.list('CartItem');
+	Expand = keystone.list('Expand');
 
 exports = module.exports = function (req, res) {
 
@@ -13,35 +12,20 @@ exports = module.exports = function (req, res) {
 	var shopping_cart_price;
 	var datas = {};
 
-	// headerfind.findCategories()
+	// Category.model.find()
 	// 	.exec(function(err,result){
 	// 		if(err) throw err;
-	// 		categories = result;
+	// 		datas.categories = result;
 	// 	})
 	// 	.then(
 	// 		function(){
 	// 			Product.model.find()
-	// 				.sort({pv:-1})
-	// 				.limit(5)
-	// 				.exec(function(err, result){
-	// 					if(err) throw err;
-	// 					hot_products = result;
-	// 					console.log("exec hot_products" + hot_products);
-	// 				})
-	// 		}
-	// 		,function(err){
-	// 			throw err;
-	// 		}
-	// 	)
-	// 	.then(
-	// 		function(){
-	// 			Product.model.find()
 	// 				.sort({createdAt:-1})
-	// 				.limit(5)
+	// 				.limit(8)
 	// 				.exec(function(err, result){
 	// 					if(err) throw err;
-	// 					new_products = result;
-	// 					console.log("exec new_products" + new_products);
+	// 					datas.hot_products = result;
+	// 					console.log("111111111111111");
 	// 				});
 	// 		}
 	// 		,function(err){
@@ -50,14 +34,15 @@ exports = module.exports = function (req, res) {
 	// 	)
 	// 	.then(
 	// 		function(){
-	// 			console.log("sen hot_products" + hot_products);
-	// 			console.log("sen new_products" + new_products);
+	// 			console.log("sen categories" + datas.categories);
+	// 			console.log("sen datas.hot_products" + datas.hot_products);
+	// 			console.log("222222222222222222");
 	// 			view.render('index',{
 	// 				title : "买买买",
-	// 				categories : categories,
+	// 				categories : datas.categories,
 	// 				shopping_cart_price : 1233.33,
-	// 				hot_products : hot_products,
-	// 				new_products : new_products
+	// 				hot_products : datas.hot_products,
+	// 				expands : datas.expands
 	// 			});
 	// 		},
 	// 		function(err){
@@ -91,39 +76,31 @@ exports = module.exports = function (req, res) {
 									if(err) throw err;
 									datas.expands = result;
 								})
-							// Product.model.find()
-							// 	.sort({createdAt:-1})
-							// 	.limit(5)
-							// 	.exec(function(err, result){
-							// 		if(err) throw err;
-							// 		new_products = result;
-							// 		console.log("exec new_products" + new_products);
-							// 	})
 								.then(
 									function(){
-										if(req.user){
-											headerfind.findCart(req.user)
-												.exec(function(err, result){
-													if(err) throw err;
-													datas.cart = result;
-													console.log("cart" + result);
-												})
-												.then(
-													function(){
-														view.render('index',{
-															title : "买买买",
-															categories : datas.categories,
-															shopping_cart_price : 1233.33,
-															hot_products : datas.hot_products,
-															expands : datas.expands
-														});
-													}
-													,function(err){
-														throw err;
-													}
-												)
-										}
-										else
+										// if(req.user){
+										// 	headerfind.findCart(req.user)
+										// 		.exec(function(err, result){
+										// 			if(err) throw err;
+										// 			datas.cart = result;
+										// 			console.log("cart" + result);
+										// 		})
+										// 		.then(
+										// 			function(){
+										// 				view.render('index',{
+										// 					title : "买买买",
+										// 					categories : datas.categories,
+										// 					shopping_cart_price : 1233.33,
+										// 					hot_products : datas.hot_products,
+										// 					expands : datas.expands
+										// 				});
+										// 			}
+										// 			,function(err){
+										// 				throw err;
+										// 			}
+										// 		)
+										// }
+										// else
 											view.render('index',{
 												title : "买买买",
 												categories : datas.categories,
@@ -148,33 +125,3 @@ exports = module.exports = function (req, res) {
 		)
 
 };
-
-// var getCart = function(){
-// 	if(req.user){
-// 		Cart.model.find({
-// 			user : req.user._id
-// 			})
-// 			.populate('products')
-// 			.exec(function(err, result){
-// 				cart_datas = result;
-// 			}
-// 			.then(
-// 				function(){
-// 					if(cart_datas){
-// 						for(one in cart_datas){
-// 							Product.model.find({
-// 								_id : one.product
-// 							}).exec(function(err,result){
-// 								if(err) throw err;
-// 								one.price = result[0].price;
-// 								one.name = 
-// 							})
-// 						}
-// 					}
-// 				},
-// 				function(err){
-// 					throw err;
-// 				}
-
-// 			);
-// 	}
