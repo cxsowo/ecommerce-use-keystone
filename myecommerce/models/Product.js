@@ -9,7 +9,7 @@ Product.add({
 	description: {type: Types.Markdown},
 	pv: {type: Number, default: 0, noedit:true},
 	category: {type: Types.Relationship, ref:'Category', initial: true},
-	images: {type: Types.CloudinaryImages, folder: true, autoCleanup : true}
+	image: {type: Types.CloudinaryImage, folder: true, autoCleanup : true}
 })
 Product.track = true
 

@@ -1,5 +1,6 @@
-var keystone = require('keystone');
-var User = keystone.list('User');
+var keystone = require('keystone'),
+	Category = keystone.list('Category'),
+	User = keystone.list('User');
 
 exports = module.exports = function (req, res) {
 
@@ -42,7 +43,12 @@ exports = module.exports = function (req, res) {
 };
 
 exports.showSignin = function(req, res) {
-	res.render('signin', {
-		title: '登录'
-	})
+
+	Category.model.find()
+		.exec(function(err, result){
+			res.render('signin', {
+				title : '登录',
+				categories : result,
+			})
+		})
 }

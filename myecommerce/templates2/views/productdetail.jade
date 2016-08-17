@@ -10,19 +10,15 @@ block content
 							li.home
 								a(href='/', title='') 主页
 								span ›
-							if product &&　product.first_category
+							if product &&　product.category
 								li.category1599
-									a(href='/'+'#{product.first_category.id}', title='') #{product.first_category.name}
+									a(href='/productlist/'+'#{product.category._id}', title='') #{product.category.name}
 									span ›
-							if product &&　product.sec_category
 								li.category1600
-									a(href='/'+'#{product.sec_category.id}', title='') #{product.sec_category.name}
-									span ›
-							li.category1601
-								strong #{product.name}
+									strong #{product.name}
 					// col-xs-12
 					.page-title
-						h2 Women
+						h2 商品详情
 					// row
 			// container
 	// BEGIN Main Container
@@ -32,7 +28,6 @@ block content
 				// Endif Next Previous Product
 				.product-view.wow.bounceInUp.animated(itemscope='', itemtype='http://schema.org/Product', itemid='#product_base')
 					#messages_product_view
-					// product-next-prev
 					.product-essential.container
 						.row
 							.product-next-prev
@@ -47,16 +42,23 @@ block content
 										link(itemprop='availability', href='http://schema.org/InStock')
 										span In stock
 									.product-image
-										.large-image
-											a#zoom1.cloud-zoom(href='products-images/p4.jpg', rel='useWrapper: false, adjustY:0, adjustX:20')
-												img(src='products-images/p4.jpg')
+										.large-image(style="height: 90%")
+											if product.image
+												a#zoom1.cloud-zoom(href='#{product.image.url}', rel='useWrapper: false, adjustY:0, adjustX:20')
+													img(src='#{product.image.url}')
+											else
+												a#zoom1.cloud-zoom(href='products-images/p4.jpg', rel='useWrapper: false, adjustY:0, adjustX:20')
+													img(src='/products-images/p4.jpg')
 										.flexslider.flexslider-thumb
 											ul.previews-list.slides
-												if product.imgs
-													each one in product.imgs
-														li
-															a.cloud-zoom-gallery(href='#{one.imgPath}', rel="useZoom: 'zoom1', smallImage: 'products-images/p15.jpg' ")
-																img(src='products-images/p15.jpg', alt='Thumbnail 1')
+												if product.image
+													li
+														a.cloud-zoom-gallery(href='#{product.image.url}', rel="useZoom: 'zoom1', smallImage: '#{product.image.url}' ")
+															img(src='#{product.image.url}', alt='Thumbnail 1')
+												else
+													li
+														a.cloud-zoom-gallery(href='', rel="useZoom: 'zoom1', smallImage: '/products-images/p15.jpg' ")
+															img(src='/products-images/p15.jpg', alt='Thumbnail 1')
 
 									// end: more-images
 								// End For version 1,2,6
@@ -73,20 +75,20 @@ block content
 									.price-block
 										.price-box
 											span#product-price-123.regular-price
-												span.price #{product.price}
+												span.price ￥#{product.price}
 									// price-block
 									.short-description
-										h2 Quick Overview
-										p
-											| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate.
+										h2 #{product.name}
+										if product.description
+											p #{product.description.html}
 									.add-to-box
 										.add-to-cart
 											.pull-left
 												.custom.pull-left
 													button.increase.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;", type='button')
 														i.icon-plus
-													input#qty.input-text.qty(type='text', name='qty', maxlength='12', value='1', title='Quantity:')
-													button.reduced.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty > 0 ) result.value--;return false;", type='button')
+													input#qty.input-text.qty(type='text', name='qty', maxlength='5', value='1', title='Quantity:')
+													button.reduced.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty > 1 ) result.value--;return false;", type='button')
 														i.icon-minus
 												// custom pull-left
 											// pull-left
@@ -128,22 +130,22 @@ block content
 					.product-collateral.container
 						ul#product-detail-tab.nav.nav-tabs.product-tabs
 							li.active
-								a(href='#product_tabs_description', data-toggle='tab')  Product Description
+								a(href='#product_tabs_description', data-toggle='tab')  商品描述
 							li
 								a(href='#product_tabs_tags', data-toggle='tab') Tags
 							li
-								a(href='#reviews_tabs', data-toggle='tab') Reviews
-							li
-								a(href='#product_tabs_custom', data-toggle='tab') Custom Tab
-							li
-								a(href='#product_tabs_custom1', data-toggle='tab') Custom Tab1
+								a(href='#reviews_tabs', data-toggle='tab') 评价
+							//- li
+							//- 	a(href='#product_tabs_custom', data-toggle='tab') Custom Tab
+							//- li
+							//- 	a(href='#product_tabs_custom1', data-toggle='tab') Custom Tab1
 						#productTabContent.tab-content
 							#product_tabs_description.tab-pane.fade.in.active
 								.std
-									p
-										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.
-									p
-										| Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.
+									if product.description
+										#{product.description.html}
+									else
+										p 没有商品详细描述
 							#product_tabs_tags.tab-pane.fade
 								.box-collateral.box-tags
 									.tags
@@ -350,18 +352,3 @@ block content
 												span
 													span View all
 									.clear
-							#product_tabs_custom.tab-pane.fade
-								.product-tabs-content-inner.clearfix
-									p
-										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi.
-									p
-										| Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.
-							#product_tabs_custom1.tab-pane.fade
-								.product-tabs-content-inner.clearfix
-									p
-										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.
-										// End Item
-						// end related product
-					// end related product
-				// box-additional
-				// product-view

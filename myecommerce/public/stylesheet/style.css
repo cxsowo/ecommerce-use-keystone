@@ -8051,6 +8051,7 @@ a.button.detail-bnt span {
 .product-view .product-img-box .product-image {
 	margin: 0 0 13px;
 	background:#fff;
+	height: 100%;
 	box-shadow: 0px 3px 8px -4px rgba(0,0,0,0.15);
 	padding-bottom:15px
 }
@@ -8206,7 +8207,7 @@ a.button.detail-bnt span {
 	margin-left: auto;
 }
 .product-essential .product-image img {
-	height: auto;
+	height: 100%;
 	width: 100%;
 }
 .product-essential .button-viewall {
@@ -8303,7 +8304,7 @@ a.button.detail-bnt span {
 	margin-left: 5px;
 }
 
-.product-img-box {padding-right:0px}
+.product-img-box {padding-right:0px; height: 660px;}
 
 
 .product-view .hot-banner img {
@@ -8317,7 +8318,7 @@ a.button.detail-bnt span {
 	margin-top: 0;
 	background:#2fdab8;
 	box-shadow: 0px 3px 8px -4px rgba(0,0,0,0.15);
-	height:760px;
+	height:660px;
 	padding:40px
 }
 .product-additional {

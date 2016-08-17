@@ -7,9 +7,7 @@ exports.findByCategory = function (req, res) {
 	var view = new keystone.View(req, res);
 	var id = req.params.id;
 
-	console.log("request id:"+req.params.id);
 	var view = new keystone.View(req, res);
-	var locals = res.locals;
 	var datas = {};
 	Category.model.find()
 		.exec(function(err, result){
@@ -20,16 +18,18 @@ exports.findByCategory = function (req, res) {
 		.then(
 			function(){
 				var categoriyids = [];
-				categoriyids.push(id);
 				Category.model.find({
-					parent : id
+					$or : [{parent : id}, {_id : id}]
 					})
 					.exec(function(err, result){
 						if(err) throw err;
 
 						if(result && result.length > 0)
-							for(var i = 0; i < result.length; i++)
+							for(var i = 0; i < result.length; i++){
+								if(result[i]._id.equals(id))
+									datas.category_name = result[i].name;
 								categoriyids.push(result[i]._id);
+							}
 						console.log("category by id"+categoriyids);
 					})
 					.then(
@@ -47,8 +47,7 @@ exports.findByCategory = function (req, res) {
 								view.render('productlist',{
 									title : "所有产品",
 									categories : datas.categories,
-									first_category : datas.first_category,
-									sec_category : datas.sec_category,
+									category_name : datas.category_name,
 									shopping_cart_price : 1233.33,
 									// commodities_in_cart:commodities_in_cart,
 									product_result : result
@@ -88,7 +87,6 @@ exports.findByCategory = function (req, res) {
 exports.allproduct = function (req, res) {
 
 	var view = new keystone.View(req, res);
-	var locals = res.locals;
 	var datas = {};
 	Category.model.find()
 		.exec(function(err, result){
@@ -108,8 +106,7 @@ exports.allproduct = function (req, res) {
 				view.render('productlist',{
 					title : "所有产品",
 					categories : datas.categories,
-					first_category : datas.first_category,
-					sec_category : datas.sec_category,
+					category_name : "所有商品",
 					shopping_cart_price : 1233.33,
 					// commodities_in_cart:commodities_in_cart,
 					product_result : result

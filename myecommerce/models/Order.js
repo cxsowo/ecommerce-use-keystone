@@ -5,7 +5,7 @@ var Order = new keystone.List('Order')
 
 Order.add({
 	user: {type: Types.Relationship, ref: 'User', many: false, required: true,index: true, initial: true},
-	products: {type: Types.Relationship, ref: 'CartItem', many: true, unique: true},
+	products: {type: Types.Relationship, ref: 'OrderItem', many: true, unique: true},
 	totalprice: {type: Types.Money, required: true, default: 0},
 	address: {type: Types.Text, required: true, default: '', initial: true},
 	phone: {type: Types.Number, required: true, default: '', initial: true},

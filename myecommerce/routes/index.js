@@ -51,7 +51,7 @@ exports = module.exports = function (app) {
 	app.post('/signup', middleware.requireNoUser, routes.views.signup);
 	app.post('/addtocart', middleware.requireUser, routes.views.shoppingcart.addToCart);
 
-	app.delete('/shoppingcart?delete_id=:id', routes.views.shoppingcart.delete);
+	app.delete('/removecartitem', routes.views.cart.deleteItem);
 	//app.get('/categories/:id', routes.views.categories);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:

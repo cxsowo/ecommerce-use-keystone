@@ -78,36 +78,45 @@ exports = module.exports = function (req, res) {
 								})
 								.then(
 									function(){
-										// if(req.user){
-										// 	headerfind.findCart(req.user)
-										// 		.exec(function(err, result){
-										// 			if(err) throw err;
-										// 			datas.cart = result;
-										// 			console.log("cart" + result);
-										// 		})
-										// 		.then(
-										// 			function(){
-										// 				view.render('index',{
-										// 					title : "买买买",
-										// 					categories : datas.categories,
-										// 					shopping_cart_price : 1233.33,
-										// 					hot_products : datas.hot_products,
-										// 					expands : datas.expands
-										// 				});
-										// 			}
-										// 			,function(err){
-										// 				throw err;
-										// 			}
-										// 		)
-										// }
-										// else
+										if(req.user){
+											Cart.model.find({
+												user : req.user._id
+												})
+												.populate('product')
+												.exec(function(err, result){
+													if(err) throw err;
+													datas.cart = result;
+													var sum = 0;
+													for(var i = 0; i < result.length; i++){
+														sum += result[i].product.price;
+													}
+													datas.cartprice = sum;
+												})
+												.then(
+													function(){
+														view.render('index',{
+															title : "买买买",
+															categories : datas.categories,
+															cart : datas.cart,
+															cartprice : datas.cartprice,
+															hot_products : datas.hot_products,
+															expands : datas.expands
+														});
+													}
+													,function(err){
+														throw err;
+													}
+												)
+										}
+										else{
 											view.render('index',{
 												title : "买买买",
 												categories : datas.categories,
-												shopping_cart_price : 1233.33,
+												cart : datas.cart,
 												hot_products : datas.hot_products,
 												expands : datas.expands
 											});
+										}
 									},
 									function(err){
 										throw err;

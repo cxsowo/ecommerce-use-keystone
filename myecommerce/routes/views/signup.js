@@ -1,32 +1,37 @@
-var keystone = require('keystone');
-var User = keystone.list('User');
-var signin = require('./signin');
+var keystone = require('keystone'),
+	User = keystone.list('User'),
+	Category = keystone.list('Category'),
+	signin = require('./signin');
 
 exports = module.exports = function (req, res) {
 
 	var _user = req.body.user;
-	var newUser = new User.model({
-		name : _user.name,
-		email : _user.email,
-		password : _user.password,
-		phone : _user.phone || '',
-		address : _user.address || '',
-		isAdmin : false
-	});
+	if(_user.password && _user.password.length < 6)
+		res.redirect('/signup');
+	else{
+		var newUser = new User.model({
+			name : _user.name,
+			email : _user.email,
+			password : _user.password,
+			phone : _user.phone || '',
+			address : _user.address || '',
+			isAdmin : false
+		});
 
-	newUser.save(function(err,isSuccess) {
-	    // post已保存
-	    if(err)
-	    	console.error(err);
-	    if(isSuccess){
-	    	console.log("注册成功："+_user.name);
-	    	signin(req,res);
-	    }
-	    else{
-			console.log("注册失败："+_user.name);
-			res.redirect('/signup');
-		}
-	});
+		newUser.save(function(err,isSuccess) {
+		    // post已保存
+		    if(err)
+		    	console.error(err);
+		    if(isSuccess){
+		    	console.log("注册成功："+_user.name);
+		    	signin(req,res);
+		    }
+		    else{
+				console.log("注册失败："+_user.name);
+				res.redirect('/signup');
+			}
+		});
+	}
 	// User.model.find()
 	// 	.where('name' , _user.name)
 	// 	.exec(function(err,user){
@@ -64,7 +69,11 @@ exports = module.exports = function (req, res) {
 };
 
 exports.showSignup = function(req, res) {
-	res.render('signup', {
-		title: '注册'
-	})
+	Category.model.find()
+		.exec(function(err, result){
+			res.render('signup', {
+				title : '注册',
+				categories : result,
+			})
+		})
 }

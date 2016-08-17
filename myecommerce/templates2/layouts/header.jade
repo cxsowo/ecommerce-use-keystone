@@ -59,43 +59,70 @@ header
 						.fl-mini-cart-content
 							.block-subtitle
 								.top-subtotal
-									span.price #{shopping_cart_price}
+									if cartprice
+										span.price ￥#{cartprice}
 							ul#cart-sidebar.mini-products-list
-							//- if user
-							//- 	ul#cart-sidebar.mini-products-list
-							//- 		if cart_datas &&　cart_datas.products
-							//- 			each one in commodities_in_cart
-							//- 				li.item(class = '.minicart-item-#{one._id}')
-							//- 					.item-inner
-							//- 						a.product-image(title='#{one.name}', href='/productdetail/'+'#{one._id}')
-							//- 							img(alt='#{one.imgPath}')
-							//- 						.product-details
-							//- 							.access
-							//- 								a.btn-remove1(title='删除', href='#') 删除
-							//- 								a.btn-edit(title='编辑', href='#')
-							//- 									i.icon-pencil
-							//- 									span.hidden 编辑
-							//- 							// access
-							//- 							strong #{one.number}
-							//- 							| x
-							//- 							span.price #{one.price}
-							//- 							p.product-name
-							//- 								a(href='/productdetail/'+'#{one._id}') #{one.name}
-							//- 		else
-							//- 			li.item
-							//- 				span 空荡荡的购物车O.O
-							//- 	.actions
-							//- 		button.view-cart(title='查看购物车', type='button', onclick='')
-							//- 			a(href='/shoppingcart') 进入购物车
-							//- else
-							//- 	ul#cart-sidebar.mini-products-list
-							//- 		li.item.first
-							//- 			.item-inner
-							//- 				a.product-image(title='登陆', href='/signin')
-							//- 		span 请先
-							//- 		a(href='/signin') 登陆
+							if user
+								ul#cart-sidebar.mini-products-list
+									if cart &&　cart.length > 0
+										each one in cart
+											li.item(class = '.minicart-item-#{one.product._id}')
+												.item-inner
+													if one.product.image
+														a.product-image(title='#{one.product.name}', href='/productdetail/#{one.product._id}')
+															img(src='#{one.product.image.url}')
+													else
+														a.product-image(title='#{one.product.image.url}', href='/productdetail/#{one.product._id}')
+															img(src='/products-images/p10.jpg')
+													.product-details
+														.access
+															a.btn-remove1(title='删除', href='', onclick='removeCartItem(#{one.product._id})') 删除
+															//- a.btn-edit(title='编辑', href='#')
+															//- 	i.icon-pencil
+															//- 	span.hidden 编辑
+														// access
+														strong #{one.qty}
+														| x
+														span.price ￥#{one.product.price}
+														p.product-name
+															a(href='/productdetail/#{one.product._id}') #{one.product.name}
+									else
+										li.item
+											span 空荡荡的购物车O.O
+								.actions
+									button.view-cart(title='查看购物车', type='button', onclick='')
+										a(href='/shoppingcart') 进入购物车
+							else
+								ul#cart-sidebar.mini-products-list
+									li.item.first
+										.item-inner
+											a.product-image(title='登陆', href='/signin')
+									span 请先
+									a(href='/signin') 登陆
 				.collapse.navbar-collapse
 					form.navbar-form(role='search',action='/search',method='get')
 						.input-group
 							input#desktopSearchInput.GlobalNavSearch.js-globalSearchInput(placeholder='搜索', data-reactid='.1.0.0.0')
 							label.GlobalNavSearch-searchIcon(for='desktopSearchInput', data-reactid='.1.0.0.1')
+
+block js
+	script(type='text/javascript').
+		function removeCartItem(id){
+			var tr = $('.cart-item-'+ id);
+			var minitr = $('.minicart-item-'+id)
+			$.ajax({
+				type : 'DELETE',
+				url : '/removecartitem?id=' + id
+			})
+			.done(function(result) {
+				if(result.success === 1)
+					if(tr) {
+						tr.remove()
+					}
+					if(minitr) {
+						minitr.remove()
+					}
+				else
+					window.alert("移除购物车项目失败！")
+			})
+		}

@@ -33,7 +33,7 @@ block content
 											| 邮箱
 											em.required *
 										.input-box
-											input#email.input-text.required-entry.validate-email(type='text', name='user[email]', value='', title='邮箱',maxlength=200)
+											input#email.input-text.required-entry.validate-email(type='email', name='user[email]', value='', title='邮箱',maxlength=200)
 									li
 										label(for='pass')
 											| 密码
@@ -44,12 +44,12 @@ block content
 										label(for='phone')
 											| 手机号
 										.input-box
-											input#phone.input-text.required-entry.validate-email(type='text', name='user[phone]', value='', title='手机号',maxlength=20)
+											input#phone.input-text.required-entry(type='text', name='user[phone]', value='', title='手机号',maxlength=20)
 									li
 										label(for='address')
 											| 地址
 										.input-box
-											input#address.input-text.required-entry.validate-email(type='text', name='user[address]', value='', title='地址',maxlength=200)
+											input#address.input-text.required-entry(type='text', name='user[address]', value='', title='地址',maxlength=200)
 								//- p.required * 为必填的
 								.buttons-set
 									button.button.login(type='submit', title='signup', name='send')

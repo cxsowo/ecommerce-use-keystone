@@ -53,7 +53,7 @@ block content
 		section.wow.bounceInUp.animated
 			.best-pro.slider-items-products.container
 				.new_title
-					h2 畅销产品
+					h2 热门商品
 				#best-seller.product-flexslider.hidden-buttons
 					.slider-items.slider-width-col4.products-grid
 						if hot_products
@@ -62,9 +62,9 @@ block content
 									.item-inner
 										.item-img
 											.item-img-info
-												if one.images && one.images.length >0
+												if one.image
 													a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
-														img(src='#{one.images[0].url}', alt='#{one.name}')
+														img(src='#{one.image.url}', alt='#{one.name}')
 												else
 													a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
 														img(src='images/member1.png', alt='#{one.name}')

@@ -10,16 +10,16 @@ block content
 							li.home
 								a(href='/', title='回主页') 主页
 								span ›
-							if first_category
+							if category_name
 								li.category1599
-									a(href='/productlist/#{first_category._id}', title='') #{first_category.name}
+									span #{category_name}
 									span ›
-							if sec_category
-								li.category1600
-									a(href='/productlist/#{sec_category._id}', title='') #{sec_category.name}
-									span ›
-							li.category1601
-								strong 商品列表
+							//- if sec_category
+							//- 	li.category1600
+							//- 		a(href='/productlist/#{sec_category._id}', title='') #{sec_category.name}
+							//- 		span ›
+							//- li.category1601
+							//- 	strong 商品列表
 					.page-title
 						h2 商品列表
 		section.main-container.col2-left-layout.bounceInUp.animated
@@ -76,8 +76,8 @@ block content
 															.item-img
 																.item-img-info
 																	a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
-																		if one.images && one.images.length > 0
-																			img(src='#{one.images[0].url}', alt='#{one.name}')
+																		if one.image
+																			img(src='#{one.image.url}', alt='#{one.name}')
 																		else
 																			img(src='/products-images/p11.jpg', alt='#{one.name}')
 																	.item-box-hover
