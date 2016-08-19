@@ -51,7 +51,6 @@ block content
 															a(href='/productlist?p=#{product_result.previous}') «
 														else
 															a(href='#' onclick='alert("这已经是第一页了！");') «
-														- console.log(product_result.totalPages)
 														- for (var i = 0; i < product_result.totalPages; i++) {
 															- if(product_result.currentPage === (i+1)) {
 																li.active
@@ -86,7 +85,7 @@ block content
 																				a.button.detail-bnt(href='/productdetail/#{one._id}')
 																					span 查看
 																			.add_cart
-																				button.button.btn-cart(type='button',onclick='addToCart(#{one._id})')
+																				button.button.btn-cart(type='button',onclick='addToCart(this)', data-id = "#{one._id}", data-qty = 1)
 																					span 加入购物车
 															.item-info
 																.info-inner

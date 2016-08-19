@@ -27,24 +27,25 @@ block content
 											| 用户名
 											em.required *
 										.input-box
-											input#username.input-text.required-entry(type='text', name='user[name]', value='', title='用户名', maxlength=20)
+											input#username.input-text.required-entry(type='text', name='user[name]', value='', title='用户名', maxlength=20, required)
 									li
 										label(for='email')
 											| 邮箱
 											em.required *
 										.input-box
-											input#email.input-text.required-entry.validate-email(type='email', name='user[email]', value='', title='邮箱',maxlength=200)
+											input#email.input-text.required-entry.validate-email(type='email', name='user[email]', title='邮箱', value='', maxlength=200, required)
 									li
 										label(for='pass')
 											| 密码
 											em.required *
 										.input-box
-											input#pass.input-text.required-entry.validate-password(type='password', name='user[password]', title='密码', maxlength=20)
+											input#pass.input-text.required-entry.validate-password(type='password', name='user[password]', value='', title='密码', maxlength=20,required)
 									li
 										label(for='phone')
 											| 手机号
+											em.required *
 										.input-box
-											input#phone.input-text.required-entry(type='text', name='user[phone]', value='', title='手机号',maxlength=20)
+											input#phone.input-text.required-entry(type='text', name='user[phone]', value='', title='手机号',maxlength=20, required)
 									li
 										label(for='address')
 											| 地址

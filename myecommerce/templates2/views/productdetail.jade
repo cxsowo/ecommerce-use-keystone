@@ -43,7 +43,7 @@ block content
 										span In stock
 									.product-image
 										.large-image(style="height: 90%")
-											if product.image
+											if product && product.image
 												a#zoom1.cloud-zoom(href='#{product.image.url}', rel='useWrapper: false, adjustY:0, adjustX:20')
 													img(src='#{product.image.url}')
 											else
@@ -92,8 +92,8 @@ block content
 														i.icon-minus
 												// custom pull-left
 											// pull-left
-											button.button.btn-cart(type='button', title='Add to Cart', onclick='productAddToCartForm.submit(this)')
-												span Add to Cart
+											button.button.btn-cart(type='button', title='添加到购物车', onclick='addToCart(this)', data-id = "#{product._id}")
+												span 添加到购物车
 										// add-to-cart
 										.email-addto-box
 											p.email-friend
@@ -143,7 +143,8 @@ block content
 							#product_tabs_description.tab-pane.fade.in.active
 								.std
 									if product.description
-										#{product.description.html}
+										p
+											#{product.description.html}
 									else
 										p 没有商品详细描述
 							#product_tabs_tags.tab-pane.fade

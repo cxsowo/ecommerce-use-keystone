@@ -76,7 +76,8 @@ header
 															img(src='/products-images/p10.jpg')
 													.product-details
 														.access
-															a.btn-remove1(title='删除', href='', onclick='removeCartItem(#{one.product._id})') 删除
+															- var sendid = one.product._id
+															a.btn-remove1(title='删除', href='javascript:void(0);',data-id = "#{one.product._id}", onclick='removeCartItem(this)') 删除
 															//- a.btn-edit(title='编辑', href='#')
 															//- 	i.icon-pencil
 															//- 	span.hidden 编辑
@@ -104,25 +105,3 @@ header
 						.input-group
 							input#desktopSearchInput.GlobalNavSearch.js-globalSearchInput(placeholder='搜索', data-reactid='.1.0.0.0')
 							label.GlobalNavSearch-searchIcon(for='desktopSearchInput', data-reactid='.1.0.0.1')
-
-block js
-	script(type='text/javascript').
-		function removeCartItem(id){
-			var tr = $('.cart-item-'+ id);
-			var minitr = $('.minicart-item-'+id)
-			$.ajax({
-				type : 'DELETE',
-				url : '/removecartitem?id=' + id
-			})
-			.done(function(result) {
-				if(result.success === 1)
-					if(tr) {
-						tr.remove()
-					}
-					if(minitr) {
-						minitr.remove()
-					}
-				else
-					window.alert("移除购物车项目失败！")
-			})
-		}

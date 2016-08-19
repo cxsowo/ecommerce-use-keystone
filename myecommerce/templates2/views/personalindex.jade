@@ -1,0 +1,54 @@
+extends ../layouts/default
+
+block content
+	.page-heading
+		.container
+			.row
+				.col-xs-12
+					.page-title
+						h2 #{title}
+	.main-container.container-fluid(style='visibility: visible;')
+		.row
+			.col-sm-4.col-md-4.tabbable.tabs-left
+				ul.nav.nav-pills.nav-stacked(style = 'width:30%', 'align-text:right')
+					li.horizen
+						a(href="#tab1", data-toggle="pill") 查看用户信息
+					li.horizen
+						a(href="#tab2", data-toggle="tab") 修改用户信息
+					li.horizen
+						a(href="#tab3", data-toggle="tab") 您的订单
+					li.horizen
+						a(href="#tab4", data-toggle="tab") 购物车
+			.col-sm-7.col-md-7
+				.tab-content
+					.tab-pane.active.fade#tab1
+						table.table.table-striped.table-bordered.table-responsive.table-condensed
+							thead
+								tr
+									th name
+									th email
+							tbody
+								tr
+									td #{userinfo.name}
+									td #{userinfo.email}
+					.tab-pane.fade#tab2
+						form(method='POST',action='/')
+							.form-group
+								label.control-label(for = 'name') name
+								input#username.form-control(name='user[name]', type = 'text',value='#{userinfo.name}',required)
+							.form-group
+								lable(for= 'email') email
+								input#useremail.form-control(readonly="readonly",name='user[email]', type = 'email',value='#{userinfo.email}')
+							.form-group
+								lable(for='address') address
+								input#useraddress.form-control(name='user[address]', type = 'text',value='#{userinfo.address}')
+							.form-group
+								lable(for='phone') phone
+								input#userphone.form-control(name='user[phone]', type = 'text',value='#{userinfo.phone}')
+							.modal-footer
+								button.btn(style="float:left",type='button',onclick='submitChangeUserInfo()') 提交修改
+					.tab-pane.fade#tab3
+						table
+
+block js
+	script(type='text/javascript', src='/js/personalindex.js')

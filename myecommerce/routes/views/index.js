@@ -1,5 +1,4 @@
 var keystone = require('keystone'),
-	headerfind = require('./headerfind.js'),
 	Cart = keystone.list('Cart'),
 	Category = keystone.list('Category'),
 	Product = keystone.list('Product'),

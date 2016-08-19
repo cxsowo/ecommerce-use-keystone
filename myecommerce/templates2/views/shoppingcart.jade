@@ -47,27 +47,36 @@ block content
 												span
 													span 清空购物车
 								tbody
-									if commodities_in_cart
-										each one in commodities_in_cart
-											tr.odd(class = 'cart-item-#{one.id}')
+									if cart
+										each one in cart
+											tr.odd(class = 'cart-item-#{one.product._id}')
 												td.image.hidden-table
-													a.product-image(href='/product-detail/'+'#{one.id}', title="#{one.name}")
-														img(src='#{one.imgPath}', width='75', alt="#{one.name}")
+													a.product-image(href='/product-detail/#{one.product._id}', title="#{one.product.name}")
+														if one.product.image
+															img(src='#{one.product.image.url}', width='75', alt="#{one.product.name}")
+														else
+															img(src='/products-images/p1.jpg', width='75', alt="#{one.product.name}")
 												td
 													h2.product-name
-														a(href='/product-detail/'+'#{one.id}') #{one.name}
+														a(href='/product-detail/#{one.product._id}') #{one.product.name}
 												td.a-center.hidden-table
-													a.edit-bnt(href='#', title='Edit item parameters')
+													a.edit-bnt(href='javascript:void(0)', title='编辑商品数量', onclick='addtocart(this)', data-id='one.product._id')
 												td.a-right.hidden-table
 													span.cart-price
-														span.price #{one.price}
+														span.price(class = 'unitprice') #{one.product.price}
 												td.a-center.movewishlist
-													input.input-text.qty(name='cart[26340][qty]', value='#{one.number}', size='4', title='Qty', maxlength='12')
+													input#qty.input-text.qty(name='cart[26340][qty]', value='#{one.qty}', size='4', title='Qty', maxlength='5')
+													.custom.pull-left
+														button.increase.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;", type='button')
+															i.icon-plus
+														input#qty.input-text.qty(type='text', name='qty', maxlength='5', value='1', title='Quantity:')
+														button.reduced.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty > 1 ) result.value--;return false;", type='button')
+															i.icon-minus
 												td.a-right.movewishlist
 													span.cart-price
-														span.price #{one.price * one.number}
+														span.price(class = 'trprice') #{one.product.price * one.qty}
 												td.a-center.last
-													a.button.remove-item(href='#', title='删除',onclick="delete_item_in_cart(#{one.id})")
+													a.button.remove-item(href='javascript:void(0)', title='删除',onclick="removeCartItem(this)", data-id = "#{one.product._id}")
 														span
 															span 删除
 
@@ -75,23 +84,23 @@ block content
 				.cart-collaterals.container
 					// BEGIN COL2 SEL COL 1
 					// BEGIN TOTALS COL 2
-					.col-sm-8
-						.discount
-							h3 地址
-							if address
-								span #{address}
-							else
-								form#address_form(action='/save-address', method='post')
-									label(for='coupon_code') Enter your coupon code if you have one.
-									input#remove-coupone(type='hidden', name='remove', value='0')
-									input#coupon_code.input-text.fullwidth(type='text', name='coupon_code', value='')
-									button.button.coupon(type='button', title='Apply Coupon', onclick='discountForm.submit(false)', value='Apply Coupon')
-										span Apply Coupon
-						// discount
-					// col-sm-4
+					//- .col-sm-8
+					//- 	.discount
+					//- 		h3 地址
+					//- 		if address
+					//- 			span #{address}
+					//- 		else
+					//- 			form#address_form(action='/saveaddress', method='post')
+					//- 				label(for='coupon_code') Enter your coupon code if you have one.
+					//- 				input#remove-coupone(type='hidden', name='remove', value='0')
+					//- 				input#coupon_code.input-text.fullwidth(type='text', name='coupon_code', value='')
+					//- 				button.button.coupon(type='button', title='Apply Coupon', onclick='discountForm.submit(false)', value='Apply Coupon')
+					//- 					span 保存地址
+					//- 	// discount
+					//- // col-sm-4
 					.col-sm-4
 						.totals
-							h3 Shopping Cart Total
+							h3 购物车总价
 							.inner
 								table#shopping-cart-totals-table.table.shopping-cart-table-total
 									colgroup
@@ -100,41 +109,24 @@ block content
 									tfoot
 										tr
 											td.a-left(style='', colspan='1')
-												strong Grand Total
+												strong 总价
 											td.a-right(style='')
 												strong
-													span.price $129.00
-									tbody
-										tr
-											td.a-left(style='', colspan='1')
-												| Subtotal
-											td.a-right(style='')
-												span.price $129.00
+													span.price ￥#{cartprice}
+									//- tbody
+									//- 	tr
+									//- 		td.a-left(style='', colspan='1')
+									//- 			| Subtotal
+									//- 		td.a-right(style='')
+									//- 			span.price ￥#{cartprice}
 								ul.checkout
 									li
 										button.button.btn-proceed-checkout(type='button', title='Proceed to Checkout', onclick='')
-											span Proceed to Checkout
+											span 结算
 									br
 									li
 										a(href='multiple-addresses.html', title='Checkout with Multiple Addresses') Checkout with Multiple Addresses
 									br
 							// inner
 block js
-	script(type='text/javascript').
-		function delete_item_in_cart(id){
-			var tr = $('.cart-item-'+ id);
-			var minitr = $('.minicart-item-'+id)
-			$.ajax({
-				type : 'DELETE',
-				url : '/shopping-cart?id=' + id
-			})
-			.done(function(results) {
-				if(results.success === 1)
-					if(tr) {
-						tr.remove()
-					}
-					if(minitr) {
-						,minitr.remove()
-					}
-			})
-		}
+	script(type='text/javascript', src='/js/shoppingcart.js')
