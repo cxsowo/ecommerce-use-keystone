@@ -6,7 +6,6 @@ exports = module.exports = function (req, res) {
 
 	var _user = req.body.user;
 
-	console.dir(_user);
 	keystone.session.signin(_user, req, res,
 		function onSuccess(user){
 			console.log("登录成功："+user.name);

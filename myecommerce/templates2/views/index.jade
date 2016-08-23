@@ -72,16 +72,10 @@ block content
 													.box-inner
 														.product-detail-bnt
 															a.button.detail-bnt
-																span Quick View
-														//- .actions
-														//- 	span.add-to-links
-														//- 		a.link-wishlist(href='#', title='Add to Wishlist')
-														//- 			span Add to Wishlist
-														//- 		a.link-compare.add_to_compare(href='#', title='Add to Compare')
-														//- 			span Add to Compare
+																span 查看
 														.add_cart
-															button.button.btn-cart(type='button')
-																span Add to Cart
+															button.button.btn-cart(type='button', onclick='addToCart(this)', data-id = "#{one._id}", data-qty = 1)
+																span 加入购物车
 										.item-info
 											.info-inner
 												.item-title
@@ -101,28 +95,3 @@ block content
 																span.price #{one.price}
 						else
 							span 商店里没有商品
-
-block js
-	//- script(type='text/javascript').
-	//- 	var dthen1 = new Date("12/25/17 11:59:00 PM");
-	//- 	start = "05/03/15 03:02:11 AM";
-	//- 	start_date = Date.parse(start);
-	//- 	var dnow1 = new Date(start_date);
-	//- 	if (CountStepper > 0)
-	//- 	ddiff = new Date((dnow1) - (dthen1));
-	//- 	else
-	//- 	ddiff = new Date((dthen1) - (dnow1));
-	//- 	gsecs1 = Math.floor(ddiff.valueOf() / 1000);
-	//- 	var iid1 = "countbox_1";
-	//- 	CountBack_slider(gsecs1, "countbox_1", 1);
-	//- 	var dthen1 = new Date("12/12/17 11:59:00 PM");
-	//- 	start = "01/20/16 03:02:11 AM";
-	//- 	start_date = Date.parse(start);
-	//- 	var dnow1 = new Date(start_date);
-	//- 	if (CountStepper > 0)
-	//- 	ddiff = new Date((dnow1) - (dthen1));
-	//- 	else
-	//- 	ddiff = new Date((dthen1) - (dnow1));
-	//- 	gsecs1 = Math.floor(ddiff.valueOf() / 1000);
-	//- 	var iid1 = "countbox_2";
-	//- 	CountBack_slider(gsecs1, "countbox_2", 1);

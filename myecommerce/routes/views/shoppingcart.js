@@ -26,7 +26,7 @@ exports = module.exports = function(req, res) {
 
 							var sum = 0;
 							for(var i = 0; i < result.length; i++){
-								sum += result[i].product.price;
+								sum += result[i].product.price*result[i].qty;
 							}
 							datas.cart = result;
 							datas.cartprice = sum;
@@ -42,10 +42,7 @@ exports = module.exports = function(req, res) {
 										title : "购物车",
 										categories : datas.categories,
 										cart : datas.cart,
-										address : result.address,
-										phone : result.phone,
-										cartprice : datas.cartprice,
-										hot_products : datas.hot_products
+										cartprice : datas.cartprice
 									});
 								})
 							}
@@ -91,10 +88,12 @@ exports.addToCart = function(req, res) {
 
 	if(!qty || !id || qty < 1){
 		console.log("更新购物车商品错误！qty:"+qty+",id:"+id);
+		res.json({success:0});
 	}
 	else{
 		Product.model.findOne({_id: id})
 			.exec(function(err, result){
+				console.log("要更新购物车了:"+result);
 				if(err) console.error(err);
 				if(result){
 					Cart.model.update({
@@ -102,9 +101,53 @@ exports.addToCart = function(req, res) {
 							product : id
 						},{
 							qty : qty
-						},true);//设置成没找到就插入
+						},{
+							upsert  : true//设置成没找到就插入
+						},function (err, raw) {
+							if(err) console.error(err);
+
+							//res.json({success:1});
+							Cart.model.find({
+									user : req.user._id
+									})
+									.populate('product')
+									.exec(function(err, result){
+										if(err) throw err;
+										var sum = 0;
+										for(var i = 0; i < result.length; i++){
+											sum += result[i].product.price*result[i].qty;
+										}
+										res.json({
+											success : 1,
+											cart : result,
+											cartprice : sum
+										})
+									})
+						});
+						// .then(
+						// 	function(){
+						// 		Cart.model.find({
+						// 			user : req.user._id
+						// 			})
+						// 			.populate('product')
+						// 			.exec(function(err, result){
+						// 				if(err) throw err;
+						// 				var sum = 0;
+						// 				for(var i = 0; i < result.length; i++){
+						// 					sum += result[i].product.price;
+						// 				}
+						// 				res.json({
+						// 					success : 1,
+						// 					cart : result,
+						// 					cartprice : sum
+						// 				})
+						// 			})
+						// 	},function(err){
+						// 		throw err;
+						// 	}
+						// )
 				}
-			})
+			});
 	}
 
 }

@@ -37,7 +37,7 @@ exports = module.exports = function (req, res) {
 
 										var sum = 0;
 										for(var i = 0; i < result.length; i++){
-											sum += result[i].product.price;
+											sum += result[i].product.price*result[i].qty;
 										}
 										view.render('productdetail',{
 											title : datas.product_name || "商品详情",

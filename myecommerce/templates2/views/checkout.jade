@@ -1,0 +1,120 @@
+extends ../layouts/default
+
+block content
+	.page-heading
+		.container
+			.row
+				.col-xs-12
+					.page-title
+						h2 购物车
+	.main-container.col1-layout.wow.bounceInUp.animated
+		.main.container
+			.cart.wow.bounceInUp.animated
+				.table-responsive.shopping-cart-tbl.container
+					form(action='/checkout', method='post')
+						input(name='form_key', type='hidden', value='EPYwQxF6xoWcjLUr')
+						fieldset
+							table#shopping-cart-table.data-table.cart-table.table-striped
+								colgroup
+									col(width='1')
+									col
+									col(width='1')
+									col(width='1')
+									col(width='1')
+									col(width='1')
+								thead
+									tr.first.last
+										th(rowspan='1')  
+										th(rowspan='1')
+											span.nobr 产品名称
+										th(rowspan='1')
+											span.nobr 单价
+										th.a-center(rowspan='1') 数量
+										th.a-center(colspan='1') 总价
+								tfoot
+									tr.first.last
+										td.a-right.last(colspan='50')
+											button.button.btn-continue(type='button', title='继续购物', onclick='')
+												span
+													span 取消结算
+								tbody
+									if cart
+										each one in cart
+											tr.odd(class = 'cart-item-#{one.product._id}')
+												td.image.hidden-table
+													a.product-image(href='/product-detail/#{one.product._id}', title="#{one.product.name}")
+														if one.product.image
+															img(src='#{one.product.image.url}', width='75', alt="#{one.product.name}")
+														else
+															img(src='/products-images/p1.jpg', width='75', alt="#{one.product.name}")
+												td
+													h2.product-name
+														a(href='/product-detail/#{one.product._id}') #{one.product.name}
+												td.a-right.hidden-table
+													span.cart-price
+														span.price(class = 'unitprice') #{one.product.price}
+												td.a-center.movewishlist
+														input.input-text.qty(id='qty#{one.product._id}', name='', value='#{one.qty}', size='4', title='Qty', maxlength='5', readonly='readonly')
+														//- .custom.pull-left
+														//- button.increase.items-count(onclick="clickAddNum()", type='button', data-id='one.product._id')
+														//- 	i.icon-plus
+														//- input.input-text.qty(id='qty#{one.product._id}', type='text', name='qty', maxlength='5', value='1', title='aty')
+														//- button.reduced.items-count(onclick="clickReduceNum()", type='button', data-id='one.product._id')
+														//- 	i.icon-minus
+												td.a-right.movewishlist
+													span.cart-price
+														span.price #{one.product.price * one.qty}
+
+				.cart-collaterals.container
+					.col-sm-8
+						.discount
+							h3 邮寄信息
+							.inner
+								table
+									colgroup
+										col
+										col(width='1')
+									tfoot
+										tr
+											if address
+												td
+													span 地址：#{address}
+											else
+												td(style='', colspan='1')
+													input(id='address',name='address',maxlength='200')
+												td.a-right
+													a.btn(href='javascript:void(0);', onclick='saveAddress()') 保存地址
+										tr
+											td
+												span 手机：#{phone}
+						// discount
+					// col-sm-4
+					.col-sm-4
+						.totals
+							h3 总价
+							.inner
+								table#shopping-cart-totals-table.table.shopping-cart-table-total
+									colgroup
+										col(width='5')
+										col(width='1')
+									tfoot
+										tr
+											td.a-left(style='', colspan='1')
+												strong 总价
+											td.a-right(style='')
+												strong
+													span.price ￥#{cartprice}
+									//- tbody
+									//- 	tr
+									//- 		td.a-left(style='', colspan='1')
+									//- 			| Subtotal
+									//- 		td.a-right(style='')
+									//- 			span.price ￥#{cartprice}
+								ul.checkout
+									li
+										button.button.btn-proceed-checkout(type='button', title='去付款', onclick='')
+											span 去付款
+									br
+							// inner
+block js
+	script(type='text/javascript', src='/js/checkout.js')

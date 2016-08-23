@@ -5,7 +5,7 @@ header
 				.logo
 					a(href='/', title='主页')
 						div
-							img(src='/images/logo2.png', alt='')
+							img(src='/images/logo.png', alt='')
 				.fl-nav-menu
 					nav
 						.mm-toggle-wrap
@@ -60,8 +60,7 @@ header
 							.block-subtitle
 								.top-subtotal
 									if cartprice
-										span.price ￥#{cartprice}
-							ul#cart-sidebar.mini-products-list
+										span.price(id='minicartprice') ￥#{cartprice}
 							if user
 								ul#cart-sidebar.mini-products-list
 									if cart &&　cart.length > 0

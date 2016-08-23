@@ -24,10 +24,11 @@ exports = module.exports = function (req, res) {
 
 						var sum = 0;
 						for(var i = 0; i < result.length; i++){
-							sum += result[i].product.price;
+							sum += result[i].product.price*result[i].qty;
 						}
 						datas.cartprice = sum;
 						datas.cart = result;
+						console.log("查完了购物车");
 					})
 					.then(
 						function(){
@@ -35,10 +36,12 @@ exports = module.exports = function (req, res) {
 								User.model.findOne({//查用户信息
 									_id : req.user._id
 									})
+									// .select(name, phone, address, email)
 									.exec(function(err, result){
+										console.log("查找用户信息了："+result);
 										if(err) throw err;
 										view.render('personalindex',{
-											title : datas.product_name || "商品详情",
+											title : "个人主页",
 											categories : datas.categories,
 											cartprice : datas.cartprice,
 											cart : datas.cart,
@@ -69,6 +72,7 @@ exports.changeUserInfo = function(req, res) {
 	var reg =/^0{0,1}(13|15|18)[0-9]{9}$/;
 	if(name && phone && !phone.match(reg)){
 		console.log("手机号格式不对！"+name+phone);
+		req.flash('warning', '手机号格式不对！');
 		res.json({success:0});
 	}
 	else

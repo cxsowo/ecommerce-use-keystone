@@ -43,8 +43,9 @@ exports = module.exports = function (app) {
 	app.get('/signin', middleware.requireNoUser, routes.views.signin.showSignin);
 	app.get('/signup', middleware.requireNoUser, routes.views.signup.showSignup);
 	app.get('/signout', middleware.requireUser, routes.views.signout);
-	app.get('/shoppingcart', routes.views.shoppingcart);
+	app.get('/shoppingcart', middleware.requireUser, routes.views.shoppingcart);
 	app.get('/personalindex', middleware.requireUser, routes.views.personalindex);
+	app.get('/checkout', middleware.requireUser, routes.views.checkout);
 
 
 	app.post('/signin', middleware.requireNoUser, routes.views.signin);

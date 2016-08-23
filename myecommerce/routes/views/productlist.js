@@ -43,7 +43,7 @@ exports.findByCategory = function (req, res) {
 										if(err) throw err;
 										var sum = 0;
 										for(var i = 0; i < result.length; i++){
-											sum += result[i].product.price;
+											sum += result[i].product.price*result[i].qty;
 										}
 										datas.cartprice = sum;
 										datas.cart = result;

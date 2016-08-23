@@ -23,6 +23,8 @@ block content
 									col(width='1')
 									col(width='1')
 									col(width='1')
+									col(width='1')
+									col(width='1')
 								thead
 									tr.first.last
 										th(rowspan='1')  
@@ -31,7 +33,9 @@ block content
 										th(rowspan='1')
 										th.a-center(colspan='1')
 											span.nobr 单价
+										th.a-center(colspan='1')
 										th.a-center(rowspan='1') 数量
+										th.a-center(colspan='1')
 										th.a-center(colspan='1') 总价
 										th.a-center(rowspan='1')  
 								tfoot
@@ -60,21 +64,25 @@ block content
 													h2.product-name
 														a(href='/product-detail/#{one.product._id}') #{one.product.name}
 												td.a-center.hidden-table
-													a.edit-bnt(href='javascript:void(0)', title='编辑商品数量', onclick='addtocart(this)', data-id='one.product._id')
+													a.edit-bnt(href='javascript:void(0)', title='编辑商品数量', onclick='editCart(this)', data-id='one.product._id')
 												td.a-right.hidden-table
 													span.cart-price
 														span.price(class = 'unitprice') #{one.product.price}
+												td
+													a.btn(herf= 'javascript:void(0);' onclick='cartReduce(this)', data-id='#{one.product._id}') -
 												td.a-center.movewishlist
-													input#qty.input-text.qty(name='cart[26340][qty]', value='#{one.qty}', size='4', title='Qty', maxlength='5')
-													.custom.pull-left
-														button.increase.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;", type='button')
-															i.icon-plus
-														input#qty.input-text.qty(type='text', name='qty', maxlength='5', value='1', title='Quantity:')
-														button.reduced.items-count(onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty > 1 ) result.value--;return false;", type='button')
-															i.icon-minus
+														input.input-text.qty(id='qty#{one.product._id}', name='', value='#{one.qty}', size='4', title='Qty', maxlength='5', readonly='readonly')
+												td
+													a.btn(herf= 'javascript:void(0);' onclick='cartAdd(this)', data-id='#{one.product._id}') +
+														//- .custom.pull-left
+														//- button.increase.items-count(onclick="clickAddNum()", type='button', data-id='one.product._id')
+														//- 	i.icon-plus
+														//- input.input-text.qty(id='qty#{one.product._id}', type='text', name='qty', maxlength='5', value='1', title='aty')
+														//- button.reduced.items-count(onclick="clickReduceNum()", type='button', data-id='one.product._id')
+														//- 	i.icon-minus
 												td.a-right.movewishlist
 													span.cart-price
-														span.price(class = 'trprice') #{one.product.price * one.qty}
+														span.price(class = 'trprice#{one.product._id}', data-price='#{one.product.price}') #{one.product.price * one.qty}
 												td.a-center.last
 													a.button.remove-item(href='javascript:void(0)', title='删除',onclick="removeCartItem(this)", data-id = "#{one.product._id}")
 														span
@@ -84,7 +92,7 @@ block content
 				.cart-collaterals.container
 					// BEGIN COL2 SEL COL 1
 					// BEGIN TOTALS COL 2
-					//- .col-sm-8
+					.col-sm-8
 					//- 	.discount
 					//- 		h3 地址
 					//- 		if address
@@ -112,7 +120,7 @@ block content
 												strong 总价
 											td.a-right(style='')
 												strong
-													span.price ￥#{cartprice}
+													span.price(id='cartprice') ￥#{cartprice}
 									//- tbody
 									//- 	tr
 									//- 		td.a-left(style='', colspan='1')
@@ -121,11 +129,8 @@ block content
 									//- 			span.price ￥#{cartprice}
 								ul.checkout
 									li
-										button.button.btn-proceed-checkout(type='button', title='Proceed to Checkout', onclick='')
+										button.button.btn-proceed-checkout(type='button', title='结算', onclick='location="/checkout"')
 											span 结算
-									br
-									li
-										a(href='multiple-addresses.html', title='Checkout with Multiple Addresses') Checkout with Multiple Addresses
 									br
 							// inner
 block js

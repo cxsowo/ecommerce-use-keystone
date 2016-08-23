@@ -59,7 +59,7 @@ $(document).ready(function(){
 function removeCartItem(self){
 	var id = $(self).data('id');
 	var tr = $('.cart-item-'+ id);
-	var minitr = $('.minicart-item-'+id);
+	var minitr = $('item .minicart-item-'+id);
 	$.ajax({
 		type : 'DELETE',
 		url : '/removecartitem?id='+id
@@ -70,7 +70,7 @@ function removeCartItem(self){
 				tr.remove();
 			}
 			if(minitr) {
-				minitr.remove(minitr);
+				minitr.delete(minitr);
 			}
 		}
 		else
@@ -81,6 +81,9 @@ function removeCartItem(self){
 function addToCart(self){
 	var id = $(self).data('id');
 	var qty;
+	var minicart = $('#cart-sidebar');
+	var cartprice = $('#minicartprice');
+	var strhtml = '';
 	if($(self).data('qty'))
 		qty = $(self).data('qty');
 	else
@@ -88,5 +91,31 @@ function addToCart(self){
 	$.ajax({
 		type : 'PUT',
 		url : '/addtocart?id='+id+'&qty='+qty
+	})
+	.done(function(result){
+		if(result.success){
+			alert("加入购物车成功！");
+			if(result.cart){
+				for(var i = 0; i < result.cart.length; i++){
+					var one = result.cart[i];
+					strhtml += '<li class="item .minicart-item-'+one.product._id+'">'
+								+'<div class="item-inner"><a title="电脑2" href="/productdetail/'+one.product._id+'" class="product-image">';
+					if(one.product.image)
+						strhtml += '<img src="'+one.product.image.url+'"></a>';
+					else
+						strhtml += '<img src="/products-images/p1.jpg';
+					strhtml += '<div class="product-details">'
+							+'<div class="access"><a title="删除" href="javascript:void(0);" data-id="'+one.product._id+'" onclick="removeCartItem(this)" class="btn-remove1">删除</a>'
+							+'</div>'
+							+'<!-- access--><strong>'+one.qty+'</strong>x<span class="price">￥'+one.product.price+'</span>'
+							+'<p class="product-name"><a href="/productdetail/'+one.product._id+'">'+one.product.name+'</a></p>'
+							+'</div></div></li>';
+				}
+			}
+			cartprice.html('￥'+result.cartprice);
+			minicart.html(strhtml);
+		}
+		else
+			alert("加入购物车失败了！");
 	});
 }
