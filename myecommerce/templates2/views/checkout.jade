@@ -6,7 +6,7 @@ block content
 			.row
 				.col-xs-12
 					.page-title
-						h2 购物车
+						h2 结算
 	.main-container.col1-layout.wow.bounceInUp.animated
 		.main.container
 			.cart.wow.bounceInUp.animated
@@ -70,20 +70,20 @@ block content
 						.discount
 							h3 邮寄信息
 							.inner
-								table
+								table.table
 									colgroup
 										col
 										col(width='1')
-									tfoot
+									tbody
 										tr
 											if address
 												td
 													span 地址：#{address}
 											else
-												td(style='', colspan='1')
-													input(id='address',name='address',maxlength='200')
 												td.a-right
-													a.btn(href='javascript:void(0);', onclick='saveAddress()') 保存地址
+													input(id='address',type = 'text',name='address',maxlength='200')
+												td.a-left
+													a.btn(href='javascript:void(0);', onclick='changeAddress()') 保存地址
 										tr
 											td
 												span 手机：#{phone}
@@ -95,7 +95,7 @@ block content
 							.inner
 								table#shopping-cart-totals-table.table.shopping-cart-table-total
 									colgroup
-										col(width='5')
+										col
 										col(width='1')
 									tfoot
 										tr
@@ -112,7 +112,7 @@ block content
 									//- 			span.price ￥#{cartprice}
 								ul.checkout
 									li
-										button.button.btn-proceed-checkout(type='button', title='去付款', onclick='')
+										button.button.btn-proceed-checkout(type='button', title='去付款', onclick='payIt()')
 											span 去付款
 									br
 							// inner

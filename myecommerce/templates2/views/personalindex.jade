@@ -16,9 +16,7 @@ block content
 					li.horizen
 						a(href="#tab2", data-toggle="tab") 修改用户信息
 					li.horizen
-						a(href="#tab3", data-toggle="tab") 您的订单
-					li.horizen
-						a(href="#tab4", data-toggle="tab") 购物车
+						a(href="#tab3", data-toggle="tab") 订单
 			.col-sm-7.col-md-7
 				.tab-content
 					.tab-pane.active.fade#tab1
@@ -48,7 +46,7 @@ block content
 							.modal-footer
 								button.btn(style="float:left",type='button',onclick='submitChangeUserInfo()') 提交修改
 					.tab-pane.fade#tab3
-						table
+						table.table
 
 block js
 	script(type='text/javascript', src='/js/personalindex.js')

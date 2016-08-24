@@ -75,7 +75,7 @@ block content
 															.item-img
 																.item-img-info
 																	a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
-																		if one.image
+																		if one.image && one.image.url
 																			img(src='#{one.image.url}', alt='#{one.name}')
 																		else
 																			img(src='/products-images/p11.jpg', alt='#{one.name}')

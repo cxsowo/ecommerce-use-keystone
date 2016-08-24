@@ -94,7 +94,6 @@ function addToCart(self){
 	})
 	.done(function(result){
 		if(result.success){
-			alert("加入购物车成功！");
 			if(result.cart){
 				for(var i = 0; i < result.cart.length; i++){
 					var one = result.cart[i];
@@ -111,6 +110,11 @@ function addToCart(self){
 							+'<p class="product-name"><a href="/productdetail/'+one.product._id+'">'+one.product.name+'</a></p>'
 							+'</div></div></li>';
 				}
+			}
+			else{
+				strhtml +=  '<ul id="cart-sidebar" class="mini-products-list">'
+						+'<li class="item"><span>空荡荡的购物车O.O</span></li>'
+						+'</ul>';
 			}
 			cartprice.html('￥'+result.cartprice);
 			minicart.html(strhtml);

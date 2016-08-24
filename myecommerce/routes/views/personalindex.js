@@ -38,16 +38,37 @@ exports = module.exports = function (req, res) {
 									})
 									// .select(name, phone, address, email)
 									.exec(function(err, result){
-										console.log("查找用户信息了："+result);
 										if(err) throw err;
-										view.render('personalindex',{
-											title : "个人主页",
-											categories : datas.categories,
-											cartprice : datas.cartprice,
-											cart : datas.cart,
-											userinfo : result,
-										});
+										result.password = '';
+										datas.userinfo = result;
+										console.log("查找用户信息了："+result);
 									})
+									.then(
+										function(){//查所有订单
+											Order.paginate({//分页查看商品
+												page: req.body.p || 1,
+												perPage: 10,
+												maxPages: 10
+											})
+											.sort({createdAt:-1})
+											.where('user').equals(req.user._id)
+											.exec(function(err, presult){
+												if(err) console.error(err);
+
+												console.log(presult);
+												view.render('personalindex',{
+													title : "个人主页",
+													categories : datas.categories,
+													cartprice : datas.cartprice,
+													cart : datas.cart,
+													userinfo : datas.userinfo,
+													presult : presult
+												});
+											})
+										},function(err){
+											throw err;
+										}
+									)
 							}
 						}
 						,function(err){
@@ -76,14 +97,31 @@ exports.changeUserInfo = function(req, res) {
 		res.json({success:0});
 	}
 	else
-	User.model.update({
-		_id : req.user._id
-	},{
-		name : name,
-		phone : phone,
-		address : address
-	}).exec(function(err, result){
-		if(err) throw err;
-		res.json({success:1});
-	})
+		User.model.update({
+			_id : req.user._id
+		},{
+			name : name,
+			phone : phone,
+			address : address
+		}).exec(function(err, result){
+			if(err) throw err;
+			res.json({success:1});
+		});
+}
+
+exports.changeAddress = function(req, res) {
+	var address = req.body.address;
+	if(!address){
+		console.log("要更改的地址为空！"+req.user);
+		res.json({success:0});
+	}
+	else
+		User.model.update({
+			_id : req.user._id
+		},{
+			address : address
+		}).exec(function(err, result){
+			if(err) throw err;
+			res.json({success:1});
+		});
 }

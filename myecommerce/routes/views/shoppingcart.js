@@ -68,13 +68,7 @@ exports.deleteItem = function(req, res){
 			user : req.user._id,
 			product : id
 		}).exec(function(err, result){
-
-			//return {success : result};
-			// res.send({
-			// 	success : result
-			// })
 			if(err) throw err;
-			console.log("///////////"+result);
 			res.json({success : 1});
 		})
 	}
@@ -100,7 +94,7 @@ exports.addToCart = function(req, res) {
 							user : req.user._id,
 							product : id
 						},{
-							qty : qty
+							qty : parseInt(qty)
 						},{
 							upsert  : true//设置成没找到就插入
 						},function (err, raw) {
@@ -121,34 +115,20 @@ exports.addToCart = function(req, res) {
 											success : 1,
 											cart : result,
 											cartprice : sum
-										})
+										});
 									})
 						});
-						// .then(
-						// 	function(){
-						// 		Cart.model.find({
-						// 			user : req.user._id
-						// 			})
-						// 			.populate('product')
-						// 			.exec(function(err, result){
-						// 				if(err) throw err;
-						// 				var sum = 0;
-						// 				for(var i = 0; i < result.length; i++){
-						// 					sum += result[i].product.price;
-						// 				}
-						// 				res.json({
-						// 					success : 1,
-						// 					cart : result,
-						// 					cartprice : sum
-						// 				})
-						// 			})
-						// 	},function(err){
-						// 		throw err;
-						// 	}
-						// )
 				}
 			});
 	}
+}
 
+exports.clearCart = function(req, res){
+	Cart.model.remove({
+		user : req.user._id
+	}).exec(function(err, result){
+		if(err) throw err;
+		res.json({success : 1});
+	})
 }
 

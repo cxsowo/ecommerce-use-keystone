@@ -2,7 +2,7 @@ function updateMinicart(result){
 	var minicart = $('#cart-sidebar');
 	var cartprice = $('#minicartprice');
 	var strhtml = '';
-	if(result.cart){
+	if(result.cart && result.cart.length > 0){
 		for(var i = 0; i < result.cart.length; i++){
 			var one = result.cart[i];
 			strhtml += '<li class="item .minicart-item-'+one.product._id+'">'
@@ -14,10 +14,15 @@ function updateMinicart(result){
 			strhtml += '<div class="product-details">'
 					+'<div class="access"><a title="删除" href="javascript:void(0);" data-id="'+one.product._id+'" onclick="removeCartItem(this)" class="btn-remove1">删除</a>'
 					+'</div>'
-					+'<!-- access--><strong>'+one.qty+'</strong>x<span class="price">￥'+one.product.price+'</span>'
+					+'<!-- access--><strong>'+parseInt(one.qty)+'</strong>x<span class="price">￥'+one.product.price+'</span>'
 					+'<p class="product-name"><a href="/productdetail/'+one.product._id+'">'+one.product.name+'</a></p>'
 					+'</div></div></li>';
 		}
+	}
+	else{
+		strhtml +=  '<ul id="cart-sidebar" class="mini-products-list">'
+				+'<li class="item"><span>空荡荡的购物车O.O</span></li>'
+				+'</ul>';
 	}
 	cartprice.html('￥'+result.cartprice);
 	minicart.html(strhtml);
@@ -75,8 +80,19 @@ function cartReduce(self){
 	return false;
 }
 
-
-
-function editCart(){
-	
+function clearCart(){
+	$.ajax({
+		type : 'DELETE',
+		url : '/clearcart'
+	})
+	.done(function(result) {
+		if(result.success){
+			$('#cart-tbody').html('');
+			$('#cartprice').html('￥0');
+			result.cartprice = 0;
+			updateMinicart(result);
+		}
+		else
+			alert("清空购物车失败！");
+	});
 }

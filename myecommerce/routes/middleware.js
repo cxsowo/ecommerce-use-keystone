@@ -7,7 +7,9 @@
  * you have more middleware you may want to group it as separate
  * modules in your project's /lib directory.
  */
-var _ = require('lodash');
+var _ = require('lodash'),
+	keystone = require('keystone'),
+	Cart = keystone.list('Cart');
 
 
 /**
@@ -64,4 +66,19 @@ exports.requireNoUser = function (req, res, next) {
 	} else {
 		next();
 	}
+};
+
+exports.requireCart = function (req, res, next) {
+	Cart.model.findOne({
+		user : req.user._id
+	}).exec(function(err, result){
+		if(err) console.error(err);
+		if(!result){
+			req.flash('warning', '购物车为空！');
+			res.redirect('/shoppingcart');
+		}
+		else{
+			next();
+		}
+	})
 };

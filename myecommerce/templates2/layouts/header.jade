@@ -61,6 +61,8 @@ header
 								.top-subtotal
 									if cartprice
 										span.price(id='minicartprice') ￥#{cartprice}
+									else
+										span.price(id='minicartprice') ￥0
 							if user
 								ul#cart-sidebar.mini-products-list
 									if cart &&　cart.length > 0

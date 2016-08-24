@@ -44,13 +44,13 @@ block content
 											button.button.btn-continue(type='button', title='继续购物', onclick='')
 												span
 													span 返回继续购物
-											button.button.btn-update(name='update_cart_action', value='update_qty', title='Update Cart')
-												span
-													span 刷新购物车
-											button#empty_cart_button.button.btn-empty(name='update_cart_action', value='empty_cart', title='Clear Cart')
+											//- button.button.btn-update(name='update_cart_action', value='update_qty', title='Update Cart')
+											//- 	span
+											//- 		span 刷新购物车
+											button#empty_cart_button.button.btn-empty(name='', type='button', value='empty_cart', title='清空购物车', onclick='clearCart()')
 												span
 													span 清空购物车
-								tbody
+								tbody(id='cart-tbody')
 									if cart
 										each one in cart
 											tr.odd(class = 'cart-item-#{one.product._id}')
@@ -74,12 +74,6 @@ block content
 														input.input-text.qty(id='qty#{one.product._id}', name='', value='#{one.qty}', size='4', title='Qty', maxlength='5', readonly='readonly')
 												td
 													a.btn(herf= 'javascript:void(0);' onclick='cartAdd(this)', data-id='#{one.product._id}') +
-														//- .custom.pull-left
-														//- button.increase.items-count(onclick="clickAddNum()", type='button', data-id='one.product._id')
-														//- 	i.icon-plus
-														//- input.input-text.qty(id='qty#{one.product._id}', type='text', name='qty', maxlength='5', value='1', title='aty')
-														//- button.reduced.items-count(onclick="clickReduceNum()", type='button', data-id='one.product._id')
-														//- 	i.icon-minus
 												td.a-right.movewishlist
 													span.cart-price
 														span.price(class = 'trprice#{one.product._id}', data-price='#{one.product.price}') #{one.product.price * one.qty}
@@ -93,19 +87,6 @@ block content
 					// BEGIN COL2 SEL COL 1
 					// BEGIN TOTALS COL 2
 					.col-sm-8
-					//- 	.discount
-					//- 		h3 地址
-					//- 		if address
-					//- 			span #{address}
-					//- 		else
-					//- 			form#address_form(action='/saveaddress', method='post')
-					//- 				label(for='coupon_code') Enter your coupon code if you have one.
-					//- 				input#remove-coupone(type='hidden', name='remove', value='0')
-					//- 				input#coupon_code.input-text.fullwidth(type='text', name='coupon_code', value='')
-					//- 				button.button.coupon(type='button', title='Apply Coupon', onclick='discountForm.submit(false)', value='Apply Coupon')
-					//- 					span 保存地址
-					//- 	// discount
-					//- // col-sm-4
 					.col-sm-4
 						.totals
 							h3 购物车总价
@@ -121,12 +102,6 @@ block content
 											td.a-right(style='')
 												strong
 													span.price(id='cartprice') ￥#{cartprice}
-									//- tbody
-									//- 	tr
-									//- 		td.a-left(style='', colspan='1')
-									//- 			| Subtotal
-									//- 		td.a-right(style='')
-									//- 			span.price ￥#{cartprice}
 								ul.checkout
 									li
 										button.button.btn-proceed-checkout(type='button', title='结算', onclick='location="/checkout"')

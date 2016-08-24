@@ -45,16 +45,19 @@ exports = module.exports = function (app) {
 	app.get('/signout', middleware.requireUser, routes.views.signout);
 	app.get('/shoppingcart', middleware.requireUser, routes.views.shoppingcart);
 	app.get('/personalindex', middleware.requireUser, routes.views.personalindex);
-	app.get('/checkout', middleware.requireUser, routes.views.checkout);
-
+	app.get('/checkout', middleware.requireUser, middleware.requireCart, routes.views.checkout);
 
 	app.post('/signin', middleware.requireNoUser, routes.views.signin);
 	app.post('/signup', middleware.requireNoUser, routes.views.signup);
+	app.post('/createorder', middleware.requireUser, routes.views.checkout.checkOutPay);
 
 	app.put('/addtocart', middleware.requireUser, routes.views.shoppingcart.addToCart);
 	app.put('/changeuserinfo', middleware.requireUser, routes.views.personalindex.changeUserInfo);
+	app.put('/changeaddress', middleware.requireUser, routes.views.personalindex.changeAddress);
 
 	app.delete('/removecartitem', middleware.requireUser, routes.views.shoppingcart.deleteItem);
+	app.delete('/clearcart', middleware.requireUser, routes.views.shoppingcart.clearCart);
+
 	//app.get('/categories/:id', routes.views.categories);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:

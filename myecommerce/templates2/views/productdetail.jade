@@ -30,9 +30,9 @@ block content
 					#messages_product_view
 					.product-essential.container
 						.row
-							.product-next-prev
-								a.product-next(title='Next', href='#')
-								a.product-prev(title='Previous', href='#')
+							//- .product-next-prev
+							//- 	a.product-next(title='Next', href='#')
+							//- 	a.product-prev(title='Previous', href='#')
 							form#product_addtocart_form(action='', method='post')
 								// End For version 1, 2, 6
 								// For version 3
@@ -42,23 +42,23 @@ block content
 										link(itemprop='availability', href='http://schema.org/InStock')
 										span In stock
 									.product-image
-										.large-image(style="height: 90%")
-											if product && product.image
+										.large-image(style="height: 100%")
+											if product && product.image && product.image.url
 												a#zoom1.cloud-zoom(href='#{product.image.url}', rel='useWrapper: false, adjustY:0, adjustX:20')
 													img(src='#{product.image.url}')
 											else
 												a#zoom1.cloud-zoom(href='products-images/p4.jpg', rel='useWrapper: false, adjustY:0, adjustX:20')
 													img(src='/products-images/p4.jpg')
-										.flexslider.flexslider-thumb
-											ul.previews-list.slides
-												if product.image
-													li
-														a.cloud-zoom-gallery(href='#{product.image.url}', rel="useZoom: 'zoom1', smallImage: '#{product.image.url}' ")
-															img(src='#{product.image.url}', alt='Thumbnail 1')
-												else
-													li
-														a.cloud-zoom-gallery(href='', rel="useZoom: 'zoom1', smallImage: '/products-images/p15.jpg' ")
-															img(src='/products-images/p15.jpg', alt='Thumbnail 1')
+										//- .flexslider.flexslider-thumb
+										//- 	ul.previews-list.slides
+										//- 		if product.image
+										//- 			li
+										//- 				a.cloud-zoom-gallery(href='#{product.image.url}', rel="useZoom: 'zoom1', smallImage: '#{product.image.url}' ")
+										//- 					img(src='#{product.image.url}', alt='Thumbnail 1')
+										//- 		else
+										//- 			li
+										//- 				a.cloud-zoom-gallery(href='', rel="useZoom: 'zoom1', smallImage: '/products-images/p15.jpg' ")
+										//- 					img(src='/products-images/p15.jpg', alt='Thumbnail 1')
 
 									// end: more-images
 								// End For version 1,2,6
