@@ -28,7 +28,7 @@ exports = module.exports = function (req, res) {
 						for(var i = 0; i < result.length; i++){
 							sum += result[i].product.price*result[i].qty;
 						}
-						datas.cartprice = sum;
+						datas.cartprice = (parseInt(sum*100))/100;
 						datas.cart = result;
 						console.log("查完了购物车");
 					})

@@ -91,8 +91,9 @@ function clearCart(){
 			$('#cartprice').html('￥0');
 			result.cartprice = 0;
 			updateMinicart(result);
+			layer.msg("清空购物车成功！");
 		}
 		else
-			alert("清空购物车失败！");
+			layer.msg("清空购物车失败！");
 	});
 }

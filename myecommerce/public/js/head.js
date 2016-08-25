@@ -74,6 +74,7 @@ function removeCartItem(self){
 			if(minitr) {
 				minitr.delete(minitr);
 			}
+			layer.msg("移除成功！");
 		}
 		else
 			layer.msg("移除购物车项目失败！");
@@ -120,6 +121,7 @@ function addToCart(self){
 			}
 			cartprice.html('￥'+result.cartprice);
 			minicart.html(strhtml);
+			layer.msg("加入购物车成功！");
 		}
 		else
 			layer.msg("加入购物车失败了！");

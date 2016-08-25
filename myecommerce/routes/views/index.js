@@ -11,44 +11,6 @@ exports = module.exports = function (req, res) {
 	var shopping_cart_price;
 	var datas = {};
 
-	// Category.model.find()
-	// 	.exec(function(err,result){
-	// 		if(err) throw err;
-	// 		datas.categories = result;
-	// 	})
-	// 	.then(
-	// 		function(){
-	// 			Product.model.find()
-	// 				.sort({createdAt:-1})
-	// 				.limit(8)
-	// 				.exec(function(err, result){
-	// 					if(err) throw err;
-	// 					datas.hot_products = result;
-	// 					console.log("111111111111111");
-	// 				});
-	// 		}
-	// 		,function(err){
-	// 			throw err;
-	// 		}
-	// 	)
-	// 	.then(
-	// 		function(){
-	// 			console.log("sen categories" + datas.categories);
-	// 			console.log("sen datas.hot_products" + datas.hot_products);
-	// 			console.log("222222222222222222");
-	// 			view.render('index',{
-	// 				title : "买买买",
-	// 				categories : datas.categories,
-	// 				shopping_cart_price : 1233.33,
-	// 				hot_products : datas.hot_products,
-	// 				expands : datas.expands
-	// 			});
-	// 		},
-	// 		function(err){
-	// 			throw err;
-	// 		}
-	// 	);
-
 	Category.model.find()
 		.exec(function(err,result){
 			if(err) throw err;
@@ -89,7 +51,7 @@ exports = module.exports = function (req, res) {
 													for(var i = 0; i < result.length; i++){
 														sum += result[i].product.price*result[i].qty;
 													}
-													datas.cartprice = sum;
+													datas.cartprice = (parseInt(sum*100))/100;
 												})
 												.then(
 													function(){

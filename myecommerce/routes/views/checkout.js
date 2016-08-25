@@ -32,7 +32,7 @@ exports = module.exports = function(req, res) {
 								sum += result[i].product.price*result[i].qty;
 							}
 							datas.cart = result;
-							datas.cartprice = sum;
+							datas.cartprice = (parseInt(sum*100))/100;
 						})
 						.then(
 							function(){
@@ -91,7 +91,7 @@ exports.checkOutPay = function(req, res){
 
 						var newOrder = Order.model({
 							user: req.user._id,
-							totalprice: sum,
+							totalprice: (parseInt(sum*100))/100,
 							address: address,
 							phone: phone,
 							finish: false
