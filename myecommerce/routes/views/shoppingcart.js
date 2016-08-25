@@ -85,7 +85,6 @@ exports.deleteItem = function(req, res){
 						cartprice : sum
 					});
 				})
-			res.json({success : 1});
 		})
 	}
 }

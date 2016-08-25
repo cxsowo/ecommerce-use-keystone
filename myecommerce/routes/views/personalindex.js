@@ -149,7 +149,7 @@ exports.findOrderById = function(req, res) {
 
 exports.findOrderPaginate = function(req, res) {
 		Order.paginate({//分页查看商品
-			page: req.body.p || 1,
+			page: req.query.p || 1,
 			perPage: 10,
 			maxPages: 10
 		})
@@ -159,7 +159,7 @@ exports.findOrderPaginate = function(req, res) {
 			if(err) console.error(err);
 
 			console.log(presult);
-			view.json({
+			res.json({
 				success : 1,
 				presult : presult
 			});

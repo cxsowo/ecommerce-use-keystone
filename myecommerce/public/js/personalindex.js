@@ -122,26 +122,26 @@ function getOrderPage(p){
 		})
 		.done(function(result) {
 			if(result.success && result.presult){//页码更新
-				var str = '<div class="toolbar"><div class="pager"><div class="pages"><ul class="pagination">';
+				var str = '';
 				if(result.presult.previous)
-					str += '';
+					str += '<li><a href="javascript:void(0)" onclick="getOrderPage('+result.presult.previous+')">«</a>';
 				else
 					str += '<li><a href="javascript:void(0)" onclick="layer.msg(&quot;这已经是第一页了！&quot;);">«</a>';
 				for(var i = 0; i < result.presult.totalPages; i++)
 					if(result.presult.currentPage === (i+1))
 						str += '<li class="active"><a href="javascript:void(0)">'+(i+1)+'</a></li>';
 					else
-						str += '<li class="active"><a href="getOrderPage(#{i+1})">'+(i+1)+'</a></li>';
+						str += '<li><a href="javascript:void(0)" onclick="getOrderPage('+(i+1)+')">'+(i+1)+'</a></li>';
 				str += '</li>';
 				if(result.presult.next)
-					str += '';
+					str += '<li><a href="javascript:void(0)" onclick="getOrderPage('+result.presult.next+')">»</a>';
 				else
 					str += '<li><a href="javascript:void(0)" onclick="layer.msg(&quot;这已经是最后一页了！&quot;);">»</a>';
-				str += '</li></ul></div></div>';
-				$('#tab3').html(str);
+				str += '</li>';
+				$('#paginatebtn').html(str);
 
 				str = '';
-				for(var i = 0; i < result.presult.results; i++){
+				for(var i = 0; i < result.presult.results.length; i++){
 					str += '<tr><td>'+result.presult.results[i]._id+'</td>'
 						+ '<td>'+result.presult.results[i].address+'</td>'
 						+ '<td>'+result.presult.results[i].phone+'</td>'

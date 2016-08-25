@@ -66,13 +66,13 @@ function removeCartItem(self){
 	})
 	.done(function(result) {
 		if(result.success){
+			$('#minicartprice').html('￥'+result.cartprice);
+			$('#cartprice').html('￥'+result.cartprice);
 			if(tr) {
 				tr.remove();
 			}
 			if(minitr) {
 				minitr.delete(minitr);
-				$('#minicartprice').html('￥'+result.cartprice);
-				$('#cartprice').html('￥'+result.cartprice);
 			}
 		}
 		else
