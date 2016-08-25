@@ -50,7 +50,7 @@ block content
 														if product_result.previous
 															a(href='/productlist?p=#{product_result.previous}') «
 														else
-															a(href='javascript:void(0)' onclick='alert("这已经是第一页了！");') «
+															a(href='javascript:void(0)' onclick='layer.msg("这已经是第一页了！");') «
 														- for (var i = 0; i < product_result.totalPages; i++) {
 															- if(product_result.currentPage === (i+1)) {
 																li.active
@@ -65,7 +65,7 @@ block content
 														if product_result.next
 															a(href='/productlist?p=#{product_result.next}') »
 														else
-															a(href='javascript:void(0)' onclick='alert("这已经是最后一页了！");') »
+															a(href='javascript:void(0)' onclick='layer.msg("这已经是最后一页了！");') »
 									.category-products
 										ul.products-grid
 											if product_result.results
@@ -115,7 +115,7 @@ block content
 														if product_result.previous
 															a(href='/productlist?p=#{product_result.previous}') «
 														else
-															a(href='javascript:void(0)' onclick='alert("这已经是第一页了！");') «
+															a(href='javascript:void(0)' onclick='layer.msg("这已经是第一页了！");') «
 														- for (var i = 0; i < product_result.totalPages; i++) {
 															- if(product_result.currentPage === (i+1)) {
 																li.active
@@ -130,5 +130,5 @@ block content
 														if product_result.next
 															a(href='/productlist?p=#{product_result.next}') »
 														else
-															a(href='javascript:void(0)' onclick='alert("这已经是最后一页了！");') »
+															a(href='javascript:void(0)' onclick='layer.msg("这已经是最后一页了！");') »
 

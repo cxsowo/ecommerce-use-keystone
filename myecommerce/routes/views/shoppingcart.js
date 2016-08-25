@@ -69,6 +69,22 @@ exports.deleteItem = function(req, res){
 			product : id
 		}).exec(function(err, result){
 			if(err) throw err;
+			Cart.model.find({
+				user : req.user._id
+				})
+				.populate('product')
+				.exec(function(err, result){
+					if(err) throw err;
+					var sum = 0;
+					for(var i = 0; i < result.length; i++){
+						sum += result[i].product.price*result[i].qty;
+					}
+					res.json({
+						success : 1,
+						cart : result,
+						cartprice : sum
+					});
+				})
 			res.json({success : 1});
 		})
 	}

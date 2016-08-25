@@ -1,6 +1,8 @@
 var keystone = require('keystone'),
 	Category = keystone.list('Category'),
 	Cart = keystone.list('Cart'),
+	Order = keystone.list('Order'),
+	OrderItem = keystone.list('OrderItem'),
 	User = keystone.list('User');
 
 exports = module.exports = function (req, res) {
@@ -120,6 +122,56 @@ exports.changeAddress = function(req, res) {
 			_id : req.user._id
 		},{
 			address : address
+		}).exec(function(err, result){
+			if(err) throw err;
+			res.json({success:1});
+		});
+}
+
+exports.findOrderById = function(req, res) {
+	var oid = req.query.id;
+	if(!oid){
+		console.log("要查的订单id为空！"+oid);
+		res.json({success:0});
+	}
+	else
+		OrderItem.model.find({
+			order : oid
+		}).exec(function(err, result){
+			if(err) throw err;
+			console.log(result);
+			res.json({
+				success : 1,
+				order_items : result
+			});
+		});
+}
+
+exports.findOrderPaginate = function(req, res) {
+		Order.paginate({//分页查看商品
+			page: req.body.p || 1,
+			perPage: 10,
+			maxPages: 10
+		})
+		.sort({createdAt:-1})
+		.where('user').equals(req.user._id)
+		.exec(function(err, presult){
+			if(err) console.error(err);
+
+			console.log(presult);
+			view.json({
+				success : 1,
+				presult : presult
+			});
+		})
+}
+
+exports.confirmOrder = function(req, res) {
+	Order.model.update({
+			_id : req.body.id,
+			user : req.user._id
+		},{
+			finish : true
 		}).exec(function(err, result){
 			if(err) throw err;
 			res.json({success:1});

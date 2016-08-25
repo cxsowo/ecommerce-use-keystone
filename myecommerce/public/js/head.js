@@ -71,10 +71,12 @@ function removeCartItem(self){
 			}
 			if(minitr) {
 				minitr.delete(minitr);
+				$('#minicartprice').html('￥'+result.cartprice);
+				$('#cartprice').html('￥'+result.cartprice);
 			}
 		}
 		else
-			alert("移除购物车项目失败！");
+			layer.msg("移除购物车项目失败！");
 	});
 }
 
@@ -100,7 +102,7 @@ function addToCart(self){
 					strhtml += '<li class="item .minicart-item-'+one.product._id+'">'
 								+'<div class="item-inner"><a title="电脑2" href="/productdetail/'+one.product._id+'" class="product-image">';
 					if(one.product.image)
-						strhtml += '<img src="'+one.product.image.url+'"></a>';
+						strhtml += '<img width="60px" height="60px" src="'+one.product.image.url+'"></a>';
 					else
 						strhtml += '<img src="/products-images/p1.jpg';
 					strhtml += '<div class="product-details">'
@@ -120,6 +122,6 @@ function addToCart(self){
 			minicart.html(strhtml);
 		}
 		else
-			alert("加入购物车失败了！");
+			layer.msg("加入购物车失败了！");
 	});
 }

@@ -61,7 +61,6 @@ exports = module.exports = function(req, res) {
 				throw err;
 			}
 		)
-
 }
 
 exports.checkOutPay = function(req, res){
@@ -87,7 +86,7 @@ exports.checkOutPay = function(req, res){
 					if(cart && cart.length > 0){
 						var i,sum = 0;
 						for(i = 0; i < cart.length; i++){
-							sum += cart[i].product.price * cart[i].qty;
+							sum += cart[i].product.price*cart[i].qty;
 						}
 
 						var newOrder = Order.model({

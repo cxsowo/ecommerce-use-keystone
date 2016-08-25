@@ -13,9 +13,6 @@ exports.deleteItem = function(req, res){
 		}).exec(function(err, result){
 			console.log("22222222"+result);
 			return {success : result};
-			// res.json({
-			// 	success : 1
-			// })
 		})
 	}
 }

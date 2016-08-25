@@ -34,7 +34,7 @@ block content
 								tfoot
 									tr.first.last
 										td.a-right.last(colspan='50')
-											button.button.btn-continue(type='button', title='继续购物', onclick='')
+											button.button.btn-continue(type='button', title='继续购物', onclick='/shoppingcart')
 												span
 													span 取消结算
 								tbody
@@ -44,9 +44,9 @@ block content
 												td.image.hidden-table
 													a.product-image(href='/product-detail/#{one.product._id}', title="#{one.product.name}")
 														if one.product.image
-															img(src='#{one.product.image.url}', width='75', alt="#{one.product.name}")
+															img(src='#{one.product.image.url}', width='75', height='75', alt="#{one.product.name}")
 														else
-															img(src='/products-images/p1.jpg', width='75', alt="#{one.product.name}")
+															img(src='/products-images/p1.jpg', width='75', height='75', alt="#{one.product.name}")
 												td
 													h2.product-name
 														a(href='/product-detail/#{one.product._id}') #{one.product.name}

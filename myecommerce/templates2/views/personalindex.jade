@@ -46,7 +46,54 @@ block content
 							.modal-footer
 								button.btn(style="float:left",type='button',onclick='submitChangeUserInfo()') 提交修改
 					.tab-pane.fade#tab3
-						table.table
+						.toolbar
+							.pager
+								.pages
+									ul.pagination
+										li
+											if presult.previous
+												a(href='javascript:void(0)', onclick='getOrderPage(#{presult.previous})') «
+											else
+												a(href='javascript:void(0)' onclick='layer.msg("这已经是第一页了！");') «
+											- for (var i = 0; i < presult.totalPages; i++) {
+												- if(presult.currentPage === (i+1)) {
+													li.active
+														a(href='javascript:void(0)') #{i+1}
+												- }
+												- else{
+													li
+														a(href='getOrderPage(#{i+1})') #{i+1}
+												- }
+											- }
+										li
+											if presult.next
+												a(href='javascript:void(0)', onclick='getOrderPage(#{presult.next})') »
+											else
+												a(href='javascript:void(0)' onclick='layer.msg("这已经是最后一页了！");') »
+						table.table#ordertable
+							thead
+								tr
+									th 订单号
+									th 收件地址
+									th 联系手机
+									th 总价
+									th 状态
+									th
+							tbody#ordertbody
+								if presult.results && presult.results.length > 0
+									each one in presult.results
+										tr
+											td #{one._id}
+											td #{one.address}
+											td #{one.phone}
+											td #{one.totalprice}
+											td
+												if one.finish
+													p(style='color:green') 已完成
+												else
+													p(style='color:red') 未完成
+											td
+												a.btn(href='javascript:void(0)', onclick='checkDetail(this)', data-id='#{one._id}', data-price='#{one.totalprice}', data-finish='#{one.finish}') 查看
 
 block js
 	script(type='text/javascript', src='/js/personalindex.js')

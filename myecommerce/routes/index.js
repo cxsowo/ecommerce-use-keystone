@@ -46,6 +46,8 @@ exports = module.exports = function (app) {
 	app.get('/shoppingcart', middleware.requireUser, routes.views.shoppingcart);
 	app.get('/personalindex', middleware.requireUser, routes.views.personalindex);
 	app.get('/checkout', middleware.requireUser, middleware.requireCart, routes.views.checkout);
+	app.get('/getorderbyp', middleware.requireUser, routes.views.personalindex.findOrderPaginate);
+	app.get('/getorderdetail', middleware.requireUser, routes.views.personalindex.findOrderById);
 
 	app.post('/signin', middleware.requireNoUser, routes.views.signin);
 	app.post('/signup', middleware.requireNoUser, routes.views.signup);
@@ -54,6 +56,7 @@ exports = module.exports = function (app) {
 	app.put('/addtocart', middleware.requireUser, routes.views.shoppingcart.addToCart);
 	app.put('/changeuserinfo', middleware.requireUser, routes.views.personalindex.changeUserInfo);
 	app.put('/changeaddress', middleware.requireUser, routes.views.personalindex.changeAddress);
+	app.put('/confirmorder', middleware.requireUser, routes.views.personalindex.confirmOrder);
 
 	app.delete('/removecartitem', middleware.requireUser, routes.views.shoppingcart.deleteItem);
 	app.delete('/clearcart', middleware.requireUser, routes.views.shoppingcart.clearCart);

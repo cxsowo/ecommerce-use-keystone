@@ -8,13 +8,13 @@ function changeAddress(saveAddress){
 		})
 		.done(function(result) {
 			if(result.success){
-				alert("地址修改成功！");
+				layer.msg("地址修改成功！");
 			}
 			else
-				alert("修改失败！");
+				layer.msg("修改失败！");
 		});
 	else
-		alert("地址是空的啊0o0");
+		layer.msg("地址是空的啊0o0");
 }
 
 function payIt(){
@@ -25,10 +25,10 @@ function payIt(){
 	})
 	.done(function(result) {
 		if(result.success){
-			alert("订单创建成功！");
+			layer.msg("付款成功！");
 			window.location.href='/personalindex';
 		}
 		else
-			alert("订单创建失败！注意要有邮箱、手机和商品~");
+			layer.msg("订单创建失败！注意要有邮箱、手机和商品~");
 	});
 }

@@ -8,13 +8,13 @@ function updateMinicart(result){
 			strhtml += '<li class="item .minicart-item-'+one.product._id+'">'
 						+'<div class="item-inner"><a title="电脑2" href="/productdetail/'+one.product._id+'" class="product-image">';
 			if(one.product.image)
-				strhtml += '<img src="'+one.product.image.url+'"></a>';
+				strhtml += '<img width="60px" height="60px" src="'+one.product.image.url+'"></a>';
 			else
 				strhtml += '<img src="/products-images/p1.jpg';
 			strhtml += '<div class="product-details">'
 					+'<div class="access"><a title="删除" href="javascript:void(0);" data-id="'+one.product._id+'" onclick="removeCartItem(this)" class="btn-remove1">删除</a>'
 					+'</div>'
-					+'<!-- access--><strong>'+parseInt(one.qty)+'</strong>x<span class="price">￥'+one.product.price+'</span>'
+					+'<!-- access--><strong>'+one.qty+'</strong>x<span class="price">￥'+one.product.price+'</span>'
 					+'<p class="product-name"><a href="/productdetail/'+one.product._id+'">'+one.product.name+'</a></p>'
 					+'</div></div></li>';
 		}

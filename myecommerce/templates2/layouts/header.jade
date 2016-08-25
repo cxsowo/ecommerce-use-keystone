@@ -71,10 +71,10 @@ header
 												.item-inner
 													if one.product.image
 														a.product-image(title='#{one.product.name}', href='/productdetail/#{one.product._id}')
-															img(src='#{one.product.image.url}')
+															img(height='60px', width='60px', src='#{one.product.image.url}')
 													else
 														a.product-image(title='#{one.product.image.url}', href='/productdetail/#{one.product._id}')
-															img(src='/products-images/p10.jpg')
+															img(height='60px', width='60px', src='/products-images/p10.jpg')
 													.product-details
 														.access
 															- var sendid = one.product._id
