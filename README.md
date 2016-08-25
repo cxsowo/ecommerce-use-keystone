@@ -8,78 +8,34 @@
 
 ### 用户
 
-注册：用户名由字母、数字和下划线组成，以字母开头，长度6-20，唯一，密码长度6-20。
+注册：邮箱注册，密码长度6-20。
 
-登录：先检查用户名格式和密码长度正确性，再与服务端验证登录。
+登录：与服务端验证登录。
 
-查看、修改个人信息：头像、昵称、邮箱、手机号、姓名、性别、出生年月、收货地址。
+查看、修改个人信息：姓名、地址、手机可修改，邮箱可查看。
 
-查看已购买订单：查看已购买订单，只显示交易成功的，包含已完成和待评价。
+查看订单：分页显示订单，只分完成和未完成，未完成可以确认收货。
 
-查看交易中订单：包括待发货、待收货订单。
-
-购物车：待购买的商品，显示商品基本信息，可勾选付款，可删除、修改数量，付款成功生成新的待发货，无论付款成功与否都从购物车中删除。
+购物车：待购买的商品，显示商品基本信息，可删除、修改数量，付款成功生成新的待发货订单，付款成功则从购物车中删除。
 
 ### 商品
 
-搜索：可根据商品名搜索商品。
+搜索：可根据商品名搜索商品。（现在还没有）
 
-商品分类：主要分为图书类、电子类、服装类、日化类和食品类。
+商品分类：可定制管理，最多分两级。
 
-商品信息：包含最多5张、最少1张图，可查看商品名称、单价、折扣、库存、详细信息（文字）、评价。
+商品信息：包含最多1张图，可查看商品名称、单价、详细信息（md）。
 
 ### 其它说明
 
 付款：无实际付款，由后台自行随意处理。
 
-页面：应至少包含：主页、分类显示商品页、查看单个商品详情页、个人页面(包含购物车、订单查看等)。
+页面：应至少包含：主页、分类显示商品页、查看单个商品详情页、个人页面(包含修改个人信息、订单查看等)。
 
-# 数据库
+# 程序运行
 
-# users
+进入到myecommerce目录下，执行`npm install`，再执行`node myecommerce.js`。
 
-_id : ObjectId
-name : Text
-password : Password
-email : Email
+需要注意的是商品用到的图片用的是Cloudinary，需要配置Cloudinary，参见[Cloudinary配置](http://keystonejs.com/docs/configuration/#services-cloudinary)。
 
-# commodity
-
-_id : ObjectId
-category_id : ObjectId
-name : Text
-stock : Number
-price : Money
-details : Markdown
-picture : CloudinaryImages
-
-# category
-
-_id : ObjectId
-first_category : Text
-second_category : Text
-third_category : Text
-
-# shopcart
-
-_id : ObjectId
-user_id : ObjectId
-commodity : [{commodity_id : ObjectId,numbers : Number}]
-
-# comment
-
-_id : ObjectId
-commodity_id : ObjectId
-user_id : ObjectId
-order_id : ObjectId
-score : Number
-detail : Textarea
-
-# order
-
-_id : ObjectId
-user_id : ObjectId
-commodity : [{commodity_id : ObjectId,numbers : Number}]
-price : Money
-status : Text
-
+[keystone文档](http://keystonejs.com/docs/)
