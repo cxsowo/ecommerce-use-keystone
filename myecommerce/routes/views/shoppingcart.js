@@ -42,7 +42,7 @@ exports = module.exports = function(req, res) {
 										title : "购物车",
 										categories : datas.categories,
 										cart : datas.cart,
-										cartprice : (parseInt(datas.cartprice*100))/100
+										cartprice : datas.cartprice.toFixed(2)
 									});
 								})
 							}
@@ -82,7 +82,7 @@ exports.deleteItem = function(req, res){
 					res.json({
 						success : 1,
 						cart : result,
-						cartprice : (parseInt(sum*100))/100
+						cartprice : sum.toFixed(2)
 					});
 				})
 		})
@@ -129,7 +129,7 @@ exports.addToCart = function(req, res) {
 										res.json({
 											success : 1,
 											cart : result,
-											cartprice : (parseInt(sum*100))/100
+											cartprice : sum.toFixed(2)
 										});
 									})
 						});

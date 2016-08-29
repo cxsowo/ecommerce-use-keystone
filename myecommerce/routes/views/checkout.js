@@ -32,7 +32,7 @@ exports = module.exports = function(req, res) {
 								sum += result[i].product.price*result[i].qty;
 							}
 							datas.cart = result;
-							datas.cartprice = (parseInt(sum*100))/100;
+							datas.cartprice = sum.toFixed(2);
 						})
 						.then(
 							function(){
@@ -70,7 +70,6 @@ exports.checkOutPay = function(req, res){
 		}).exec(function(err, result){
 			if(err) throw err;
 
-			console.log("111111111111:"+result);
 			if(!result.address)
 				res.json({success:0});
 			else{

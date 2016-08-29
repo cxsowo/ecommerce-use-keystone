@@ -69,11 +69,11 @@ header
 										each one in cart
 											li.item(class = '.minicart-item-#{one.product._id}')
 												.item-inner
-													if one.product.image
+													if one.product.image && one.product.image.url
 														a.product-image(title='#{one.product.name}', href='/productdetail/#{one.product._id}')
 															img(height='60px', width='60px', src='#{one.product.image.url}')
 													else
-														a.product-image(title='#{one.product.image.url}', href='/productdetail/#{one.product._id}')
+														a.product-image(title='#{one.product.name}', href='/productdetail/#{one.product._id}')
 															img(height='60px', width='60px', src='/products-images/p10.jpg')
 													.product-details
 														.access
@@ -85,7 +85,7 @@ header
 														// access
 														strong #{one.qty}
 														| x
-														span.price ￥#{one.product.price}
+														span.price ￥#{one.product.price.toFixed(2)}
 														p.product-name
 															a(href='/productdetail/#{one.product._id}') #{one.product.name}
 									else

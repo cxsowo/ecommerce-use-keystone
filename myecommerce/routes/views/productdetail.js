@@ -42,7 +42,7 @@ exports = module.exports = function (req, res) {
 										view.render('productdetail',{
 											title : datas.product_name || "商品详情",
 											categories : datas.categories,
-											cartprice : (parseInt(sum*100))/100,
+											cartprice : sum.toFixed(2),
 											cart : result,
 											product : datas.product,
 										});

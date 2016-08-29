@@ -11,7 +11,7 @@ block content
 							if expands && expands.length > 0
 								for one in expands
 									li(data-transition='random', data-slotamount='7', data-masterspeed='1000', data-thumb='')
-										if one.image
+										if one.image && one.image.url
 											img(src='#{one.image.url}', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='')
 										else
 											img(src='/images/slide-img2.jpg', data-bgposition='left top', data-bgfit='cover', data-bgrepeat='no-repeat', alt='#{one.name}')
@@ -62,7 +62,7 @@ block content
 									.item-inner
 										.item-img
 											.item-img-info
-												if one.image
+												if one.image && one.image.url
 													a.product-image(href='/productdetail/#{one._id}', title='#{one.name}')
 														img(src='#{one.image.url}', alt='#{one.name}')
 												else

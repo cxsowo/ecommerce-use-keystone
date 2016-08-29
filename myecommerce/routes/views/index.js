@@ -23,9 +23,6 @@ exports = module.exports = function (req, res) {
 					.limit(8)
 					.exec(function(err, result){
 						if(err) throw err;
-						// for(one in result)
-						// 	for(image in one.images)
-						// 		image._.src({width: 300, height: 200, crop :"fill"});
 						datas.hot_products = result;
 					})
 					.then(
@@ -51,7 +48,7 @@ exports = module.exports = function (req, res) {
 													for(var i = 0; i < result.length; i++){
 														sum += result[i].product.price*result[i].qty;
 													}
-													datas.cartprice = (parseInt(sum*100))/100;
+													datas.cartprice = sum.toFixed(2);
 												})
 												.then(
 													function(){

@@ -42,7 +42,7 @@ function checkDetail(self){
 							result.order_items[i].imageurl = '/product-image/p1.jpg';
 						str += '<tr><td><a title="'+result.order_items[i].name+'" href="/productdetail/'+result.order_items[i].product+'" class="product-image"><img style="width:60px;height:60px" src="'+result.order_items[i].imageurl+'"></a></td>'
 							+ '<td><p class="product-name"><a href="/productdetail/'+result.order_items[i].product+'">'+result.order_items[i].name+'</a></p></td>'
-							+ '<td><strong>'+result.order_items[i].qty+'</strong>x<span class="price">￥'+result.order_items[i].price+'</span></td>'
+							+ '<td><strong>'+result.order_items[i].qty+'</strong>x<span class="price">￥'+result.order_items[i].price.toFixed(2)+'</span></td>'
 							+ '</tr>';
 					}
 					str += '</table>';
@@ -145,7 +145,7 @@ function getOrderPage(p){
 					str += '<tr><td>'+result.presult.results[i]._id+'</td>'
 						+ '<td>'+result.presult.results[i].address+'</td>'
 						+ '<td>'+result.presult.results[i].phone+'</td>'
-						+ '<td>'+result.presult.results[i].totalprice+'</td>';
+						+ '<td>'+result.presult.results[i].totalprice.toFixed(2)+'</td>';
 					if(result.presult.results[i].finish)
 						str += '<td><p style="color:green">已完成</p></td>';
 					else

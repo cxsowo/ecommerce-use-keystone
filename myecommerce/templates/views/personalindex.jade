@@ -86,14 +86,14 @@ block content
 											td #{one._id}
 											td #{one.address}
 											td #{one.phone}
-											td #{one.totalprice}
+											td #{one.totalprice.toFixed(2)}
 											td
 												if one.finish
 													p(style='color:green') 已完成
 												else
 													p(style='color:red') 未完成
 											td
-												a.btn(href='javascript:void(0)', onclick='checkDetail(this)', data-id='#{one._id}', data-price='#{one.totalprice}', data-finish='#{one.finish}') 查看
+												a.btn(href='javascript:void(0)', onclick='checkDetail(this)', data-id='#{one._id}', data-price='#{one.totalprice.toFixed(2)}', data-finish='#{one.finish}') 查看
 
 block js
 	script(type='text/javascript', src='/js/personalindex.js')

@@ -28,7 +28,7 @@ exports = module.exports = function (req, res) {
 						for(var i = 0; i < result.length; i++){
 							sum += result[i].product.price*result[i].qty;
 						}
-						datas.cartprice = (parseInt(sum*100))/100;
+						datas.cartprice = sum.toFixed(2);
 						datas.cart = result;
 						console.log("查完了购物车");
 					})
@@ -82,10 +82,6 @@ exports = module.exports = function (req, res) {
 				throw err;
 			}
 		)
-	// view.render('personalindex', {
-	// 			title : '个人主页',
-	// 			usermsg : {}
-	// 		});
 };
 
 exports.changeUserInfo = function(req, res) {

@@ -55,19 +55,19 @@ block content
 										each one in cart
 											tr.odd(class = 'cart-item-#{one.product._id}')
 												td.image.hidden-table
-													a.product-image(href='/product-detail/#{one.product._id}', title="#{one.product.name}")
-														if one.product.image
+													a.product-image(href='/productdetail/#{one.product._id}', title="#{one.product.name}")
+														if one.product.image && one.product.image.url
 															img(src='#{one.product.image.url}', width='75', height='75', alt="#{one.product.name}")
 														else
 															img(src='/products-images/p1.jpg', width='75', height='75', alt="#{one.product.name}")
 												td
 													h2.product-name
-														a(href='/product-detail/#{one.product._id}') #{one.product.name}
+														a(href='/productdetail/#{one.product._id}') #{one.product.name}
 												td.a-center.hidden-table
 													a.edit-bnt(href='javascript:void(0)', title='编辑商品数量', onclick='editCart(this)', data-id='one.product._id')
 												td.a-right.hidden-table
 													span.cart-price
-														span.price(class = 'unitprice') #{one.product.price}
+														span.price(class = 'unitprice') #{one.product.price.toFixed(2)}
 												td
 													a.btn(herf= 'javascript:void(0);' onclick='cartReduce(this)', data-id='#{one.product._id}') -
 												td.a-center.movewishlist
@@ -76,7 +76,7 @@ block content
 													a.btn(herf= 'javascript:void(0);' onclick='cartAdd(this)', data-id='#{one.product._id}') +
 												td.a-right.movewishlist
 													span.cart-price
-														span.price(class = 'trprice#{one.product._id}', data-price='#{one.product.price}') #{one.product.price * one.qty}
+														span.price(class = 'trprice#{one.product._id}', data-price='#{one.product.price.toFixed(2)}') #{(one.product.price * one.qty).toFixed(2)}
 												td.a-center.last
 													a.button.remove-item(href='javascript:void(0)', title='删除',onclick="removeCartItem(this)", data-id = "#{one.product._id}")
 														span

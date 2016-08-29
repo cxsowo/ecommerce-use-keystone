@@ -45,7 +45,7 @@ exports.findByCategory = function (req, res) {
 										for(var i = 0; i < result.length; i++){
 											sum += result[i].product.price*result[i].qty;
 										}
-										datas.cartprice = (parseInt(sum*100))/100;
+										datas.cartprice = sum.toFixed(2);
 										datas.cart = result;
 									})
 									.then(
@@ -127,7 +127,7 @@ exports.allproduct = function (req, res) {
 							sum += result[i].product.price;
 						}
 						datas.cart = result;
-						datas.cartprice = (parseInt(sum*100))/100;
+						datas.cartprice = sum.toFixed(2);
 					})
 					.then(
 						function(){
