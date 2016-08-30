@@ -80,7 +80,7 @@ block content
 									.short-description
 										h2 #{product.name}
 										if product.description
-											p #{product.description.html}
+											p #{product.description}
 									.add-to-box
 										.add-to-cart
 											.pull-left
@@ -143,8 +143,7 @@ block content
 							#product_tabs_description.tab-pane.fade.in.active
 								.std
 									if product.description
-										p
-											#{product.description.html}
+										p #{product.description}
 									else
 										p 没有商品详细描述
 							#product_tabs_tags.tab-pane.fade

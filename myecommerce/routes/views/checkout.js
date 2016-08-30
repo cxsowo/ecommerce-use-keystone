@@ -1,6 +1,5 @@
 var keystone = require('keystone'),
 	Cart = keystone.list('Cart'),
-	shoppingcart = require('./shoppingcart.js'),
 	Order = keystone.list('Order'),
 	Category = keystone.list('Category'),
 	OrderItem = keystone.list('OrderItem'),
@@ -90,7 +89,7 @@ exports.checkOutPay = function(req, res){
 
 						var newOrder = Order.model({
 							user: req.user._id,
-							totalprice: (parseInt(sum*100))/100,
+							totalprice: sum.toFixed(2),
 							address: address,
 							phone: phone,
 							finish: false
@@ -107,7 +106,7 @@ exports.checkOutPay = function(req, res){
 										order: orderid,
 										product: cart[i].product._id,
 										qty: cart[i].qty,
-										price: cart[i].product.price,
+										price: cart[i].product.price.toFixed(2),
 										name: cart[i].product.name,
 										imageurl: imageurl
 									});

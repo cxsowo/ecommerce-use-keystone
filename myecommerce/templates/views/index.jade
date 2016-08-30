@@ -71,7 +71,7 @@ block content
 												.item-box-hover
 													.box-inner
 														.product-detail-bnt
-															a.button.detail-bnt
+															a.button.detail-bnt(href='/productdetail/#{one._id}', title='#{one.name}')
 																span 查看
 														.add_cart
 															button.button.btn-cart(type='button', onclick='addToCart(this)', data-id = "#{one._id}", data-qty = 1)

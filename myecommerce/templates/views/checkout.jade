@@ -52,7 +52,7 @@ block content
 														a(href='/product-detail/#{one.product._id}') #{one.product.name}
 												td.a-right.hidden-table
 													span.cart-price
-														span.price(class = 'unitprice') #{one.product.price}
+														span.price(class = 'unitprice') #{one.product.price.toFixed(2)}
 												td.a-center.movewishlist
 														input.input-text.qty(id='qty#{one.product._id}', name='', value='#{one.qty}', size='4', title='Qty', maxlength='5', readonly='readonly')
 														//- .custom.pull-left
@@ -63,7 +63,7 @@ block content
 														//- 	i.icon-minus
 												td.a-right.movewishlist
 													span.cart-price
-														span.price #{one.product.price * one.qty}
+														span.price #{(one.product.price * one.qty).toFixed(2)}
 
 				.cart-collaterals.container
 					.col-sm-8

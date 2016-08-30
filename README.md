@@ -34,8 +34,10 @@
 
 # 程序运行
 
-进入到myecommerce目录下，执行`npm install`，再执行`node myecommerce.js`。
+进入到myecommerce目录下，执行`npm install`，再执行`node myecommerce.js`（记得开mongodb）。
 
-需要注意的是商品用到的图片用的是Cloudinary，需要配置Cloudinary，参见[Cloudinary配置](http://keystonejs.com/docs/configuration/#services-cloudinary)。
+需要注意的是商品用到的图片用的是Cloudinary，需要配置Cloudinary，这里是在myecommerce.js里配置的，参见[Cloudinary配置](http://keystonejs.com/docs/configuration/#services-cloudinary)。
+
+默认管理员账号：user@keystonejs.com  密码：admin
 
 [keystone文档](http://keystonejs.com/docs/)
